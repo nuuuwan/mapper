@@ -8,25 +8,29 @@ import Config from "../../nonview/core/Config";
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
-    const configJSON = Config.getDefaultJSON();
+
+    const configStr = Config.getDefaultStr();
     const config = Config.getDefault();
+
     this.state = {
       config,
-
-      configJSON,
+      configStr,
+      configExceptionStr: null,
       dims: { width: 700, height: 700, padding: 50 },
       bbox: BBox.LK_BBOX,
     };
   }
 
-  onChangeConfig(configJSON) {
+  onChangeConfig(configStr) {
     let config = this.state.config;
+    let configExceptionStr = null;
     try {
-      config = JSON.parse(configJSON);
+      config = JSON.parse(configStr);
     } catch (e) {
       console.log(e);
+      configExceptionStr = e.toString();
     }
-    this.setState({ configJSON, config });
+    this.setState({ configStr, config, configExceptionStr });
   }
 
   renderRegions() {
@@ -59,13 +63,14 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { configJSON } = this.state;
+    const { configStr, configExceptionStr } = this.state;
     return (
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         {this.renderRegions()}
         <ConfigEditorView
-          configJSON={configJSON}
+          configStr={configStr}
           onChange={this.onChangeConfig.bind(this)}
+          configExceptionStr={configExceptionStr}
         />
       </Box>
     );

@@ -25,7 +25,7 @@ export default class Config {
       },
     };
   }
-  static getDefaultJSON() {
+  static getDefaultStr() {
     return JSON.stringify(Config.getDefault(), null, 2);
   }
 }

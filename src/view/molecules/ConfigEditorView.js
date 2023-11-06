@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Alert } from "@mui/material";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
 const StyleTextareaAutosize = styled(TextareaAutosize)(
@@ -12,7 +12,11 @@ const StyleTextareaAutosize = styled(TextareaAutosize)(
 `
 );
 
-export default function ConfigEditorView({ configJSON, onChange }) {
+export default function ConfigEditorView({
+  configStr,
+  configExceptionStr,
+  onChange,
+}) {
   const onChangeInner = function (e) {
     onChange(e.target.value);
   };
@@ -24,9 +28,14 @@ export default function ConfigEditorView({ configJSON, onChange }) {
         minRows={10}
         cols={40}
         placeholder=""
-        value={configJSON}
+        value={configStr}
         onChange={onChangeInner}
       />
+      {configExceptionStr ? (
+        <Alert severity="error">{configExceptionStr}</Alert>
+      ) : (
+        ""
+      )}
     </Box>
   );
 }
