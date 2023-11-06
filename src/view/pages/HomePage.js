@@ -2,12 +2,13 @@ import { Component } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import RegionView from "../organisms/RegionView";
 import BBox from "../../nonview/base/BBox";
-import ConfigEditorView from "../molecules/ConfigEditorView";
 import LngLat from "../../nonview/base/LngLat";
 
 import Config from "../../nonview/core/Config";
 import Geo from "../../nonview/base/Geo";
 
+import { BlockPicker } from "react-color";
+import Color from "../../nonview/base/Color";
 const [SVG_WIDTH, SVG_HEIGHT] = [640, 640];
 
 export default class HomePage extends Component {
@@ -20,6 +21,7 @@ export default class HomePage extends Component {
       config,
       configStr: config.toString(),
       bbox: null,
+      selectedColor: "#ff000088",
     };
   }
 
@@ -46,6 +48,16 @@ export default class HomePage extends Component {
     this.setState({ config, bbox, configStr });
   }
 
+  onChangeSelectedColor(colorInfo) {
+    this.setState({ selectedColor: colorInfo.hex });
+  }
+
+  onClickRegion(regionID) {
+    const { selectedColor, config } = this.state;
+    config.update(regionID, { fill: selectedColor });
+    this.setState({ config, configStr: config.toString() });
+  }
+
   renderRegions() {
     const { bbox } = this.state;
     if (!bbox) {
@@ -54,11 +66,24 @@ export default class HomePage extends Component {
     const t = bbox.getTransform(SVG_WIDTH, SVG_HEIGHT, 0);
 
     const { config } = this.state;
-    const inner = config.regionInfoList.map(function (info) {
-      const regionID = info.id;
-      const key = "region-" + regionID;
-      return <RegionView key={key} regionID={regionID} info={info} t={t} />;
-    });
+    const inner = config.regionInfoList.map(
+      function (info) {
+        const regionID = info.id;
+        const key = "region-" + regionID;
+        const onClickInner = function () {
+          this.onClickRegion(regionID);
+        }.bind(this);
+        return (
+          <RegionView
+            key={key}
+            regionID={regionID}
+            info={info}
+            t={t}
+            onClick={onClickInner}
+          />
+        );
+      }.bind(this)
+    );
     return (
       <svg
         viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
@@ -71,15 +96,19 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { configStr, config } = this.state;
+    const { selectedColor } = this.state;
     return (
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         {this.renderRegions()}
-        <ConfigEditorView
-          key={config.hash}
-          configStr={configStr}
-          onChange={this.onChangeConfig.bind(this)}
-        />
+        <Box>
+          <div style={{ height: 200 }}>
+            <BlockPicker
+              color={selectedColor}
+              onChangeComplete={this.onChangeSelectedColor.bind(this)}
+              colors={Color.DEFAULT_COLORS}
+            />
+          </div>
+        </Box>
       </Box>
     );
   }

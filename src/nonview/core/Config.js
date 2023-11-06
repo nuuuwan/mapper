@@ -9,6 +9,19 @@ export default class Config {
     return md5(this.toString());
   }
 
+  // Updating
+
+  update(regionID, newInfo) {
+    let newRegionInfoList = [];
+    for (let regionInfo of this.regionInfoList) {
+      if (regionInfo.id === regionID) {
+        regionInfo = Object.assign({}, regionInfo, newInfo);
+      }
+      newRegionInfoList.push(regionInfo);
+    }
+    this.regionInfoList = newRegionInfoList;
+  }
+
   // Serializing
   toString() {
     return JSON.stringify(this.regionInfoList, null, 2);

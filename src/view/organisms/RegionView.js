@@ -28,7 +28,7 @@ export default class RegionView extends Component {
     if (!polygonList || !ent) {
       return null;
     }
-    const { t, info } = this.props;
+    const { t, info, onClick } = this.props;
     const [lat, lng] = ent.centroid;
     const [x, y] = t([lng, lat]);
 
@@ -36,7 +36,7 @@ export default class RegionView extends Component {
     const infoLabel = info.label !== undefined ? info.label : ent.name;
 
     return (
-      <g>
+      <g onClick={onClick}>
         <PolygonListView t={t} info={info} polygonList={polygonList} />
         <text x={x} y={y} fill={labelFill} textAnchor="middle">
           {infoLabel}

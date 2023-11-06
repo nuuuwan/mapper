@@ -12,7 +12,25 @@ export default class Color {
     return Color.hsla(h, s, l, a);
   }
 
-  static getRandomShortHexA() {
-    return "#" + Math.floor(Math.random() * 4096).toString(16) + "4";
+  static getRandomHex() {
+    return "#" + Math.floor(Math.random() * 16_777_216).toString(16);
   }
+
+  static getRandomShortHexA() {
+    return "#" + Math.floor(Math.random() * 4_096).toString(16) + "4";
+  }
+
+  static DEFAULT_COLORS = [
+    "#941E32",
+    "#DF7500",
+    "#F7B718",
+    "#005F56",
+    "#000000",
+    "#888888",
+    "#cccccc",
+    "#eeeeee",
+    "#FF0000",
+    "#00FF00",
+    "#0000FF",
+  ];
 }

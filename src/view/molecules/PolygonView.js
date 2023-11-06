@@ -7,7 +7,15 @@ export default function PolygonView({ polygon, t, info }) {
       })
       .join(" ") + " Z";
 
-  let { fill, stroke, strokeWidth } = info;
+  let { fill, fillOpacity, stroke, strokeWidth } = info;
 
-  return <path d={d} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />;
+  return (
+    <path
+      d={d}
+      fill={fill}
+      fillOpacity={fillOpacity}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
+    />
+  );
 }
