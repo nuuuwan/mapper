@@ -20,24 +20,44 @@ export default class Config {
       fill: "#08f8",
     },
     {
+      id: "LK-2",
+      label: "Central",
+      fill: "#0f08",
+    },
+    {
       id: "LK-3",
       label: "Southern",
-      fill: "#f808",
+      fill: "#f008",
     },
     {
       id: "LK-4",
       label: "Northern",
-      fill: "#0f88",
+      fill: "#80f8",
     },
     {
       id: "LK-5",
       label: "Eastern",
-      fill: "#80f8",
+      fill: "#f808",
     },
     {
       id: "LK-6",
       label: "North Western",
+      fill: "#08f8",
+    },
+    {
+      id: "LK-7",
+      label: "North Central",
+      fill: "#0f88",
+    },
+    {
+      id: "LK-8",
+      label: "Uva",
       fill: "#f0f8",
+    },
+    {
+      id: "LK-9",
+      label: "Sabaragamuwa",
+      fill: "#80f8",
     },
   ]);
 }
