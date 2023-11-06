@@ -21,16 +21,23 @@ export default class Color {
   }
 
   static DEFAULT_COLORS = [
+    // Sri Lanka
     "#941E32",
     "#DF7500",
     "#F7B718",
     "#005F56",
     "#000000",
+    // Gray
+    "#444444",
     "#888888",
     "#cccccc",
+    "#dddddd",
     "#eeeeee",
+    // Rainbow
     "#FF0000",
-    "#00FF00",
-    "#0000FF",
+    "#FF7F00",
+    "#cccc00",
+    "#00cc00",
+    "#0000cc",
   ];
 }
