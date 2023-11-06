@@ -25,7 +25,7 @@ export default class RegionView extends Component {
 
   render() {
     const { polygonList, ent } = this.state;
-    if (!polygonList) {
+    if (!polygonList || !ent) {
       return null;
     }
     const { t, info } = this.props;

@@ -1,10 +1,15 @@
 import { Component } from "react";
-import { Box } from "@mui/material";
+import { Box, CircularProgress } from "@mui/material";
 import RegionView from "../organisms/RegionView";
 import BBox from "../../nonview/base/BBox";
 import ConfigEditorView from "../molecules/ConfigEditorView";
+import LngLat from "../../nonview/base/LngLat";
 
 import Config from "../../nonview/core/Config";
+import Geo from "../../nonview/base/Geo";
+
+const [SVG_WIDTH, SVG_HEIGHT] = [640, 640];
+
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -15,26 +20,45 @@ export default class HomePage extends Component {
       config,
       configStr: config.toString(),
       configExceptionStr: null,
-      bbox: BBox.LK_BBOX,
+      bbox: null,
     };
   }
 
-  onChangeConfig(configStr) {
-    let config = this.state.config;
-    let configExceptionStr = null;
+  async componentDidMount() {
+    const bbox = await HomePage.getBBox(this.state.config);
+    this.setState({ bbox });
+  }
+
+  static async getBBox(config) {
+    const regionIDList = config.regionInfoList.map(
+      (regionInfo) => regionInfo.id
+    );
+    const regionIDToPolygonList = await Geo.getIDToPolygonList(regionIDList);
+    const lngLatList = LngLat.fromPolygonListList(
+      Object.values(regionIDToPolygonList)
+    );
+    return BBox.fromLngLatList(lngLatList);
+  }
+
+  async onChangeConfig(configStr) {
+    let { config, configExceptionStr, bbox } = this.state;
     try {
       config = Config.fromString(configStr);
-      configStr = config.toString();
+      bbox = await HomePage.getBBox(config);
+      configExceptionStr = null;
     } catch (e) {
       console.log(e);
       configExceptionStr = e.toString();
     }
-    this.setState({ configStr, config, configExceptionStr });
+    this.setState({ config, configExceptionStr, bbox, configStr });
   }
 
   renderRegions() {
     const { bbox } = this.state;
-    const t = bbox.getTransform(1000, 1000, 0);
+    if (!bbox) {
+      return <CircularProgress />;
+    }
+    const t = bbox.getTransform(SVG_WIDTH, SVG_HEIGHT, 0);
 
     const { config } = this.state;
     const inner = config.regionInfoList.map(function (info) {
@@ -43,8 +67,11 @@ export default class HomePage extends Component {
       return <RegionView key={key} regionID={regionID} info={info} t={t} />;
     });
     return (
-      <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
-        <rect x={0} y={0} width={1000} height={1000} fill="#ccc1" />
+      <svg
+        viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <rect x={0} y={0} width={SVG_WIDTH} height={SVG_HEIGHT} fill="#ccc1" />
         {inner}
       </svg>
     );

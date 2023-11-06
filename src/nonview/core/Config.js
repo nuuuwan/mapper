@@ -17,27 +17,27 @@ export default class Config {
     {
       id: "LK-1",
       label: "Western",
-      fill: "#08f",
+      fill: "#08f8",
     },
     {
       id: "LK-3",
       label: "Southern",
-      fill: "#f80",
+      fill: "#f808",
     },
     {
       id: "LK-4",
       label: "Northern",
-      fill: "#0f8",
+      fill: "#0f88",
     },
     {
       id: "LK-5",
       label: "Eastern",
-      fill: "#80f",
+      fill: "#80f8",
     },
     {
       id: "LK-6",
       label: "North Western",
-      fill: "#f0f",
+      fill: "#f0f8",
     },
   ]);
 }
