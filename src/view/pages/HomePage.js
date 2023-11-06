@@ -1,16 +1,20 @@
 import { Component } from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Drawer, IconButton } from "@mui/material";
 import RegionView from "../organisms/RegionView";
 import BBox from "../../nonview/base/BBox";
 import LngLat from "../../nonview/base/LngLat";
+import Ents from "../../nonview/base/Ents";
 
 import Config from "../../nonview/core/Config";
 import Geo from "../../nonview/base/Geo";
 
 import { BlockPicker } from "react-color";
+import RegionPicker from "../molecules/RegionPicker";
 import Color from "../../nonview/base/Color";
-const [SVG_WIDTH, SVG_HEIGHT] = [640, 640];
 
+import TuneIcon from "@mui/icons-material/Tune";
+
+const [SVG_WIDTH, SVG_HEIGHT, SVG_PADDING] = [640, 640, 20];
 export default class HomePage extends Component {
   constructor(props) {
     super(props);
@@ -22,12 +26,21 @@ export default class HomePage extends Component {
       configStr: config.toString(),
       bbox: null,
       selectedColor: "#ff000088",
+      isDrawerOptionsOpen: false,
     };
   }
 
   async componentDidMount() {
     const bbox = await HomePage.getBBox(this.state.config);
-    this.setState({ bbox });
+    const allEntIndex = await Ents.getAllEntIndex();
+    let allEntList = [];
+    for (const entType of ["province", "district", "dsd", "pd", "ed"]) {
+      for (const ent of Object.values(allEntIndex[entType])) {
+        allEntList.push(ent);
+      }
+    }
+
+    this.setState({ bbox, allEntList });
   }
 
   static async getBBox(config) {
@@ -52,10 +65,25 @@ export default class HomePage extends Component {
     this.setState({ selectedColor: colorInfo.hex });
   }
 
+  async onChangeRegionIDs(regionIDs) {
+    const { config } = this.state;
+    config.setRegionIDs(regionIDs);
+    const bbox = await HomePage.getBBox(config);
+    this.setState({ config, configStr: config.toString(), bbox });
+  }
+
   onClickRegion(regionID) {
     const { selectedColor, config } = this.state;
     config.update(regionID, { fill: selectedColor });
     this.setState({ config, configStr: config.toString() });
+  }
+
+  onCloseDrawerOptions() {
+    this.setState({ isDrawerOptionsOpen: false });
+  }
+
+  onOpenDrawerOptions() {
+    this.setState({ isDrawerOptionsOpen: true });
   }
 
   renderRegions() {
@@ -63,10 +91,10 @@ export default class HomePage extends Component {
     if (!bbox) {
       return <CircularProgress />;
     }
-    const t = bbox.getTransform(SVG_WIDTH, SVG_HEIGHT, 0);
+    const t = bbox.getTransform(SVG_WIDTH, SVG_HEIGHT, SVG_PADDING);
 
     const { config } = this.state;
-    const inner = config.regionInfoList.map(
+    const inner = config.sortedRegionInfoList.map(
       function (info) {
         const regionID = info.id;
         const key = "region-" + regionID;
@@ -84,31 +112,76 @@ export default class HomePage extends Component {
         );
       }.bind(this)
     );
+    const padding2 = SVG_PADDING / 2;
     return (
       <svg
         viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
+        width="100%"
+        height="100vh"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect x={0} y={0} width={SVG_WIDTH} height={SVG_HEIGHT} fill="#ccc1" />
+        <rect
+          x={padding2}
+          y={padding2}
+          width={SVG_WIDTH - padding2 * 2}
+          height={SVG_HEIGHT - padding2 * 2}
+          fill="none"
+          stroke="#eee"
+        />
         {inner}
       </svg>
     );
   }
 
+  renderOptionsInner() {
+    const { selectedColor, config, allEntList } = this.state;
+    if (!allEntList) {
+      return <CircularProgress />;
+    }
+
+    const regionIDs = config.regionInfoList.map((info) => info.id);
+    return (
+      <Box sx={{ maxWidth: 320, p: 3 }}>
+        <RegionPicker
+          allEntList={allEntList}
+          regionIDs={regionIDs}
+          onChange={this.onChangeRegionIDs.bind(this)}
+        />
+        <div style={{ height: 200, margin: 20 }}>
+          <BlockPicker
+            color={selectedColor}
+            onChangeComplete={this.onChangeSelectedColor.bind(this)}
+            colors={Color.DEFAULT_COLORS}
+            triangle="hide"
+          />
+        </div>
+      </Box>
+    );
+  }
+
+  renderOptions() {
+    const { isDrawerOptionsOpen, selectedColor } = this.state;
+    return (
+      <Box sx={{ background: selectedColor }}>
+        <IconButton>
+          <TuneIcon onClick={this.onOpenDrawerOptions.bind(this)} />
+        </IconButton>
+        <Drawer
+          anchor={"right"}
+          open={isDrawerOptionsOpen}
+          onClose={this.onCloseDrawerOptions.bind(this)}
+        >
+          {this.renderOptionsInner()}
+        </Drawer>
+      </Box>
+    );
+  }
+
   render() {
-    const { selectedColor } = this.state;
     return (
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         {this.renderRegions()}
-        <Box>
-          <div style={{ height: 200 }}>
-            <BlockPicker
-              color={selectedColor}
-              onChangeComplete={this.onChangeSelectedColor.bind(this)}
-              colors={Color.DEFAULT_COLORS}
-            />
-          </div>
-        </Box>
+        {this.renderOptions()}
       </Box>
     );
   }

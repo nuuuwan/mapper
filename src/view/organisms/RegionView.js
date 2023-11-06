@@ -36,7 +36,7 @@ export default class RegionView extends Component {
     const infoLabel = info.label !== undefined ? info.label : ent.name;
 
     return (
-      <g onClick={onClick}>
+      <g onClick={onClick} style={{ cursor: "pointer" }}>
         <PolygonListView t={t} info={info} polygonList={polygonList} />
         <text x={x} y={y} fill={labelFill} textAnchor="middle">
           {infoLabel}

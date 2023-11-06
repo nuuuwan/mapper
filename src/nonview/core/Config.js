@@ -9,6 +9,10 @@ export default class Config {
     return md5(this.toString());
   }
 
+  get sortedRegionInfoList() {
+    return this.regionInfoList.sort((a, b) => a.id.localeCompare(b.id));
+  }
+
   // Updating
 
   update(regionID, newInfo) {
@@ -20,6 +24,12 @@ export default class Config {
       newRegionInfoList.push(regionInfo);
     }
     this.regionInfoList = newRegionInfoList;
+  }
+
+  setRegionIDs(regionIDs) {
+    return (this.regionInfoList = regionIDs.map((regionID) => ({
+      id: regionID,
+    })));
   }
 
   // Serializing
@@ -40,33 +50,17 @@ export default class Config {
   }
 
   // Instances
-  static DEFAULT = new Config([
-    {
-      id: "LK-1",
-    },
-    {
-      id: "LK-2",
-    },
-    {
-      id: "LK-3",
-    },
-    {
-      id: "LK-4",
-    },
-    {
-      id: "LK-5",
-    },
-    {
-      id: "LK-6",
-    },
-    {
-      id: "LK-7",
-    },
-    {
-      id: "LK-8",
-    },
-    {
-      id: "LK-9",
-    },
-  ]);
+  static DEFAULT = new Config(
+    [
+      "LK-1",
+      "LK-2",
+      "LK-3",
+      "LK-4",
+      "LK-5",
+      "LK-6",
+      "LK-7",
+      "LK-8",
+      "LK-9",
+    ].map((id) => ({ id }))
+  );
 }
