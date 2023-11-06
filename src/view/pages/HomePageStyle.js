@@ -12,8 +12,6 @@ export const STYLE = {
     bottom: 60,
     left: 0,
     right: 0,
-    overflowY: "scroll",
-    overflowX: "hidden",
   },
 
   FOOTER: {
