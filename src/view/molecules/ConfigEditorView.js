@@ -29,7 +29,7 @@ export default function ConfigEditorView({
     configExceptionStr = e.toString();
   }
 
-  const isLocalConfigStrUpdated = Config.fromString(localConfigStr).toString() !== configStr;
+  const isLocalConfigStrUpdated = Config.fromStringSafe(localConfigStr).toString() !== configStr;
   const syncDisabled = configExceptionStr !== null || !isLocalConfigStrUpdated;
 
   const onChangeInner = function (e) {

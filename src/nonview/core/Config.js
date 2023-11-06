@@ -18,6 +18,14 @@ export default class Config {
     return new Config(JSON.parse(str));
   }
 
+  static fromStringSafe(str) {
+    try {
+      return Config.fromString(str);
+    } catch (e) {
+      return '';
+    }
+  }
+
   // Instances
   static DEFAULT = new Config([
     {
