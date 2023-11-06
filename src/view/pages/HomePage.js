@@ -142,12 +142,7 @@ export default class HomePage extends Component {
     const regionIDs = config.regionInfoList.map((info) => info.id);
     return (
       <Box sx={{ maxWidth: 320, p: 3 }}>
-        <RegionPicker
-          allEntList={allEntList}
-          regionIDs={regionIDs}
-          onChange={this.onChangeRegionIDs.bind(this)}
-        />
-        <div style={{ height: 200, margin: 20 }}>
+        <div style={{ height: 240, margin: 12 }}>
           <BlockPicker
             color={selectedColor}
             onChangeComplete={this.onChangeSelectedColor.bind(this)}
@@ -155,6 +150,11 @@ export default class HomePage extends Component {
             triangle="hide"
           />
         </div>
+        <RegionPicker
+          allEntList={allEntList}
+          regionIDs={regionIDs}
+          onChange={this.onChangeRegionIDs.bind(this)}
+        />
       </Box>
     );
   }

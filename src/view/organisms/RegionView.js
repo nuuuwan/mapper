@@ -2,6 +2,8 @@ import { Component } from "react";
 import Geo from "../../nonview/base/Geo";
 import PolygonListView from "../molecules/PolygonListView";
 import Ents from "../../nonview/base/Ents";
+import LngLat from "../../nonview/base/LngLat";
+import BBox from "../../nonview/base/BBox";
 
 export default class RegionView extends Component {
   constructor(props) {
@@ -35,12 +37,26 @@ export default class RegionView extends Component {
     const labelFill = info.labelFill || "#000";
     const infoLabel = info.label !== undefined ? info.label : ent.name;
 
+    const bbox = BBox.fromLngLatList(LngLat.fromPolygonList(polygonList));
+    const xMin = t([bbox.minLngLat.lng, bbox.minLngLat.lat])[0];
+    const xMax = t([bbox.maxLngLat.lng, bbox.maxLngLat.lat])[0];
+    const fontSize = (xMax - xMin) / 7;
+    const MIN_FONT_SIZE = 5;
+
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>
         <PolygonListView t={t} info={info} polygonList={polygonList} />
-        <text x={x} y={y} fill={labelFill} textAnchor="middle">
-          {infoLabel}
-        </text>
+        {fontSize > MIN_FONT_SIZE ? (
+          <text
+            x={x}
+            y={y}
+            fill={labelFill}
+            textAnchor="middle"
+            fontSize={fontSize}
+          >
+            {infoLabel}
+          </text>
+        ) : null}
       </g>
     );
   }
