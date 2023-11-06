@@ -1,6 +1,12 @@
+var md5 = require('md5');
+
 export default class Config {
   constructor(regionInfoList) {
     this.regionInfoList = regionInfoList;
+  }
+
+  get hash() {
+    return md5(this.toString());
   }
 
   // Serializing

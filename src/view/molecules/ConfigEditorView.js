@@ -1,6 +1,10 @@
-import { Box, Typography, Alert } from "@mui/material";
+import { Box, Alert, IconButton } from "@mui/material";
+import SyncIcon from "@mui/icons-material/Sync";
 import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
+import { useState } from "react";
+import Config from "../../nonview/core/Config";
+
 const StyleTextareaAutosize = styled(TextareaAutosize)(
   ({ theme }) => `
   font-family: "Noto Sans Mono", monospace;
@@ -14,21 +18,36 @@ const StyleTextareaAutosize = styled(TextareaAutosize)(
 
 export default function ConfigEditorView({
   configStr,
-  configExceptionStr,
   onChange,
 }) {
+  let [localConfigStr, setLocalConfigStr] = useState(configStr);
+
+  let configExceptionStr = null;
+  try {
+    Config.fromString(localConfigStr);
+  } catch (e) {
+    configExceptionStr = e.toString();
+  }
+
+  const isLocalConfigStrUpdated = Config.fromString(localConfigStr).toString() !== configStr;
+  const syncDisabled = configExceptionStr !== null || !isLocalConfigStrUpdated;
+
   const onChangeInner = function (e) {
-    onChange(e.target.value);
+    setLocalConfigStr(e.target.value);
+  };
+
+  const onClickSync = function (e) {
+    onChange(Config.fromString(localConfigStr).toString());
   };
 
   return (
     <Box sx={{ p: 1, m: 2 }}>
-      <Typography variant="h6">Config Editor</Typography>
       <StyleTextareaAutosize
         minRows={10}
+        maxRows={30}
         cols={40}
         placeholder=""
-        value={configStr}
+        value={localConfigStr}
         onChange={onChangeInner}
       />
       {configExceptionStr ? (
@@ -36,6 +55,9 @@ export default function ConfigEditorView({
       ) : (
         ""
       )}
+      <IconButton onClick={onClickSync} disabled={syncDisabled}>
+        <SyncIcon />
+      </IconButton>
     </Box>
   );
 }

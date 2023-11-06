@@ -19,7 +19,6 @@ export default class HomePage extends Component {
     this.state = {
       config,
       configStr: config.toString(),
-      configExceptionStr: null,
       bbox: null,
     };
   }
@@ -41,17 +40,10 @@ export default class HomePage extends Component {
   }
 
   async onChangeConfig(configStr) {
-    let { config, configExceptionStr, bbox } = this.state;
-    try {
-      config = Config.fromString(configStr);
-      bbox = await HomePage.getBBox(config);
-      configStr = config.toString();
-      configExceptionStr = null;
-    } catch (e) {
-      console.log(e);
-      configExceptionStr = e.toString();
-    }
-    this.setState({ config, configExceptionStr, bbox, configStr });
+    let { config, bbox } = this.state;
+    config = Config.fromString(configStr);
+    bbox = await HomePage.getBBox(config);
+    this.setState({ config, bbox, configStr });
   }
 
   renderRegions() {
@@ -79,14 +71,14 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { configStr, configExceptionStr } = this.state;
+    const { configStr, config } = this.state;
     return (
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         {this.renderRegions()}
         <ConfigEditorView
+          key={config.hash}
           configStr={configStr}
           onChange={this.onChangeConfig.bind(this)}
-          configExceptionStr={configExceptionStr}
         />
       </Box>
     );
