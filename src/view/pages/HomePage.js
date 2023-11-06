@@ -39,7 +39,7 @@ export default class HomePage extends Component {
       config,
       configStr: config.toString(),
       bbox: null,
-      selectedColor: "#ff000088",
+      selectedColor: Color.DEFAULT_COLORS[0],
       isDrawerOptionsOpen: false,
     };
   }
