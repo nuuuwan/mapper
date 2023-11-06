@@ -26,6 +26,7 @@ export default class HomePage extends Component {
     let configExceptionStr = null;
     try {
       config = JSON.parse(configStr);
+      configStr = JSON.stringify(config, null, 2);
     } catch (e) {
       console.log(e);
       configExceptionStr = e.toString();
