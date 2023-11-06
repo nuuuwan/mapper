@@ -3,7 +3,7 @@ import { TextareaAutosize } from "@mui/base/TextareaAutosize";
 import { styled } from "@mui/system";
 const StyleTextareaAutosize = styled(TextareaAutosize)(
   ({ theme }) => `
-  font-family: monospace;
+  font-family: "Noto Sans Mono", monospace;
   padding: 24px;
   border-radius: 12px;
   color: #008;
