@@ -1,5 +1,16 @@
 import { Component } from "react";
-import { Box, CircularProgress, Drawer, IconButton } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Drawer,
+  BottomNavigation,
+  BottomNavigationAction,
+  AppBar,
+  Typography,
+  Toolbar,
+  IconButton,
+  Grid,
+} from "@mui/material";
 import RegionView from "../organisms/RegionView";
 import BBox from "../../nonview/base/BBox";
 import LngLat from "../../nonview/base/LngLat";
@@ -13,6 +24,9 @@ import RegionPicker from "../molecules/RegionPicker";
 import Color from "../../nonview/base/Color";
 
 import TuneIcon from "@mui/icons-material/Tune";
+import CloseIcon from '@mui/icons-material/Close';
+import VersionView from "../atoms/VersionView";
+import { STYLE } from "./HomePageStyle";
 
 const [SVG_WIDTH, SVG_HEIGHT, SVG_PADDING] = [640, 640, 20];
 export default class HomePage extends Component {
@@ -112,7 +126,7 @@ export default class HomePage extends Component {
         );
       }.bind(this)
     );
-    const padding2 = SVG_PADDING / 2;
+
     return (
       <svg
         viewBox={`0 0 ${SVG_WIDTH} ${SVG_HEIGHT}`}
@@ -120,14 +134,6 @@ export default class HomePage extends Component {
         height="100vh"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <rect
-          x={padding2}
-          y={padding2}
-          width={SVG_WIDTH - padding2 * 2}
-          height={SVG_HEIGHT - padding2 * 2}
-          fill="none"
-          stroke="#eee"
-        />
         {inner}
       </svg>
     );
@@ -141,7 +147,11 @@ export default class HomePage extends Component {
 
     const regionIDs = config.regionInfoList.map((info) => info.id);
     return (
-      <Box sx={{ maxWidth: 320, p: 3 }}>
+      <Box sx={{ maxWidth: 320, p: 3}}><Grid container justify="flex-end">
+        <IconButton onClick={this.onCloseDrawerOptions.bind(this)}>
+          <CloseIcon />
+        </IconButton>
+        </Grid>
         <div style={{ height: 240, margin: 12 }}>
           <BlockPicker
             color={selectedColor}
@@ -160,12 +170,9 @@ export default class HomePage extends Component {
   }
 
   renderOptions() {
-    const { isDrawerOptionsOpen, selectedColor } = this.state;
+    const { isDrawerOptionsOpen } = this.state;
     return (
-      <Box sx={{ background: selectedColor }}>
-        <IconButton>
-          <TuneIcon onClick={this.onOpenDrawerOptions.bind(this)} />
-        </IconButton>
+      <Box>
         <Drawer
           anchor={"right"}
           open={isDrawerOptionsOpen}
@@ -177,11 +184,51 @@ export default class HomePage extends Component {
     );
   }
 
-  render() {
+  renderHeaderInner() {
+    return (
+      <AppBar component="nav">
+        <Toolbar>
+          <Typography
+            variant="h4"
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+          >
+            #Mapper
+          </Typography>
+        </Toolbar>
+      </AppBar>
+    );
+  }
+
+  renderBodyInner() {
     return (
       <Box sx={{ display: "flex", flexDirection: "row" }}>
         {this.renderRegions()}
         {this.renderOptions()}
+      </Box>
+    );
+  }
+
+  renderFooterInner() {
+    return (
+      <BottomNavigation>
+        <BottomNavigationAction
+          icon={<TuneIcon />}
+          onClick={this.onOpenDrawerOptions.bind(this)}
+        />
+      </BottomNavigation>
+    );
+  }
+
+  render() {
+    return (
+      <Box sx={STYLE.ALL}>
+        <Box sx={STYLE.HEADER}>{this.renderHeaderInner()}</Box>
+        <Box sx={STYLE.BODY}>
+          {this.renderBodyInner()}
+          <VersionView />
+        </Box>
+        <Box sx={STYLE.FOOTER}>{this.renderFooterInner()}</Box>
       </Box>
     );
   }
