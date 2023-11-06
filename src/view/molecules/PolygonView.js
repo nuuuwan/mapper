@@ -8,9 +8,6 @@ export default function PolygonView({ polygon, t, info }) {
       .join(" ") + " Z";
 
   let { fill, stroke, strokeWidth } = info;
-  fill = fill || "#0001";
-  stroke = stroke || "#000";
-  strokeWidth = strokeWidth || 0;
 
   return <path d={d} fill={fill} stroke={stroke} strokeWidth={strokeWidth} />;
 }

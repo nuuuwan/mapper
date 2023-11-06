@@ -11,4 +11,8 @@ export default class Color {
     const a = 1;
     return Color.hsla(h, s, l, a);
   }
+
+  static getRandomShortHexA() {
+    return "#" + Math.floor(Math.random() * 4096).toString(16) + "4";
+  }
 }

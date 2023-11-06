@@ -16,10 +16,7 @@ const StyleTextareaAutosize = styled(TextareaAutosize)(
 `
 );
 
-export default function ConfigEditorView({
-  configStr,
-  onChange,
-}) {
+export default function ConfigEditorView({ configStr, onChange }) {
   let [localConfigStr, setLocalConfigStr] = useState(configStr);
 
   let configExceptionStr = null;
@@ -29,7 +26,8 @@ export default function ConfigEditorView({
     configExceptionStr = e.toString();
   }
 
-  const isLocalConfigStrUpdated = Config.fromStringSafe(localConfigStr).toString() !== configStr;
+  const isLocalConfigStrUpdated =
+    Config.fromStringSafe(localConfigStr).toString() !== configStr;
   const syncDisabled = configExceptionStr !== null || !isLocalConfigStrUpdated;
 
   const onChangeInner = function (e) {
@@ -44,7 +42,6 @@ export default function ConfigEditorView({
     <Box sx={{ p: 1, m: 2 }}>
       <StyleTextareaAutosize
         minRows={10}
-        maxRows={30}
         cols={40}
         placeholder=""
         value={localConfigStr}

@@ -33,12 +33,13 @@ export default class RegionView extends Component {
     const [x, y] = t([lng, lat]);
 
     const labelFill = info.labelFill || "#000";
+    const infoLabel = info.label !== undefined ? info.label : ent.name;
 
     return (
       <g>
         <PolygonListView t={t} info={info} polygonList={polygonList} />
         <text x={x} y={y} fill={labelFill} textAnchor="middle">
-          {info.label}
+          {infoLabel}
         </text>
       </g>
     );
