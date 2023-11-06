@@ -16,7 +16,6 @@ export default class HomePage extends Component {
       config,
       configStr,
       configExceptionStr: null,
-      dims: { width: 700, height: 700, padding: 50 },
       bbox: BBox.LK_BBOX,
     };
   }
@@ -35,9 +34,8 @@ export default class HomePage extends Component {
   }
 
   renderRegions() {
-    const { dims, bbox } = this.state;
-    const { width, height, padding } = dims;
-    const t = bbox.getTransform(width, height, padding);
+    const { bbox } = this.state;
+    const t = bbox.getTransform(1000, 1000, 0);
 
     const { config } = this.state;
 
@@ -48,16 +46,9 @@ export default class HomePage extends Component {
       const key = "region-" + regionID;
       return <RegionView key={key} regionID={regionID} info={info} t={t} />;
     });
-    const padding2 = padding / 2;
     return (
-      <svg width={width} height={height}>
-        <rect
-          x={padding2}
-          y={padding2}
-          width={width - padding2 / 2}
-          height={height - padding2 / 2}
-          fill="#0001"
-        />
+      <svg viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg">
+        <rect x={0} y={0} width={1000} height={1000} fill="#ccc1" />
         {inner}
       </svg>
     );
