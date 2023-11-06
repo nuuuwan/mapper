@@ -45,6 +45,7 @@ export default class HomePage extends Component {
     try {
       config = Config.fromString(configStr);
       bbox = await HomePage.getBBox(config);
+      configStr = config.toString();
       configExceptionStr = null;
     } catch (e) {
       console.log(e);
