@@ -1,5 +1,5 @@
-import EntTypes from "../../../nonview/base/EntTypes";
-import WWW from "../../../nonview/base/WWW";
+import EntTypes from "./EntTypes";
+import WWW from "./WWW";
 
 const URL_BASE =
   "https://raw.githubusercontent.com/nuuuwan/gig-data/master/geo";

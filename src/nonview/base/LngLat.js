@@ -36,4 +36,10 @@ export default class LngLat {
 
   static MIN = new LngLat(-180, -180);
   static MAX = new LngLat(180, 180);
+
+  // Extreme Points in Sri Lanka
+  static LK_NORTH = new LngLat(80.212222, 9.835556);
+  static LK_SOUTH = new LngLat(80.589694, 5.923389);
+  static LK_EAST = new LngLat(81.879167, 7.022222);
+  static LK_WEST = new LngLat(79.516667, 9.383333);
 }

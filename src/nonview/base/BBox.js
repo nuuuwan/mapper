@@ -60,4 +60,11 @@ export default class BBox {
       (bbox.minLngLat.lng + bbox.maxLngLat.lng) / 2,
     ];
   }
+
+  static LK_BBOX = BBox.fromLngLatList([
+    LngLat.LK_NORTH,
+    LngLat.LK_SOUTH,
+    LngLat.LK_EAST,
+    LngLat.LK_WEST,
+  ]);
 }
