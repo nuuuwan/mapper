@@ -1,31 +1,43 @@
 export default class Config {
-  static getDefault() {
-    return {
-      regionInfoIndex: {
-        "LK-1": {
-          label: "Western",
-          fill: "#08f",
-        },
-        "LK-3": {
-          label: "Southern",
-          fill: "#f80",
-        },
-        "LK-4": {
-          label: "Northern",
-          fill: "#0f8",
-        },
-        "LK-5": {
-          label: "Eastern",
-          fill: "#80f",
-        },
-        "LK-6": {
-          label: "North Western",
-          fill: "#f0f",
-        },
-      },
-    };
+  constructor(regionInfoList) {
+    this.regionInfoList = regionInfoList;
   }
-  static getDefaultStr() {
-    return JSON.stringify(Config.getDefault(), null, 2);
+
+  // Serializing
+  toString() {
+    return JSON.stringify(this.regionInfoList, null, 2);
   }
+
+  static fromString(str) {
+    return new Config(JSON.parse(str));
+  }
+
+  // Instances
+  static DEFAULT = new Config([
+    {
+      id: "LK-1",
+      label: "Western",
+      fill: "#08f",
+    },
+    {
+      id: "LK-3",
+      label: "Southern",
+      fill: "#f80",
+    },
+    {
+      id: "LK-4",
+      label: "Northern",
+      fill: "#0f8",
+    },
+    {
+      id: "LK-5",
+      label: "Eastern",
+      fill: "#80f",
+    },
+    {
+      id: "LK-6",
+      label: "North Western",
+      fill: "#f0f",
+    },
+  ]);
 }

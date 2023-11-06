@@ -9,12 +9,11 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    const configStr = Config.getDefaultStr();
-    const config = Config.getDefault();
+    const config = Config.DEFAULT;
 
     this.state = {
       config,
-      configStr,
+      configStr: config.toString(),
       configExceptionStr: null,
       bbox: BBox.LK_BBOX,
     };
@@ -24,8 +23,8 @@ export default class HomePage extends Component {
     let config = this.state.config;
     let configExceptionStr = null;
     try {
-      config = JSON.parse(configStr);
-      configStr = JSON.stringify(config, null, 2);
+      config = Config.fromString(configStr);
+      configStr = config.toString();
     } catch (e) {
       console.log(e);
       configExceptionStr = e.toString();
@@ -38,11 +37,8 @@ export default class HomePage extends Component {
     const t = bbox.getTransform(1000, 1000, 0);
 
     const { config } = this.state;
-
-    const inner = Object.entries(config.regionInfoIndex).map(function ([
-      regionID,
-      info,
-    ]) {
+    const inner = config.regionInfoList.map(function (info) {
+      const regionID = info.id;
       const key = "region-" + regionID;
       return <RegionView key={key} regionID={regionID} info={info} t={t} />;
     });
