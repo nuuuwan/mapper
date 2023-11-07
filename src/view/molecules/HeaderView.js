@@ -13,7 +13,11 @@ export default function HeaderView({ nRegions, selectedColor }) {
             #Mapper
           </Typography>
         </Badge>
-        <Typography variant="caption" onClick={onClickTitle} sx={{ marginLeft: 1 }}>
+        <Typography
+          variant="caption"
+          onClick={onClickTitle}
+          sx={{ marginLeft: 1 }}
+        >
           {DATETIME_STR}
         </Typography>
       </Toolbar>
