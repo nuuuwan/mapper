@@ -12,6 +12,8 @@ export const STYLE = {
     bottom: 60,
     left: 0,
     right: 0,
+    margin: "auto",
+    align: "center",
   },
 
   FOOTER: {
