@@ -13,7 +13,7 @@ export default function RegionPicker({ regionIDs, allEntList, onChange }) {
       multiple
       defaultValue={allEntList.filter((ent) => regionIDs.includes(ent.id))}
       options={allEntList}
-      getOptionLabel={(ent) => `${ent.id} ${ent.name}`}
+      getOptionLabel={(ent) => `${ent.label}`}
       onChange={onChangeInner}
       renderInput={(params) => (
         <TextField
