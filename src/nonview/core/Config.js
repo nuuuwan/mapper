@@ -13,6 +13,10 @@ export default class Config {
     return this.regionInfoList.sort((a, b) => a.id.localeCompare(b.id));
   }
 
+  get nRegions() {
+    return this.regionInfoList.length;
+  }
+
   // Updating
 
   update(regionID, newInfo) {

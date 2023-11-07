@@ -115,11 +115,12 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { pageId } = this.state;
+    const { pageId, config } = this.state;
+    const nRegions = config.nRegions;
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>
-          <HeaderView />
+          <HeaderView nRegions={nRegions} />
         </Box>
         <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
         <Box sx={STYLE.FOOTER}>
