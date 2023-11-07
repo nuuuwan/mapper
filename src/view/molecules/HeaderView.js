@@ -9,10 +9,13 @@ export default function HeaderView({ nRegions }) {
     <AppBar component="nav" sx={{ background: "#941E32" }}>
       <Toolbar>
         <Badge badgeContent={nRegions} color="primary">
-          <Typography variant="h4h6" onClick={onClickTitle}>
-            #Mapper - {DATETIME_STR}
+          <Typography variant="h6" onClick={onClickTitle}>
+            #Mapper
           </Typography>
         </Badge>
+        <Typography variant="caption" onClick={onClickTitle} sx={{m:1}}>
+            {DATETIME_STR}
+          </Typography>
       </Toolbar>
     </AppBar>
   );
