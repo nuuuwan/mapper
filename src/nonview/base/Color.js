@@ -26,18 +26,10 @@ export default class Color {
     "#DF7500",
     "#F7B718",
     "#005F56",
-    "#000000",
     // Gray
-    "#444444",
+    "#000000",
     "#888888",
     "#cccccc",
-    "#dddddd",
     "#eeeeee",
-    // Rainbow
-    "#FF0000",
-    "#FF7F00",
-    "#cccc00",
-    "#00cc00",
-    "#0000cc",
   ];
 }

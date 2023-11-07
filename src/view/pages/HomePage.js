@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Box, CircularProgress, Drawer } from "@mui/material";
-import { BlockPicker } from "react-color";
+import { TwitterPicker } from "react-color";
 import { BBox, LngLat, Ents, Geo, Color } from "../../nonview/base";
 import { Config } from "../../nonview/core";
 
@@ -124,11 +124,12 @@ export default class HomePage extends Component {
           />
          
           <div style={STYLE.BODY_CONTROLS}>
-     <BlockPicker
+     <TwitterPicker
           color={selectedColor}
           onChangeComplete={this.onChangeSelectedColor.bind(this)}
           colors={Color.DEFAULT_COLORS}
           triangle="hide"
+          width="200px"
         />
         </div>
           {this.renderDrawerOptions()}
