@@ -3,7 +3,7 @@ import { Box, CircularProgress, Drawer } from "@mui/material";
 
 import { BBox, LngLat, Ents, Geo, Color } from "../../nonview/base";
 import { Config } from "../../nonview/core";
-import VersionView from "../atoms/VersionView";
+
 import {
   HeaderView,
   FooterView,
@@ -122,7 +122,6 @@ export default class HomePage extends Component {
             onClickRegion={this.onClickRegion.bind(this)}
           />
           {this.renderDrawerOptions()}
-          <VersionView />
         </Box>
         <Box sx={STYLE.FOOTER}>
           <FooterView onClick={this.onOpenDrawerOptions.bind(this)} />
