@@ -11,6 +11,10 @@ export default class EntType {
     return `${URL_BASE}/${this.id}.latest.basic.tsv`;
   }
 
+  get shortName() {
+    return this.id.toUpperCase();
+  }
+
   // Loaders
   static isLKRegion(entId) {
     return entId.substring(0, 3) === "LK-";

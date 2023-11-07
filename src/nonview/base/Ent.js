@@ -14,6 +14,10 @@ export default class Ent {
     return EntType.fromEntId(this.id);
   }
 
+  get label() {
+    return this.name + ' ' + this.entType.shortName;
+  }
+
   // Serializing
   toDict() {
     return {
