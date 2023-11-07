@@ -1,12 +1,16 @@
 var md5 = require("md5");
 
 export default class Config {
-  constructor(regionInfoList) {
-    this.regionInfoList = regionInfoList;
+  constructor(regionInfoIdx) {
+    this.regionInfoIdx = regionInfoIdx;
   }
 
   get hash() {
     return md5(this.toString());
+  }
+
+  get regionInfoList() {
+    return Object.entries(this.regionInfoIdx).map(([id, info]) => Object.assign({}, info, { id }));
   }
 
   get sortedRegionInfoList() {
@@ -20,26 +24,19 @@ export default class Config {
   // Updating
 
   update(regionID, newInfo) {
-    let newRegionInfoList = [];
-    for (let regionInfo of this.regionInfoList) {
-      if (regionInfo.id === regionID) {
-        regionInfo = Object.assign({}, regionInfo, newInfo);
-      }
-      newRegionInfoList.push(regionInfo);
-    }
-    this.regionInfoList = newRegionInfoList;
+    this.regionInfoIdx[regionID] = newInfo;
   }
 
-  setRegionIDs(regionIDs) {
-    return (this.regionInfoList = regionIDs.map((regionID) => ({
-      id: regionID,
-    })));
+  setRegionIDs(regionIDList) {
+   this.regionInfoIdx = Config.regionIDListToIdx(regionIDList);
   }
 
   // Serializing
   toString() {
     return JSON.stringify(this.regionInfoList, null, 2);
   }
+
+  // Loaders
 
   static fromString(str) {
     return new Config(JSON.parse(str));
@@ -53,10 +50,16 @@ export default class Config {
     }
   }
 
+  static regionIDListToIdx(regionIDList) {
+    return Object.fromEntries(regionIDList.map((id) => [id, { id }]))
+  }
+
+  static fromRegionIDList(regionIDList) {
+    return new Config(Config.regionIDListToIdx(regionIDList));
+  }
+
   // Instances
-  static DEFAULT = new Config(
-    ["LK-11", "LK-12", "LK-13", "LK-2", "LK-3", "LK-8", "LK-9"].map((id) => ({
-      id,
-    }))
+  static DEFAULT = Config.fromRegionIDList(
+    ["LK-11", "LK-12", "LK-13", "LK-2", "LK-3", "LK-8", "LK-9"]
   );
 }
