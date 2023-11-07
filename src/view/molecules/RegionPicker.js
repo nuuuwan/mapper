@@ -19,7 +19,7 @@ export default function RegionPicker({ regionIDs, allEntList, onChange }) {
             {...params}
             variant="standard"
             label="Regions"
-            placeholder="Favorites"
+            placeholder="Select Regions"
           />
         )}
       />
