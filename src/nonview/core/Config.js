@@ -10,7 +10,9 @@ export default class Config {
   }
 
   get regionInfoList() {
-    return Object.entries(this.regionInfoIdx).map(([id, info]) => Object.assign({}, info, { id }));
+    return Object.entries(this.regionInfoIdx).map(([id, info]) =>
+      Object.assign({}, info, { id })
+    );
   }
 
   get sortedRegionInfoList() {
@@ -28,7 +30,7 @@ export default class Config {
   }
 
   setRegionIDs(regionIDList) {
-   this.regionInfoIdx = Config.regionIDListToIdx(regionIDList);
+    this.regionInfoIdx = Config.regionIDListToIdx(regionIDList);
   }
 
   // Serializing
@@ -51,7 +53,7 @@ export default class Config {
   }
 
   static regionIDListToIdx(regionIDList) {
-    return Object.fromEntries(regionIDList.map((id) => [id, { id }]))
+    return Object.fromEntries(regionIDList.map((id) => [id, { id }]));
   }
 
   static fromRegionIDList(regionIDList) {
@@ -59,7 +61,13 @@ export default class Config {
   }
 
   // Instances
-  static DEFAULT = Config.fromRegionIDList(
-    ["LK-11", "LK-12", "LK-13", "LK-2", "LK-3", "LK-8", "LK-9"]
-  );
+  static DEFAULT = Config.fromRegionIDList([
+    "LK-11",
+    "LK-12",
+    "LK-13",
+    "LK-2",
+    "LK-3",
+    "LK-8",
+    "LK-9",
+  ]);
 }
