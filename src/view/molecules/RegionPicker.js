@@ -6,8 +6,10 @@ export default function RegionPicker({ regionIDs, allEntList, onChange }) {
     onChange(newRegionsIDs);
   };
 
+  const key = regionIDs.join(",");
+
   return (
-    <Box sx={{ p: 1, m: 1 }}>
+    <Box key={key} sx={{ p: 1, m: 1 }}>
       <Autocomplete
         multiple
         defaultValue={allEntList.filter((ent) => regionIDs.includes(ent.id))}
