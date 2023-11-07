@@ -13,9 +13,9 @@ export default function HeaderView({ nRegions }) {
             #Mapper
           </Typography>
         </Badge>
-        <Typography variant="caption" onClick={onClickTitle} sx={{m:1}}>
-            {DATETIME_STR}
-          </Typography>
+        <Typography variant="caption" onClick={onClickTitle} sx={{ m: 1 }}>
+          {DATETIME_STR}
+        </Typography>
       </Toolbar>
     </AppBar>
   );
