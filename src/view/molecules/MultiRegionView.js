@@ -45,6 +45,12 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
       height="85vh"
       xmlns="http://www.w3.org/2000/svg"
     >
+      {" "}
+      <defs>
+        <style>
+          @import url('https://fonts.googleapis.com/css?family=Akshar');
+        </style>
+      </defs>
       {innerShapes}
       {innerLabels}
     </svg>

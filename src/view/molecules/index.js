@@ -7,6 +7,7 @@ import MultiRegionView from "./MultiRegionView";
 import PolygonListView from "./PolygonListView";
 import PolygonView from "./PolygonView";
 import RegionPicker from "./RegionPicker";
+import ScreenShot from "./ScreenShot";
 
 export {
   ConfigEditorView,
@@ -17,4 +18,5 @@ export {
   PolygonListView,
   PolygonView,
   RegionPicker,
+  ScreenShot,
 };

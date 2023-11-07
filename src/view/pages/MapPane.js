@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Color } from "../../nonview/base";
-import { MultiRegionView } from "../molecules";
+import { MultiRegionView, ScreenShot } from "../molecules";
 import { STYLE } from "./HomePageStyle";
 
 export default function MapPane({
@@ -15,11 +15,13 @@ export default function MapPane({
   const expandedColors = Color.expand(selectedColor);
   return (
     <Box>
-      <MultiRegionView
-        bbox={bbox}
-        config={config}
-        onClickRegion={onClickRegion}
-      />
+      <ScreenShot label="map">
+        <MultiRegionView
+          bbox={bbox}
+          config={config}
+          onClickRegion={onClickRegion}
+        />
+      </ScreenShot>
 
       {isColorPickerOpen ? (
         <div style={STYLE.BODY_CONTROLS}>
