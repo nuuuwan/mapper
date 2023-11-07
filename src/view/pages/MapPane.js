@@ -11,6 +11,7 @@ export default function MapPane({
   onChangeSelectedColor,
   onClickRegion,
 }) {
+  const expandedColors = Color.expand(selectedColor);
   return (
     <Box>
       <MultiRegionView
@@ -23,9 +24,9 @@ export default function MapPane({
         <TwitterPicker
           color={selectedColor}
           onChangeComplete={onChangeSelectedColor}
-          colors={Color.DEFAULT_COLORS}
+          colors={[].concat(Color.DEFAULT_COLORS, expandedColors)}
           triangle="hide"
-          width="200px"
+          width="180px"
         />
       </div>
     </Box>

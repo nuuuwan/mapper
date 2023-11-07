@@ -17,7 +17,7 @@ export default class Ent {
   }
 
   get label() {
-    return this.name + ' ' + this.entType.shortName ;
+    return this.name + " " + this.entType.shortName;
   }
 
   // Serializing
@@ -26,8 +26,8 @@ export default class Ent {
       id: this.id,
       name: this.name,
       centroid: JSON.stringify(this.centroid),
-        population: this.population,
-        area: this.area,
+      population: this.population,
+      area: this.area,
     };
   }
 
@@ -35,6 +35,27 @@ export default class Ent {
     return new Ent(d.id, d.name, JSON.parse(d.centroid), d.population, d.area);
   }
 
+  // sorting
+
+  static cmp(entA, entB) {
+    return Ent.cmpName(entA, entB);
+  }
+
+  static cmpPopulation(entA, entB) {
+    return entB.population - entA.population;
+  }
+
+  static cmpName(entA, entB) {
+    return entA.name.localeCompare(entB.name);
+  }
+
+  static cmpEntType(entA, entB) {
+    return entA.entType.id.localeCompare(entB.entType.id);
+  }
+
+  static cmpEntTypeAndName(entA, entB) {
+    return Ent.cmpEntType(entA, entB) || Ent.cmpName(entA, entB);
+  }
   // Loaders
   static async fromId(id) {
     const entType = EntType.fromEntId(id);
