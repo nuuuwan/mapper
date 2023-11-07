@@ -1,13 +1,9 @@
 import { Component } from "react";
 import { Box, CircularProgress, Drawer } from "@mui/material";
-import HeaderView from "../molecules/HeaderView";
-import FooterView from "../molecules/FooterView";
 
 import BBox from "../../nonview/base/BBox";
 import LngLat from "../../nonview/base/LngLat";
 import Ents from "../../nonview/base/Ents";
-import OptionsView from "../molecules/OptionsView";
-
 import Config from "../../nonview/core/Config";
 import Geo from "../../nonview/base/Geo";
 
@@ -15,7 +11,13 @@ import Color from "../../nonview/base/Color";
 
 import VersionView from "../atoms/VersionView";
 import { STYLE } from "./HomePageStyle";
-import MultiRegionView from "../molecules/MultiRegionView";
+
+import {
+  HeaderView,
+  FooterView,
+  OptionsView,
+  MultiRegionView,
+} from "../molecules";
 
 export default class HomePage extends Component {
   constructor(props) {
