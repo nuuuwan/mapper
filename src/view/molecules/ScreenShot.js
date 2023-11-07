@@ -2,9 +2,12 @@ import { useScreenshot } from "use-react-screenshot";
 import { Grid, Tooltip, IconButton } from "@mui/material";
 import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import {SnackbarLight} from "../atoms";
 
-export default function ScreenShot({ label, children, setSnackbarMessage }) {
+export default function ScreenShot({ label, children }) {
   const ref = React.useRef(null);
+
+  const [snackbarMessage, setSnackbarMessage] = React.useState("");
 
   const takeScreenshot = useScreenshot()[1];
   const imageFile = `${label}.png`;
@@ -13,9 +16,7 @@ export default function ScreenShot({ label, children, setSnackbarMessage }) {
     link.href = image;
     link.download = imageFile;
     link.click();
-    if (setSnackbarMessage) {
-      setSnackbarMessage(`Downloaded ${imageFile}`);
-    }
+    setSnackbarMessage(`Downloaded ${imageFile}`);
   };
 
   const onClick = function () {
@@ -30,10 +31,12 @@ export default function ScreenShot({ label, children, setSnackbarMessage }) {
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
+        <SnackbarLight key={'snackbar-' + snackbarMessage} snackbarMessage={snackbarMessage} />
       </Grid>
       <div ref={ref} id={label}>
         {children}
       </div>
+      
     </div>
   );
 }

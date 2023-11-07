@@ -13,10 +13,11 @@ export default function MapPane({
   isColorPickerOpen,
 }) {
   const expandedColors = Color.expand(selectedColor);
+  const screenshotLabel = "map-" + config.hash;
   return (
     <Box>
       <div style={STYLE.BODY_CONTENT}>
-        <ScreenShot label="map">
+        <ScreenShot label={screenshotLabel}>
           <MultiRegionView
             bbox={bbox}
             config={config}
