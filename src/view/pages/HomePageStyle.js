@@ -22,4 +22,12 @@ export const STYLE = {
     left: 0,
     right: 0,
   },
+
+  BODY_CONTROLS: {
+    position: "fixed",
+    top: 60,
+    right: 0,
+
+    padding: 10,
+  }
 };

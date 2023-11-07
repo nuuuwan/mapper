@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Box, CircularProgress, Drawer } from "@mui/material";
-
+import { BlockPicker } from "react-color";
 import { BBox, LngLat, Ents, Geo, Color } from "../../nonview/base";
 import { Config } from "../../nonview/core";
 
@@ -106,7 +106,7 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { bbox, config } = this.state;
+    const { bbox, config,selectedColor } = this.state;
     if (!bbox) {
       return <CircularProgress />;
     }
@@ -116,11 +116,21 @@ export default class HomePage extends Component {
           <HeaderView />
         </Box>
         <Box sx={STYLE.BODY}>
-          <MultiRegionView
+        
+        <MultiRegionView
             bbox={bbox}
             config={config}
             onClickRegion={this.onClickRegion.bind(this)}
           />
+         
+          <div style={STYLE.BODY_CONTROLS}>
+     <BlockPicker
+          color={selectedColor}
+          onChangeComplete={this.onChangeSelectedColor.bind(this)}
+          colors={Color.DEFAULT_COLORS}
+          triangle="hide"
+        />
+        </div>
           {this.renderDrawerOptions()}
         </Box>
         <Box sx={STYLE.FOOTER}>
