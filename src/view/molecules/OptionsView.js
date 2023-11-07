@@ -12,7 +12,6 @@ export default function OptionsView({
   const regionIDs = config.regionInfoList.map((info) => info.id);
   return (
     <Box sx={{ maxWidth: 320, p: 3 }}>
-
       <RegionPicker
         allEntList={allEntList}
         regionIDs={regionIDs}

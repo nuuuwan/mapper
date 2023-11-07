@@ -106,7 +106,7 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { bbox, config,selectedColor } = this.state;
+    const { bbox, config, selectedColor } = this.state;
     if (!bbox) {
       return <CircularProgress />;
     }
@@ -116,22 +116,21 @@ export default class HomePage extends Component {
           <HeaderView />
         </Box>
         <Box sx={STYLE.BODY}>
-        
-        <MultiRegionView
+          <MultiRegionView
             bbox={bbox}
             config={config}
             onClickRegion={this.onClickRegion.bind(this)}
           />
-         
+
           <div style={STYLE.BODY_CONTROLS}>
-     <TwitterPicker
-          color={selectedColor}
-          onChangeComplete={this.onChangeSelectedColor.bind(this)}
-          colors={Color.DEFAULT_COLORS}
-          triangle="hide"
-          width="200px"
-        />
-        </div>
+            <TwitterPicker
+              color={selectedColor}
+              onChangeComplete={this.onChangeSelectedColor.bind(this)}
+              colors={Color.DEFAULT_COLORS}
+              triangle="hide"
+              width="200px"
+            />
+          </div>
           {this.renderDrawerOptions()}
         </Box>
         <Box sx={STYLE.FOOTER}>

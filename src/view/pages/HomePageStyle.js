@@ -29,5 +29,5 @@ export const STYLE = {
     right: 0,
 
     padding: 10,
-  }
+  },
 };
