@@ -55,15 +55,8 @@ export default class Config {
 
   // Instances
   static DEFAULT = new Config(
-    [
-      "LK-11",
-      "LK-12",
-      "LK-13",
-      "LK-2",
-      "LK-3",
-      "LK-8",
-      "LK-9",
-      
-    ].map((id) => ({ id }))
+    ["LK-11", "LK-12", "LK-13", "LK-2", "LK-3", "LK-8", "LK-9"].map((id) => ({
+      id,
+    }))
   );
 }

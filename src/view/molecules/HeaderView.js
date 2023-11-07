@@ -1,4 +1,5 @@
 import { AppBar, Typography, Toolbar, Badge } from "@mui/material";
+import { DATETIME_STR } from "../../nonview/constants/VERSION.js";
 
 export default function HeaderView({ nRegions }) {
   const onClickTitle = function () {
@@ -9,7 +10,7 @@ export default function HeaderView({ nRegions }) {
       <Toolbar>
         <Badge badgeContent={nRegions} color="primary">
           <Typography variant="h4h6" onClick={onClickTitle}>
-            #Mapper
+            #Mapper - {DATETIME_STR}
           </Typography>
         </Badge>
       </Toolbar>
