@@ -6,13 +6,15 @@ export default function RegionPicker({ regionIDs, allEntList, onChange }) {
     onChange(newRegionsIDs);
   };
 
+  const sortedAllEntList = [...allEntList].sort((a, b) => a.label.localeCompare(b.label));
+
   const key = regionIDs.join(",");
   return (
     <Autocomplete
       key={key}
       multiple
-      defaultValue={allEntList.filter((ent) => regionIDs.includes(ent.id))}
-      options={allEntList}
+      defaultValue={sortedAllEntList.filter((ent) => regionIDs.includes(ent.id))}
+      options={sortedAllEntList}
       getOptionLabel={(ent) => `${ent.label}`}
       onChange={onChangeInner}
       renderInput={(params) => (

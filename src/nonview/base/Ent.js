@@ -3,10 +3,12 @@ import WWW from "./WWW.js";
 import EntType from "./EntType.js";
 
 export default class Ent {
-  constructor(id, name, centroid) {
+  constructor(id, name, centroid, population, area) {
     this.id = id;
     this.name = name;
     this.centroid = centroid;
+    this.population = population;
+    this.area = area;
   }
 
   // Getters
@@ -15,7 +17,7 @@ export default class Ent {
   }
 
   get label() {
-    return this.name + ' ' + this.entType.shortName;
+    return this.name + ' ' + this.entType.shortName ;
   }
 
   // Serializing
@@ -24,11 +26,13 @@ export default class Ent {
       id: this.id,
       name: this.name,
       centroid: JSON.stringify(this.centroid),
+        population: this.population,
+        area: this.area,
     };
   }
 
   static fromDict(d) {
-    return new Ent(d.id, d.name, JSON.parse(d.centroid));
+    return new Ent(d.id, d.name, JSON.parse(d.centroid), d.population, d.area);
   }
 
   // Loaders
