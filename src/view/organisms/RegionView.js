@@ -35,25 +35,26 @@ export default class RegionView extends Component {
     const infoLabel = info.label !== undefined ? info.label : ent.name;
 
     const bbox = BBox.fromLngLatList(LngLat.fromPolygonList(polygonList));
-    const xMin = t([bbox.minLngLat.lng, bbox.minLngLat.lat])[0];
-    const xMax = t([bbox.maxLngLat.lng, bbox.maxLngLat.lat])[0];
-    const fontSize = (xMax - xMin) / 7;
-    const MIN_FONT_SIZE = 5;
+    const [xMin, yMin] = t([bbox.minLngLat.lng, bbox.minLngLat.lat]);
+    const [xMax, yMax] = t([bbox.maxLngLat.lng, bbox.maxLngLat.lat]);
+    const [xSpan, ySpan] = [xMax - xMin, yMin - yMax];
+
+    const angle = xSpan > ySpan ? 0 : -90;
+    const fontSize = Math.sqrt(xSpan * xSpan + ySpan * ySpan) / 12;
 
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>
         <PolygonListView t={t} info={info} polygonList={polygonList} />
-        {fontSize > MIN_FONT_SIZE ? (
-          <text
-            x={x}
-            y={y}
-            fill={labelFill}
-            textAnchor="middle"
-            fontSize={fontSize}
-          >
-            {infoLabel}
-          </text>
-        ) : null}
+        <text
+          x={x}
+          y={y}
+          fill={labelFill}
+          textAnchor="middle"
+          fontSize={fontSize}
+          transform={`translate(${x}, ${y}) rotate(${angle}) translate(-${x}, -${y})`}
+        >
+          {infoLabel}
+        </text>
       </g>
     );
   }
