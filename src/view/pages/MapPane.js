@@ -15,6 +15,7 @@ export default function MapPane({
   const expandedColors = Color.expand(selectedColor);
   return (
     <Box>
+      <div style={STYLE.BODY_CONTENT}>
       <ScreenShot label="map">
         <MultiRegionView
           bbox={bbox}
@@ -22,6 +23,7 @@ export default function MapPane({
           onClickRegion={onClickRegion}
         />
       </ScreenShot>
+      </div>
 
       {isColorPickerOpen ? (
         <div style={STYLE.BODY_CONTROLS}>

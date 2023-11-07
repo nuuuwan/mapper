@@ -32,4 +32,14 @@ export const STYLE = {
 
     margin: "auto",
   },
+
+  BODY_CONTENT: {
+    position: "fixed",
+    top: BLOCK_SIZE,
+    bottom: BLOCK_SIZE,
+    right: 0,
+    left: 0,
+
+    margin: "auto",
+  }
 };
