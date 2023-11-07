@@ -48,7 +48,7 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
     >
       <defs>
         <style>
-          @import url('https://fonts.googleapis.com/css?family=Akshar');
+          @import url('https://fonts.googleapis.com/css?family=Roboto');
         </style>
       </defs>
       {innerShapes}
