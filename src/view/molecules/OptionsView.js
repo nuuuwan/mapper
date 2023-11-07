@@ -1,8 +1,10 @@
 import { IconButton, Box, Grid } from "@mui/material";
-import { BlockPicker } from "react-color";
-import RegionPicker from "./RegionPicker";
-import Color from "../../nonview/base/Color";
 import CloseIcon from "@mui/icons-material/Close";
+
+import { BlockPicker } from "react-color";
+
+import Color from "../../nonview/base/Color";
+import RegionPicker from "./RegionPicker";
 
 export default function OptionsView({
   selectedColor,

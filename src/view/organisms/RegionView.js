@@ -1,9 +1,6 @@
 import { Component } from "react";
-import Geo from "../../nonview/base/Geo";
+import { Ents, Geo, LngLat, BBox } from "../../nonview/base";
 import PolygonListView from "../molecules/PolygonListView";
-import Ents from "../../nonview/base/Ents";
-import LngLat from "../../nonview/base/LngLat";
-import BBox from "../../nonview/base/BBox";
 
 export default class RegionView extends Component {
   constructor(props) {
