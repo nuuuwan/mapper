@@ -4,7 +4,8 @@ const SVG_WIDTH = 1000;
 const SVG_PADDING = 10;
 
 export default function MultiRegionView({ bbox, config, onClickRegion }) {
-  const svg_height = 0.8 * (SVG_WIDTH * window.innerHeight) / window.innerWidth;
+  const svg_height =
+    (0.8 * (SVG_WIDTH * window.innerHeight)) / window.innerWidth;
 
   const t = bbox.getTransform(SVG_WIDTH, svg_height, SVG_PADDING);
 

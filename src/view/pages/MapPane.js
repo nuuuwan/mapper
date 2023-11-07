@@ -16,13 +16,13 @@ export default function MapPane({
   return (
     <Box>
       <div style={STYLE.BODY_CONTENT}>
-      <ScreenShot label="map">
-        <MultiRegionView
-          bbox={bbox}
-          config={config}
-          onClickRegion={onClickRegion}
-        />
-      </ScreenShot>
+        <ScreenShot label="map">
+          <MultiRegionView
+            bbox={bbox}
+            config={config}
+            onClickRegion={onClickRegion}
+          />
+        </ScreenShot>
       </div>
 
       {isColorPickerOpen ? (

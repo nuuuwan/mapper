@@ -41,5 +41,5 @@ export const STYLE = {
     left: 0,
 
     margin: "auto",
-  }
+  },
 };
