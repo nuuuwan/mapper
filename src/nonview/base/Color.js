@@ -104,7 +104,7 @@ export default class Color {
     const [r, g, b] = Color.hexToRGBVec(hexColor);
     const [h, s, l] = Color.rgbVecToHSLVec([r, g, b]);
 
-    const I_LIST = [0, 1, 2, 3, 4, 5, 6, 7];
+    const I_LIST = [0, 1, 2, 3];
     const N = I_LIST.length;
     const lVaryList = I_LIST.map((i) =>
       Color.hslVecToHexColor([h, s, 90 - (i * 80) / N])

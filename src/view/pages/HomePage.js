@@ -22,7 +22,7 @@ export default class HomePage extends Component {
       configStr: config.toString(),
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
-      isDrawerOptionsOpen: false,
+      isColorPickerOpen: true,
       pageId: "map",
     };
   }
@@ -69,12 +69,8 @@ export default class HomePage extends Component {
     this.setState({ config, configStr: config.toString() });
   }
 
-  onCloseDrawerOptions() {
-    this.setState({ isDrawerOptionsOpen: false });
-  }
-
-  onOpenDrawerOptions() {
-    this.setState({ isDrawerOptionsOpen: true });
+  onToggleColorPicker() {
+    this.setState({ isColorPickerOpen: !this.state.isColorPickerOpen });
   }
 
   onClickPage(pageId) {
@@ -82,7 +78,14 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { bbox, config, selectedColor, pageId, allEntList } = this.state;
+    const {
+      bbox,
+      config,
+      selectedColor,
+      pageId,
+      allEntList,
+      isColorPickerOpen,
+    } = this.state;
     if (!bbox) {
       return <CircularProgress />;
     }
@@ -95,6 +98,7 @@ export default class HomePage extends Component {
             selectedColor={selectedColor}
             onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
             onClickRegion={this.onClickRegion.bind(this)}
+            isColorPickerOpen={isColorPickerOpen}
           />
         );
       case "data":
@@ -111,7 +115,7 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { pageId, config } = this.state;
+    const { pageId, config, isColorPickerOpen } = this.state;
     const nRegions = config.nRegions;
     return (
       <Box sx={STYLE.ALL}>
@@ -123,6 +127,8 @@ export default class HomePage extends Component {
           <FooterView
             onClickPage={this.onClickPage.bind(this)}
             pageId={pageId}
+            isColorPickerOpen={isColorPickerOpen}
+            onToggleColorPicker={this.onToggleColorPicker.bind(this)}
           />
         </Box>
       </Box>

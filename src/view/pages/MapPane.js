@@ -10,6 +10,7 @@ export default function MapPane({
   selectedColor,
   onChangeSelectedColor,
   onClickRegion,
+  isColorPickerOpen,
 }) {
   const expandedColors = Color.expand(selectedColor);
   return (
@@ -20,15 +21,16 @@ export default function MapPane({
         onClickRegion={onClickRegion}
       />
 
-      <div style={STYLE.BODY_CONTROLS}>
-        <TwitterPicker
-          color={selectedColor}
-          onChangeComplete={onChangeSelectedColor}
-          colors={[].concat(Color.DEFAULT_COLORS, expandedColors)}
-          triangle="hide"
-          width="180px"
-        />
-      </div>
+      {isColorPickerOpen ? (
+        <div style={STYLE.BODY_CONTROLS}>
+          <TwitterPicker
+            color={selectedColor}
+            onChangeComplete={onChangeSelectedColor}
+            colors={[].concat(Color.DEFAULT_COLORS, expandedColors)}
+            width="320px"
+          />
+        </div>
+      ) : null}
     </Box>
   );
 }

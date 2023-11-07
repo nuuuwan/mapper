@@ -1,3 +1,5 @@
+const BLOCK_SIZE = 60;
+
 export const STYLE = {
   ALL: { margin: 0, padding: 0 },
   HEADER: {
@@ -8,8 +10,8 @@ export const STYLE = {
   },
   BODY: {
     position: "fixed",
-    top: 60,
-    bottom: 60,
+    top: BLOCK_SIZE,
+    bottom: BLOCK_SIZE,
     left: 0,
     right: 0,
     margin: "auto",
@@ -25,9 +27,9 @@ export const STYLE = {
 
   BODY_CONTROLS: {
     position: "fixed",
-    top: 60,
+    bottom: BLOCK_SIZE,
     right: 0,
 
-    padding: 10,
+    margin: "auto",
   },
 };

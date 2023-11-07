@@ -1,13 +1,21 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-
+import KeyboardHideIcon from "@mui/icons-material/KeyboardHide";
+import KeyboardIcon from "@mui/icons-material/Keyboard";
 import BugIcon from "@mui/icons-material/BugReport";
 
 import { PAGE_IDX } from "../pages/pages.js";
 
-export default function FooterView({ onClickPage, pageId: selectedPageId }) {
+export default function FooterView({
+  onClickPage,
+  pageId: selectedPageId,
+  isColorPickerOpen,
+  onToggleColorPicker,
+}) {
   const onClickBug = function () {
     window.open("https://github.com/nuuuwan/mapper/issues/new", "_blank");
   };
+
+  const ColorPickerIcon = isColorPickerOpen ? KeyboardHideIcon : KeyboardIcon;
 
   return (
     <BottomNavigation>
@@ -28,6 +36,12 @@ export default function FooterView({ onClickPage, pageId: selectedPageId }) {
           />
         );
       })}
+      <BottomNavigationAction
+        icon={<ColorPickerIcon />}
+        onClick={onToggleColorPicker}
+        disabled={selectedPageId !== "map"}
+        sx={{ color: selectedPageId !== "map" ? "#eee" : "#000" }}
+      />
     </BottomNavigation>
   );
 }
