@@ -191,9 +191,8 @@ export default class HomePage extends Component {
       <AppBar component="nav">
         <Toolbar>
           <Typography
-            variant="h4"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            variant="h4h6"
+
           >
             #Mapper
           </Typography>
