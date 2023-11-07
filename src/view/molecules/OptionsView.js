@@ -1,4 +1,4 @@
-import { IconButton, Box, Grid } from "@mui/material";
+import { IconButton, Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 import { BlockPicker } from "react-color";
@@ -17,11 +17,6 @@ export default function OptionsView({
   const regionIDs = config.regionInfoList.map((info) => info.id);
   return (
     <Box sx={{ maxWidth: 320, p: 3 }}>
-      <Grid container justify="flex-end">
-        <IconButton onClick={onCloseDrawerOptions}>
-          <CloseIcon />
-        </IconButton>
-      </Grid>
       <div style={{ height: 240, margin: 12 }}>
         <BlockPicker
           color={selectedColor}
@@ -35,6 +30,11 @@ export default function OptionsView({
         regionIDs={regionIDs}
         onChange={onChangeRegionIDs}
       />
+      <Box m={1} display="flex" justifyContent="flex-end" alignItems="flex-end">
+        <IconButton onClick={onCloseDrawerOptions}>
+          <CloseIcon />
+        </IconButton>
+      </Box>{" "}
     </Box>
   );
 }
