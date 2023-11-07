@@ -2,7 +2,7 @@ import { useScreenshot } from "use-react-screenshot";
 import { Grid, Tooltip, IconButton } from "@mui/material";
 import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import {SnackbarLight} from "../atoms";
+import { SnackbarLight } from "../atoms";
 
 export default function ScreenShot({ label, children }) {
   const ref = React.useRef(null);
@@ -31,12 +31,14 @@ export default function ScreenShot({ label, children }) {
             <CloudDownloadIcon sx={{ color: "#ccc" }} />
           </IconButton>
         </Tooltip>
-        <SnackbarLight key={'snackbar-' + snackbarMessage} snackbarMessage={snackbarMessage} />
+        <SnackbarLight
+          key={"snackbar-" + snackbarMessage}
+          snackbarMessage={snackbarMessage}
+        />
       </Grid>
       <div ref={ref} id={label}>
         {children}
       </div>
-      
     </div>
   );
 }

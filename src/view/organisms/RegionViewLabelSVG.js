@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Ent, Geo, LngLat, BBox, Color } from "../../nonview/base";
 
-export default class RegionViewLabel extends Component {
+export default class RegionViewLabelSVG extends Component {
   constructor(props) {
     super(props);
     this.state = {

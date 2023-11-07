@@ -3,7 +3,7 @@ import ConfigEditorView from "./ConfigEditorView";
 import FooterView from "./FooterView";
 import HeaderView from "./HeaderView";
 import MultiRegionPicker from "./MultiRegionPicker";
-import MultiRegionView from "./MultiRegionView";
+import MultiRegionViewSVG from "./MultiRegionViewSVG";
 import PolygonListView from "./PolygonListView";
 import PolygonView from "./PolygonView";
 import RegionPicker from "./RegionPicker";
@@ -14,7 +14,7 @@ export {
   FooterView,
   HeaderView,
   MultiRegionPicker,
-  MultiRegionView,
+  MultiRegionViewSVG,
   PolygonListView,
   PolygonView,
   RegionPicker,

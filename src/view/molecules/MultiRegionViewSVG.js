@@ -1,9 +1,9 @@
-import { RegionViewShape, RegionViewLabel } from "../organisms";
+import { RegionViewShapeSVG, RegionViewLabelSVG } from "../organisms";
 
 const SVG_WIDTH = 1000;
 const SVG_PADDING = 10;
 
-export default function MultiRegionView({ bbox, config, onClickRegion }) {
+export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
   const svg_height =
     (0.8 * (SVG_WIDTH * window.innerHeight)) / window.innerWidth;
 
@@ -14,7 +14,7 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
     const key = "region-shape-" + regionID;
 
     return (
-      <RegionViewShape
+      <RegionViewShapeSVG
         key={key}
         regionID={regionID}
         info={info}
@@ -29,7 +29,7 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
     const key = "region-label-" + regionID;
 
     return (
-      <RegionViewLabel
+      <RegionViewLabelSVG
         key={key}
         regionID={regionID}
         info={info}
@@ -41,7 +41,6 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
 
   return (
     <svg
-
       viewBox={`0 0 ${SVG_WIDTH} ${svg_height}`}
       width="100%"
       height="80vh"
@@ -49,7 +48,7 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
     >
       <defs>
         <style>
-          @import url("https://fonts.googleapis.com/css?family=Akshar");
+          @import url('https://fonts.googleapis.com/css?family=Akshar');
         </style>
       </defs>
       {innerShapes}

@@ -2,7 +2,7 @@ import { Component } from "react";
 import { Ent, Geo } from "../../nonview/base";
 import PolygonListView from "../molecules/PolygonListView";
 
-export default class RegionViewShape extends Component {
+export default class RegionViewShapeSVG extends Component {
   constructor(props) {
     super(props);
     this.state = {

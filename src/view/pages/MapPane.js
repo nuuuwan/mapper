@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Color } from "../../nonview/base";
-import { MultiRegionView, ScreenShot } from "../molecules";
+import { MultiRegionViewSVG, ScreenShot } from "../molecules";
 import { STYLE } from "./HomePageStyle";
 
 export default function MapPane({
@@ -18,7 +18,7 @@ export default function MapPane({
     <Box>
       <div style={STYLE.BODY_CONTENT}>
         <ScreenShot label={screenshotLabel}>
-          <MultiRegionView
+          <MultiRegionViewSVG
             bbox={bbox}
             config={config}
             onClickRegion={onClickRegion}
