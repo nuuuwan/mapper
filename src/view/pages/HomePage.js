@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { Box, CircularProgress } from "@mui/material";
-import { BBox, LngLat, Ents, Geo, Color } from "../../nonview/base";
+import { BBox, LngLat, Ent, Geo, Color, EntType } from "../../nonview/base";
 import { Config } from "../../nonview/core";
 
 import { HeaderView, FooterView } from "../molecules";
@@ -8,6 +8,8 @@ import { HeaderView, FooterView } from "../molecules";
 import DataPane from "./DataPane";
 import MapPane from "./MapPane";
 import { STYLE } from "./HomePageStyle";
+
+const ENT_TYPE_LIST = EntType.ALL;
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -27,13 +29,7 @@ export default class HomePage extends Component {
 
   async componentDidMount() {
     const bbox = await HomePage.getBBox(this.state.config);
-    const allEntIndex = await Ents.getAllEntIndex();
-    let allEntList = [];
-    for (const entType of ["province", "district", "dsd", "pd", "ed"]) {
-      for (const ent of Object.values(allEntIndex[entType])) {
-        allEntList.push(ent);
-      }
-    }
+    const allEntList = await Ent.listFromTypeList(ENT_TYPE_LIST);
 
     this.setState({ bbox, allEntList });
   }

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Ents, Geo, LngLat, BBox } from "../../nonview/base";
+import { Ent, Geo, LngLat, BBox } from "../../nonview/base";
 import PolygonListView from "../molecules/PolygonListView";
 
 export default class RegionView extends Component {
@@ -13,7 +13,7 @@ export default class RegionView extends Component {
 
   async componentDidMount() {
     const { regionID } = this.props;
-    const ent = await Ents.getEnt(regionID);
+    const ent = await Ent.fromId(regionID);
     const polygonList = await Geo.getPolygonList(regionID);
     this.setState({ polygonList, ent });
   }

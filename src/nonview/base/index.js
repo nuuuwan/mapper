@@ -2,10 +2,9 @@
 import BBox from "./BBox";
 import Cache from "./Cache";
 import Color from "./Color";
-import EntTypes from "./EntTypes";
-import Ents from "./Ents";
+import Ent from "./Ent";
+import EntType from "./EntType";
 import Geo from "./Geo";
-import GeoData from "./GeoData";
 import LngLat from "./LngLat";
 import Random from "./Random";
 import TimeX from "./TimeX";
@@ -16,10 +15,9 @@ export {
   BBox,
   Cache,
   Color,
-  EntTypes,
-  Ents,
+  Ent,
+  EntType,
   Geo,
-  GeoData,
   LngLat,
   Random,
   TimeX,

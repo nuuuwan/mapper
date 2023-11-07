@@ -1,4 +1,4 @@
-import EntTypes from "./EntTypes";
+import EntType from "./EntType";
 import WWW from "./WWW";
 
 const URL_BASE =
@@ -6,8 +6,8 @@ const URL_BASE =
 
 export default class Geo {
   static getURLForRegionID(regionID) {
-    const regionType = EntTypes.getEntType(regionID);
-    return `${URL_BASE}/${regionType}/${regionID}.json`;
+    const regionType = EntType.fromEntId(regionID);
+    return `${URL_BASE}/${regionType.id}/${regionID}.json`;
   }
 
   static async getPolygonList(regionID) {
