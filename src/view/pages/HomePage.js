@@ -1,16 +1,12 @@
 import { Component } from "react";
-import { Box, CircularProgress, Drawer } from "@mui/material";
-import { TwitterPicker } from "react-color";
+import { Box, CircularProgress } from "@mui/material";
 import { BBox, LngLat, Ents, Geo, Color } from "../../nonview/base";
 import { Config } from "../../nonview/core";
 
-import {
-  HeaderView,
-  FooterView,
-  OptionsView,
-  MultiRegionView,
-} from "../molecules";
+import { HeaderView, FooterView } from "../molecules";
 
+import DataPane from "./DataPane";
+import MapPane from "./MapPane";
 import { STYLE } from "./HomePageStyle";
 
 export default class HomePage extends Component {
@@ -25,6 +21,7 @@ export default class HomePage extends Component {
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
       isDrawerOptionsOpen: false,
+      pageId: "map",
     };
   }
 
@@ -84,57 +81,52 @@ export default class HomePage extends Component {
     this.setState({ isDrawerOptionsOpen: true });
   }
 
-  renderDrawerOptions() {
-    const { isDrawerOptionsOpen, selectedColor, config, allEntList } =
-      this.state;
-    return (
-      <Drawer
-        anchor={"right"}
-        open={isDrawerOptionsOpen}
-        onClose={this.onCloseDrawerOptions.bind(this)}
-      >
-        <OptionsView
-          selectedColor={selectedColor}
-          config={config}
-          allEntList={allEntList}
-          onCloseDrawerOptions={this.onCloseDrawerOptions.bind(this)}
-          onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
-          onChangeRegionIDs={this.onChangeRegionIDs.bind(this)}
-        />
-      </Drawer>
-    );
+  onClickPage(pageId) {
+    this.setState({ pageId });
   }
 
-  render() {
-    const { bbox, config, selectedColor } = this.state;
+  renderBody() {
+    const { bbox, config, selectedColor, pageId, allEntList } = this.state;
     if (!bbox) {
       return <CircularProgress />;
     }
+    switch (pageId) {
+      case "map":
+        return (
+          <MapPane
+            config={config}
+            bbox={bbox}
+            selectedColor={selectedColor}
+            onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
+            onClickRegion={this.onClickRegion.bind(this)}
+          />
+        );
+      case "data":
+        return (
+          <DataPane
+            config={config}
+            allEntList={allEntList}
+            onChangeRegionIDs={this.onChangeRegionIDs.bind(this)}
+          />
+        );
+      default:
+        return "Unknown Page: " + pageId;
+    }
+  }
+
+  render() {
+    const { pageId } = this.state;
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>
           <HeaderView />
         </Box>
-        <Box sx={STYLE.BODY}>
-          <MultiRegionView
-            bbox={bbox}
-            config={config}
-            onClickRegion={this.onClickRegion.bind(this)}
-          />
-
-          <div style={STYLE.BODY_CONTROLS}>
-            <TwitterPicker
-              color={selectedColor}
-              onChangeComplete={this.onChangeSelectedColor.bind(this)}
-              colors={Color.DEFAULT_COLORS}
-              triangle="hide"
-              width="200px"
-            />
-          </div>
-          {this.renderDrawerOptions()}
-        </Box>
+        <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
         <Box sx={STYLE.FOOTER}>
-          <FooterView onClick={this.onOpenDrawerOptions.bind(this)} />
+          <FooterView
+            onClickPage={this.onClickPage.bind(this)}
+            pageId={pageId}
+          />
         </Box>
       </Box>
     );

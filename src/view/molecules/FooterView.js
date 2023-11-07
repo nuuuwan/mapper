@@ -1,8 +1,10 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import TuneIcon from "@mui/icons-material/Tune";
+
 import BugIcon from "@mui/icons-material/BugReport";
 
-export default function FooterView({ onClick }) {
+import { PAGE_IDX } from "../pages/pages.js";
+
+export default function FooterView({ onClickPage, pageId: selectedPageId }) {
   const onClickBug = function () {
     window.open("https://github.com/nuuuwan/mapper/issues/new", "_blank");
   };
@@ -10,7 +12,22 @@ export default function FooterView({ onClick }) {
   return (
     <BottomNavigation>
       <BottomNavigationAction icon={<BugIcon />} onClick={onClickBug} />
-      <BottomNavigationAction icon={<TuneIcon />} onClick={onClick} />
+      {Object.entries(PAGE_IDX).map(function ([pageId, d]) {
+        const key = "button-" + pageId;
+        const isSelected = pageId === selectedPageId;
+        const color = isSelected ? "#eee" : "#000";
+        return (
+          <BottomNavigationAction
+            key={key}
+            icon={<d.Icon />}
+            onClick={function () {
+              onClickPage(pageId);
+            }}
+            disabled={isSelected}
+            sx={{ color: color }}
+          />
+        );
+      })}
     </BottomNavigation>
   );
 }
