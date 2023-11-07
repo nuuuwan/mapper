@@ -1,4 +1,4 @@
-import RegionView from "../organisms/RegionView.js";
+import { RegionViewShape, RegionViewLabel } from "../organisms";
 
 const SVG_WIDTH = 1000;
 const SVG_PADDING = 10;
@@ -8,19 +8,32 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
 
   const t = bbox.getTransform(SVG_WIDTH, svg_height, SVG_PADDING);
 
-  const inner = config.sortedRegionInfoList.map(function (info) {
+  const innerShapes = config.sortedRegionInfoList.map(function (info) {
     const regionID = info.id;
-    const key = "region-" + regionID;
-    const onClickInner = function () {
-      onClickRegion(regionID);
-    };
+    const key = "region-shape-" + regionID;
+
     return (
-      <RegionView
+      <RegionViewShape
         key={key}
         regionID={regionID}
         info={info}
         t={t}
-        onClick={onClickInner}
+        onClickRegion={onClickRegion}
+      />
+    );
+  });
+
+  const innerLabels = config.sortedRegionInfoList.map(function (info) {
+    const regionID = info.id;
+    const key = "region-label-" + regionID;
+
+    return (
+      <RegionViewLabel
+        key={key}
+        regionID={regionID}
+        info={info}
+        t={t}
+        onClickRegion={onClickRegion}
       />
     );
   });
@@ -32,7 +45,8 @@ export default function MultiRegionView({ bbox, config, onClickRegion }) {
       height="85vh"
       xmlns="http://www.w3.org/2000/svg"
     >
-      {inner}
+      {innerShapes}
+      {innerLabels}
     </svg>
   );
 }

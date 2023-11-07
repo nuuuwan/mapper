@@ -1,8 +1,7 @@
 import { Component } from "react";
 import { Ent, Geo, LngLat, BBox } from "../../nonview/base";
-import PolygonListView from "../molecules/PolygonListView";
 
-export default class RegionView extends Component {
+export default class RegionViewLabel extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,7 +26,7 @@ export default class RegionView extends Component {
     if (!polygonList || !ent) {
       return null;
     }
-    const { t, info, onClick } = this.props;
+    const { t, info, onClickRegion, regionID } = this.props;
     const [lat, lng] = ent.centroid;
     const [x, y] = t([lng, lat]);
 
@@ -42,9 +41,12 @@ export default class RegionView extends Component {
     const angle = xSpan > ySpan ? 0 : -90;
     const fontSize = Math.sqrt(xSpan * xSpan + ySpan * ySpan) / 12;
 
+    const onClick = function () {
+      onClickRegion(regionID);
+    };
+
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>
-        <PolygonListView t={t} info={info} polygonList={polygonList} />
         <text
           x={x}
           y={y}
