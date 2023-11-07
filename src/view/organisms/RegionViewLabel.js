@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Ent, Geo, LngLat, BBox } from "../../nonview/base";
+import { Ent, Geo, LngLat, BBox, Color } from "../../nonview/base";
 
 export default class RegionViewLabel extends Component {
   constructor(props) {
@@ -30,7 +30,8 @@ export default class RegionViewLabel extends Component {
     const [lat, lng] = ent.centroid;
     const [x, y] = t([lng, lat]);
 
-    const labelFill = info.labelFill || "#000";
+    const labelFill = info.labelFill || Color.getCompliment(info.fill);
+
     const infoLabel = info.label !== undefined ? info.label : ent.name;
 
     const bbox = BBox.fromLngLatList(LngLat.fromPolygonList(polygonList));

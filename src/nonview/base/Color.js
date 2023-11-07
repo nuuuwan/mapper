@@ -115,6 +115,18 @@ export default class Color {
     return [].concat(lVaryList, complimentList);
   }
 
+  static getCompliment(hexColor) {
+    if (!hexColor) {
+      return "#111";
+    }
+    const [r, g, b] = Color.hexToRGBVec(hexColor);
+    const l = Color.rgbVecToHSLVec([r, g, b])[2];
+    if (l < 50) {
+      return "#eee";
+    }
+    return "#111";
+  }
+
   static DEFAULT_COLORS = [
     // Sri Lanka
     "#941E32",
