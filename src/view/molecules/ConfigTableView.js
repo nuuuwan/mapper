@@ -10,10 +10,10 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function ConfigTableViewRow({ id, info, onRemoveRegions }) {
+function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
   return (
     <TableRow key={id}>
-      <TableCell>{id}</TableCell>
+      <TableCell>{ent.label}</TableCell>
       <TableCell>
         <span
           style={{
@@ -50,7 +50,7 @@ function ConfigTableViewHeaderRow() {
   );
 }
 
-export default function ConfigTableView({ config, onRemoveRegions }) {
+export default function ConfigTableView({ allEntIdx, config, onRemoveRegions }) {
   return (
     <Box>
       <TableContainer>
@@ -66,6 +66,7 @@ export default function ConfigTableView({ config, onRemoveRegions }) {
                   key={id}
                   id={id}
                   info={info}
+                  ent={allEntIdx[id]}
                   onRemoveRegions={onRemoveRegions}
                 />
               );

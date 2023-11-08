@@ -25,7 +25,7 @@ export default function DataPane({
           onAddRegions={onAddRegions}
           onRemoveRegions={onRemoveRegions}
         />
-        <ConfigTableView config={config} onRemoveRegions={onRemoveRegions} />
+        <ConfigTableView allEntIdx={allEntIdx} config={config} onRemoveRegions={onRemoveRegions} />
         <DataUpDownloader
           data={config.toData()}
           setData={onChangeConfig}
