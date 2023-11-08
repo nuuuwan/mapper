@@ -22,7 +22,7 @@ export default class HomePage extends Component {
       configStr: config.toString(),
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
-      isColorPickerOpen: true,
+      isColorPickerOpen: false,
       pageId: "data",
     };
   }

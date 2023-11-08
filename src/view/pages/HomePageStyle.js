@@ -35,8 +35,8 @@ export const STYLE = {
 
   BODY_CONTENT: {
     position: "fixed",
-    top: BLOCK_SIZE,
-    bottom: BLOCK_SIZE,
+    top: BLOCK_SIZE-30,
+    bottom: BLOCK_SIZE+30,
     right: 0,
     left: 0,
   },

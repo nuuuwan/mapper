@@ -1,6 +1,6 @@
-import MapIcon from "@mui/icons-material/Map";
+import PublicIcon from '@mui/icons-material/Public';
 import DataIcon from "@mui/icons-material/Storage";
 export const PAGE_IDX = {
   data: { Icon: DataIcon },
-  map: { Icon: MapIcon },
+  map: { Icon: PublicIcon },
 };
