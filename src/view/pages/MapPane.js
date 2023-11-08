@@ -1,10 +1,9 @@
 import React from "react";
 import { Box } from "@mui/material";
 import PaletteIcon from "@mui/icons-material/Palette";
-import { TwitterPicker } from "react-color";
 import { Color } from "../../nonview/base";
 import { ShowHide } from "../atoms";
-import { MultiRegionViewSVG, ScreenShot } from "../molecules";
+import { MultiRegionViewSVG, ScreenShot, ColorPicker } from "../molecules";
 import { STYLE } from "./HomePageStyle";
 
 export default function MapPane({
@@ -30,12 +29,10 @@ export default function MapPane({
       </div>
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
         <ShowHide Icon={PaletteIcon} isShow={false}>
-          <TwitterPicker
+          <ColorPicker
             color={selectedColor}
             onChangeComplete={onChangeSelectedColor}
             colors={[].concat(Color.DEFAULT_COLORS, expandedColors)}
-            width="320px"
-            triangle="hide"
           />
         </ShowHide>
       </div>
