@@ -45,7 +45,7 @@ export default class RegionGroupPicker extends Component {
             );
           })}
         <Button variant="text" onClick={onClickRemoveAll}>
-          {"Remove all"}
+          {"Remove all ✖"}
         </Button>
       </Box>
     );

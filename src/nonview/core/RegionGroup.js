@@ -10,7 +10,7 @@ export default class RegionGroup {
     const regionEnts = await Ent.listFromType(regionEntType);
     const regionIdList = regionEnts.map((regionEnt) => regionEnt.id);
     return new RegionGroup(
-      "All " + regionEntType.shortName + "s",
+      "∀ All " + regionEntType.shortName + "s",
       regionIdList
     );
   }
