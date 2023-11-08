@@ -16,7 +16,7 @@ const VisuallyHiddenInput = styled("input")({
   width: 0,
 });
 
-export default function DataUpDownloader({ data, setData }) {
+export default function DataUpDownloader({ data, setData, fileName }) {
   const setSnackbarMessage = React.useState("")[1];
 
   const onUpload = function (event) {
@@ -41,7 +41,7 @@ export default function DataUpDownloader({ data, setData }) {
       JSON.stringify(data, null, 2)
     )}`;
     link.href = jsonString;
-    link.download = "config.json";
+    link.download = fileName;
     link.click();
     setSnackbarMessage(`Downloaded ${link.download}`);
   };

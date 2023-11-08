@@ -26,7 +26,7 @@ export default function DataPane({
         onChange={onChangeRegionIDs}
       />
       <ConfigTableView config={config} />
-      <DataUpDownloader data={config.toData()} setData={onChangeConfig} />
+      <DataUpDownloader data={config.toData()} setData={onChangeConfig} fileName={config.fileName} />
     </Box>
   );
 }

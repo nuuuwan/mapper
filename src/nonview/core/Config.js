@@ -1,5 +1,6 @@
 import { Color } from "../../nonview/base";
 var md5 = require("md5");
+const HASH_LENGTH = 8;
 
 export default class Config {
   constructor(regionInfoIdx) {
@@ -7,7 +8,7 @@ export default class Config {
   }
 
   get hash() {
-    return md5(this.toString());
+    return md5(this.toString()).substring(0, HASH_LENGTH);
   }
 
   get regionInfoList() {
@@ -22,6 +23,10 @@ export default class Config {
 
   get nRegions() {
     return this.regionInfoList.length;
+  }
+
+  get fileName() {
+    return `config-${this.hash}.json`;
   }
 
   // Updating
