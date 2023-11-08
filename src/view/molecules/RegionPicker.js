@@ -5,10 +5,9 @@ export default function RegionPicker({ regionIds, allEntIdx, onAddRegions }) {
     onAddRegions([ent.id]);
   };
   const entList = Object.values(allEntIdx);
-  const key = regionIds.join(",");
+
   return (
     <Autocomplete
-      key={key}
       disablePortal
       options={entList
         .filter((ent) => !regionIds.includes(ent.id))

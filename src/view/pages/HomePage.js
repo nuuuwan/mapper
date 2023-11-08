@@ -23,7 +23,7 @@ export default class HomePage extends Component {
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
 
-      pageId: "map",
+      pageId: "data",
     };
   }
 

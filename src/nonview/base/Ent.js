@@ -85,11 +85,31 @@ export default class Ent {
     return Ent._idxFromList(entList);
   }
 
+  static unique(ents) {
+    const idToEnt = Object.fromEntries(ents.map((ent) => [ent.id, ent]));
+    const idToN = ents.reduce(function (idToN, ent) {
+      idToN[ent.id] = (idToN[ent.id] || 0) + 1;
+      return idToN;
+    }, {});
+
+    const entsUnique = Object.entries(idToN)
+      .sort(function (a, b) {
+        if (a[1] !== b[1]) {
+          return b[1] - a[1];
+        }
+        return a[0].localeCompare(b[0]);
+      })
+      .map((x) => idToEnt[x[0]]);
+
+    return entsUnique;
+  }
+
   static async getSimilarEnts(entList) {
+    const entIds = entList.map((ent) => ent.id);
     const similarEnts = [];
     for (const ent of entList) {
       similarEnts.push(...(await ent.getSiblingEnts()));
     }
-    return similarEnts;
+    return Ent.unique(similarEnts.filter((ent) => !entIds.includes(ent.id)));
   }
 }

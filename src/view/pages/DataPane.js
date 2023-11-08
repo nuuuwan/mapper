@@ -12,6 +12,7 @@ export default function DataPane({
   onChangeConfig,
 }) {
   const regionIds = config.regionInfoList.map((info) => info.id);
+  const keyRegions = "suggested-region-picker-" + regionIds.join("-");
   return (
     <div style={STYLE.BODY_CONTENT_SCROLLABLE}>
       <Box sx={{ maxWidth: 640, margin: "auto", align: "center", padding: 2 }}>
@@ -21,10 +22,12 @@ export default function DataPane({
           onAddRegions={onAddRegions}
         />
         <RegionGroupPicker
+          key={keyRegions}
           regionIds={regionIds}
           onAddRegions={onAddRegions}
           onRemoveRegions={onRemoveRegions}
         />
+
         <ConfigTableView
           allEntIdx={allEntIdx}
           config={config}
