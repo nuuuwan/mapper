@@ -12,14 +12,14 @@ export default class RegionViewShapeSVG extends Component {
   }
 
   async componentDidMount() {
-    const { regionID } = this.props;
-    const ent = await Ent.fromId(regionID);
-    const polygonList = await Geo.getPolygonList(regionID);
+    const { regionId } = this.props;
+    const ent = await Ent.fromId(regionId);
+    const polygonList = await Geo.getPolygonList(regionId);
     this.setState({ polygonList, ent });
   }
 
-  renderRegion(regionID) {
-    return regionID;
+  renderRegion(regionId) {
+    return regionId;
   }
 
   render() {
@@ -27,9 +27,9 @@ export default class RegionViewShapeSVG extends Component {
     if (!polygonList || !ent) {
       return null;
     }
-    const { t, info, onClickRegion, regionID } = this.props;
+    const { t, info, onClickRegion, regionId } = this.props;
     const onClick = function () {
-      onClickRegion(regionID);
+      onClickRegion(regionId);
     };
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>

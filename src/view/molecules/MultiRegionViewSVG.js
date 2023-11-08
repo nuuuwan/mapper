@@ -10,13 +10,13 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
   const t = bbox.getTransform(SVG_WIDTH, svg_height, SVG_PADDING);
 
   const innerShapes = config.sortedRegionInfoList.map(function (info) {
-    const regionID = info.id;
-    const key = "region-shape-" + regionID;
+    const regionId = info.id;
+    const key = "region-shape-" + regionId;
 
     return (
       <RegionViewShapeSVG
         key={key}
-        regionID={regionID}
+        regionId={regionId}
         info={info}
         t={t}
         onClickRegion={onClickRegion}
@@ -25,13 +25,13 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
   });
 
   const innerLabels = config.sortedRegionInfoList.map(function (info) {
-    const regionID = info.id;
-    const key = "region-label-" + regionID;
+    const regionId = info.id;
+    const key = "region-label-" + regionId;
 
     return (
       <RegionViewLabelSVG
         key={key}
-        regionID={regionID}
+        regionId={regionId}
         info={info}
         t={t}
         onClickRegion={onClickRegion}

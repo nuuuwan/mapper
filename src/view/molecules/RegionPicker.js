@@ -1,17 +1,17 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { Ent } from "../../nonview/base";
-export default function RegionPicker({ regionIDs, allEntIdx, onAddRegions }) {
+export default function RegionPicker({ regionIds, allEntIdx, onAddRegions }) {
   const onChange = function (_, ent) {
     onAddRegions([ent.id]);
   };
   const entList = Object.values(allEntIdx);
-  const key = regionIDs.join(",");
+  const key = regionIds.join(",");
   return (
     <Autocomplete
       key={key}
       disablePortal
       options={entList
-        .filter((ent) => !regionIDs.includes(ent.id))
+        .filter((ent) => !regionIds.includes(ent.id))
         .sort((a, b) => Ent.cmp(a, b))}
       groupBy={(ent) => ent.name.substring(0, 2)}
       onChange={onChange}

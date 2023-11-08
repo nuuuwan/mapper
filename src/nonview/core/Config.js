@@ -31,8 +31,8 @@ export default class Config {
 
   // Updating
 
-  update(regionID, newInfo) {
-    this.regionInfoIdx[regionID] = newInfo;
+  update(regionId, newInfo) {
+    this.regionInfoIdx[regionId] = newInfo;
   }
 
   addRegions(regionIds) {
@@ -85,18 +85,18 @@ export default class Config {
     };
   }
 
-  static regionIDListToIdx(regionIDList) {
+  static regionIdListToIdx(regionIdList) {
     return Object.fromEntries(
-      regionIDList.map((id) => [id, Config.initItem({ id })])
+      regionIdList.map((id) => [id, Config.initItem({ id })])
     );
   }
 
-  static fromRegionIDList(regionIDList) {
-    return new Config(Config.regionIDListToIdx(regionIDList));
+  static fromRegionIdList(regionIdList) {
+    return new Config(Config.regionIdListToIdx(regionIdList));
   }
 
   // Instances
-  static DEFAULT = Config.fromRegionIDList([
+  static DEFAULT = Config.fromRegionIdList([
     "LK-11",
     "LK-12",
     "LK-13",

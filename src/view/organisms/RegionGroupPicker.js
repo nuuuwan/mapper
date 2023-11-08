@@ -14,11 +14,11 @@ export default class RegionGroupPicker extends Component {
     this.setState({ regionGroups });
   }
   render() {
-    const { onRemoveRegions, onAddRegions, regionIDs } = this.props;
+    const { onRemoveRegions, onAddRegions, regionIds } = this.props;
     const { regionGroups } = this.state;
 
     const onClickRemoveAll = function () {
-      onRemoveRegions(regionIDs);
+      onRemoveRegions(regionIds);
     };
 
     return (

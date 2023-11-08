@@ -5,25 +5,25 @@ const URL_BASE =
   "https://raw.githubusercontent.com/nuuuwan/gig-data/master/geo";
 
 export default class Geo {
-  static getURLForRegionID(regionID) {
-    const regionType = EntType.fromEntId(regionID);
-    return `${URL_BASE}/${regionType.id}/${regionID}.json`;
+  static getURLForRegionId(regionId) {
+    const regionType = EntType.fromEntId(regionId);
+    return `${URL_BASE}/${regionType.id}/${regionId}.json`;
   }
 
-  static async getPolygonList(regionID) {
-    const url = Geo.getURLForRegionID(regionID);
+  static async getPolygonList(regionId) {
+    const url = Geo.getURLForRegionId(regionId);
     return await WWW.json(url);
   }
 
-  static async getIDToPolygonList(regionIDList) {
+  static async getIdToPolygonList(regionIdList) {
     const polygonListList = await Promise.all(
-      regionIDList.map(async function (regionID) {
-        return await Geo.getPolygonList(regionID);
+      regionIdList.map(async function (regionId) {
+        return await Geo.getPolygonList(regionId);
       })
     );
 
-    return regionIDList.reduce(function (idToPolygonList, regionID, i) {
-      idToPolygonList[regionID] = polygonListList[i];
+    return regionIdList.reduce(function (idToPolygonList, regionId, i) {
+      idToPolygonList[regionId] = polygonListList[i];
       return idToPolygonList;
     }, {});
   }

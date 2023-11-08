@@ -35,12 +35,12 @@ export default class HomePage extends Component {
   }
 
   static async getBBox(config) {
-    const regionIDList = config.regionInfoList.map(
+    const regionIdList = config.regionInfoList.map(
       (regionInfo) => regionInfo.id
     );
-    const regionIDToPolygonList = await Geo.getIDToPolygonList(regionIDList);
+    const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
-      Object.values(regionIDToPolygonList)
+      Object.values(regionIdToPolygonList)
     );
     return BBox.fromLngLatList(lngLatList);
   }
@@ -56,16 +56,16 @@ export default class HomePage extends Component {
     this.setState({ config, configStr: config.toString(), bbox });
   }
 
-  async onRemoveRegions(regionIDs) {
+  async onRemoveRegions(regionIds) {
     const { config } = this.state;
-    config.deleteRegions(regionIDs);
+    config.deleteRegions(regionIds);
     const bbox = await HomePage.getBBox(config);
     this.setState({ config, configStr: config.toString(), bbox });
   }
 
-  onClickRegion(regionID) {
+  onClickRegion(regionId) {
     const { selectedColor, config } = this.state;
-    config.update(regionID, { fill: selectedColor });
+    config.update(regionId, { fill: selectedColor });
     this.setState({ config, configStr: config.toString() });
   }
 

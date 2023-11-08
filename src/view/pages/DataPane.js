@@ -11,17 +11,17 @@ export default function DataPane({
   onRemoveRegions,
   onChangeConfig,
 }) {
-  const regionIDs = config.regionInfoList.map((info) => info.id);
+  const regionIds = config.regionInfoList.map((info) => info.id);
   return (
     <div style={STYLE.BODY_CONTENT_SCROLLABLE}>
       <Box sx={{ maxWidth: 640, margin: "auto", align: "center", padding: 2 }}>
         <RegionPicker
           allEntIdx={allEntIdx}
-          regionIDs={regionIDs}
+          regionIds={regionIds}
           onAddRegions={onAddRegions}
         />
         <RegionGroupPicker
-          regionIDs={regionIDs}
+          regionIds={regionIds}
           onAddRegions={onAddRegions}
           onRemoveRegions={onRemoveRegions}
         />
