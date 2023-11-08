@@ -4,6 +4,10 @@ export default class LngLat {
     this.lat = lat;
   }
 
+  equals(lngLat) {
+    return this.lng === lngLat.lng && this.lat === lngLat.lat;
+  }
+
   static fromCoordinate(coordinate) {
     const [lng, lat] = coordinate;
     return new LngLat(lng, lat);
@@ -34,6 +38,7 @@ export default class LngLat {
     }, []);
   }
 
+  // constants
   static MIN = new LngLat(-180, -180);
   static MAX = new LngLat(180, 180);
 

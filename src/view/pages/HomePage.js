@@ -38,6 +38,8 @@ export default class HomePage extends Component {
     const regionIdList = config.regionInfoList.map(
       (regionInfo) => regionInfo.id
     );
+    const overlapPairs = await Geo.getOverlapGraph(regionIdList);
+    console.debug("overlapPairs", overlapPairs);
     const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
       Object.values(regionIdToPolygonList)
