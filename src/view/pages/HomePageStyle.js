@@ -39,10 +39,18 @@ export const STYLE = {
     bottom: BLOCK_SIZE,
     right: 0,
     left: 0,
+  },
+  BODY_CONTENT_SCROLLABLE: {
+    position: "fixed",
+    top: BLOCK_SIZE,
+    bottom: BLOCK_SIZE,
+    right: 0,
+    left: 0,
 
     margin: "auto",
+    overflow: "scroll",
+    overflowX: "hidden",
   },
-
   LOADING: {
     margin: 1,
   },
