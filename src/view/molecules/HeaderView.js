@@ -18,7 +18,7 @@ export default function HeaderView({ nRegions, selectedColor }) {
           onClick={onClickTitle}
           sx={{ marginLeft: 1 }}
         >
-          {DATETIME_STR}
+          v{DATETIME_STR}
         </Typography>
       </Toolbar>
     </AppBar>
