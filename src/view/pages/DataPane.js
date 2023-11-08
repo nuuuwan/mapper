@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { RegionPicker, MultiRegionPicker } from "../molecules";
+import { RegionPicker, MultiRegionPicker, ConfigTableView } from "../molecules";
 
 export default function DataPane({ config, allEntList, onChangeRegionIDs }) {
   const regionIDs = config.regionInfoList.map((info) => info.id);
@@ -15,6 +15,7 @@ export default function DataPane({ config, allEntList, onChangeRegionIDs }) {
         regionIDs={regionIDs}
         onChange={onChangeRegionIDs}
       />
+      <ConfigTableView config={config} />
     </Box>
   );
 }
