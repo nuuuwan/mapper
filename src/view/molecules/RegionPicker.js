@@ -12,7 +12,7 @@ export default function RegionPicker({ regionIDs, allEntList, onChange }) {
       key={key}
       multiple
       defaultValue={allEntList.filter((ent) => regionIDs.includes(ent.id))}
-      options={allEntList.sort((a, b) => Ent.cmpName(a, b))}
+      options={allEntList.sort((a, b) => Ent.cmp(a, b))}
       groupBy={(ent) => ent.name.substring(0, 2)}
       getOptionLabel={(ent) => `${ent.label}`}
       onChange={onChangeInner}

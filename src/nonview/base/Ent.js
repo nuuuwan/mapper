@@ -38,24 +38,9 @@ export default class Ent {
   // sorting
 
   static cmp(entA, entB) {
-    return Ent.cmpName(entA, entB);
-  }
-
-  static cmpPopulation(entA, entB) {
-    return entB.population - entA.population;
-  }
-
-  static cmpName(entA, entB) {
     return entA.name.localeCompare(entB.name);
   }
 
-  static cmpEntType(entA, entB) {
-    return entA.entType.id.localeCompare(entB.entType.id);
-  }
-
-  static cmpEntTypeAndName(entA, entB) {
-    return Ent.cmpEntType(entA, entB) || Ent.cmpName(entA, entB);
-  }
   // Loaders
   static async fromId(id) {
     const entType = EntType.fromEntId(id);
