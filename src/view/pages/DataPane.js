@@ -11,6 +11,7 @@ export default function DataPane({
   config,
   allEntIdx,
   onAddRegions,
+  onDeleteRegions,
   onChangeConfig,
 }) {
   const regionIDs = config.regionInfoList.map((info) => info.id);
@@ -23,7 +24,7 @@ export default function DataPane({
           onAddRegions={onAddRegions}
         />
         <MultiRegionPicker regionIDs={regionIDs} onAddRegions={onAddRegions} />
-        <ConfigTableView config={config} />
+        <ConfigTableView config={config} onDeleteRegions={onDeleteRegions}/>
         <DataUpDownloader
           data={config.toData()}
           setData={onChangeConfig}

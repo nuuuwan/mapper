@@ -56,6 +56,13 @@ export default class HomePage extends Component {
     this.setState({ config, configStr: config.toString(), bbox });
   }
 
+  async onDeleteRegions(regionIDs) {
+    const { config } = this.state;
+    config.deleteRegions(regionIDs);
+    const bbox = await HomePage.getBBox(config);
+    this.setState({ config, configStr: config.toString(), bbox });
+  }  
+
   onClickRegion(regionID) {
     const { selectedColor, config } = this.state;
     config.update(regionID, { fill: selectedColor });
@@ -113,6 +120,7 @@ export default class HomePage extends Component {
             config={config}
             allEntIdx={allEntIdx}
             onAddRegions={this.onAddRegions.bind(this)}
+            onDeleteRegions={this.onDeleteRegions.bind(this)}
             onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );

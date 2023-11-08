@@ -45,6 +45,12 @@ export default class Config {
     }  
   }
 
+  deleteRegions(regionIds) {
+    for (const regionId of regionIds) {
+      delete this.regionInfoIdx[regionId];
+    }
+  }
+
   // Serializing / Loaders
   toData() {
     return this.regionInfoIdx;
