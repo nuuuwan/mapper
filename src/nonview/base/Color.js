@@ -130,7 +130,7 @@ export default class Color {
   // Auto Color
 
   static autoColor(overlapKeyPairs, keyList) {
-    const [MIN_N_COLORS, MAX_N_COLORS] = [4,4];
+    const [MIN_N_COLORS, MAX_N_COLORS] = [4, 4];
     const MAX_ATTEMPTS = 10_000;
     let minNOverlaps = Infinity;
     let bestKeyToColor = null;
@@ -152,9 +152,8 @@ export default class Color {
         }
         const nOverlaps = overlapPairs.length;
         if (nOverlaps === 0) {
-          console.debug('Solution', { nColors });
+          console.debug("Solution", { nColors });
           return keyToIColor;
-          
         }
         if (nOverlaps < minNOverlaps) {
           minNOverlaps = nOverlaps;
@@ -162,11 +161,14 @@ export default class Color {
           bestOverlapPairs = overlapPairs;
         }
       }
-      console.debug('Partial Solution', { nColors, bestOverlapPairs })
+      console.debug("Partial Solution", { nColors, bestOverlapPairs });
     }
-    
+
     return Object.fromEntries(
-      Object.entries(bestKeyToColor).map(([key, iColor]) => [key, Color.DEFAULT_COLORS[iColor]])
+      Object.entries(bestKeyToColor).map(([key, iColor]) => [
+        key,
+        Color.DEFAULT_COLORS[iColor],
+      ])
     );
   }
 
