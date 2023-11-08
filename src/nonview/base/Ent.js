@@ -61,7 +61,7 @@ export default class Ent {
 
   static async idxFromType(entType) {
     const entList = await Ent.listFromType(entType);
-    return EmailTwoTone._idxFromList(entList);
+    return Ent._idxFromList(entList);
   }
 
   static async listFromTypeList(entTypeList) {

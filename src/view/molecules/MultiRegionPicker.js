@@ -1,7 +1,7 @@
 import { Button, Box } from "@mui/material";
 import { Ent, EntType } from "../../nonview/base";
 const ENT_TYPE_LIST = [EntType.PROVINCE, EntType.DISTRICT];
-export default function MultiRegionPicker({ regionIDs, allEntList, onChange }) {
+export default function MultiRegionPicker({ regionIDs, onChange }) {
   const key = regionIDs.join(",");
 
   return (

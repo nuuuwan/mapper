@@ -29,9 +29,9 @@ export default class HomePage extends Component {
 
   async componentDidMount() {
     const bbox = await HomePage.getBBox(this.state.config);
-    const allEntList = await Ent.listFromTypeList(ENT_TYPE_LIST);
+    const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
 
-    this.setState({ bbox, allEntList });
+    this.setState({ bbox, allEntIdx });
   }
 
   static async getBBox(config) {
@@ -82,7 +82,7 @@ export default class HomePage extends Component {
       config,
       selectedColor,
       pageId,
-      allEntList,
+      allEntIdx,
       isColorPickerOpen,
     } = this.state;
     if (!bbox) {
@@ -111,7 +111,7 @@ export default class HomePage extends Component {
         return (
           <DataPane
             config={config}
-            allEntList={allEntList}
+            allEntIdx={allEntIdx}
             onChangeRegionIDs={this.onChangeRegionIDs.bind(this)}
             onChangeConfig={this.onChangeConfig.bind(this)}
           />

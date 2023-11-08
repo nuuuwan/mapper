@@ -9,7 +9,7 @@ import { STYLE } from "./HomePageStyle";
 
 export default function DataPane({
   config,
-  allEntList,
+  allEntIdx,
   onChangeRegionIDs,
   onChangeConfig,
 }) {
@@ -18,12 +18,12 @@ export default function DataPane({
     <div style={STYLE.BODY_CONTENT_SCROLLABLE}>
       <Box sx={{ maxWidth: 640, margin: "auto", align: "center", padding: 2 }}>
         <RegionPicker
-          allEntList={allEntList}
+          allEntIdx={allEntIdx}
           regionIDs={regionIDs}
           onChange={onChangeRegionIDs}
         />
         <MultiRegionPicker
-          allEntList={allEntList}
+
           regionIDs={regionIDs}
           onChange={onChangeRegionIDs}
         />
