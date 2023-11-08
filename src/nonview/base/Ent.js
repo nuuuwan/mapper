@@ -1,6 +1,7 @@
 import WWW from "./WWW.js";
 
 import EntType from "./EntType.js";
+import { EmailTwoTone } from "@mui/icons-material";
 
 export default class Ent {
   constructor(id, name, centroid, population, area) {
@@ -54,9 +55,13 @@ export default class Ent {
     return rawEnts.map((ent) => Ent.fromDict(ent));
   }
 
+  static _idxFromList(entList) {
+    return Object.fromEntries(entList.map((ent) => [ent.id, ent]));
+  }
+
   static async idxFromType(entType) {
     const entList = await Ent.listFromType(entType);
-    return Object.fromEntries(entList.map((ent) => [ent.id, ent]));
+    return EmailTwoTone._idxFromList(entList);
   }
 
   static async listFromTypeList(entTypeList) {
@@ -65,5 +70,10 @@ export default class Ent {
       entList.push(...(await Ent.listFromType(entType)));
     }
     return entList;
+  }
+
+  static async idxFromTypeList(entTypeList) {
+    const entList = await Ent.listFromTypeList(entTypeList);
+    return Ent._idxFromList(entList);
   }
 }
