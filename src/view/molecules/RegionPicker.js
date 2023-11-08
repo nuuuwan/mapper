@@ -18,7 +18,6 @@ export default function RegionPicker({ regionIds, allEntIdx, onAddRegions }) {
         <TextField
           {...params}
           variant="standard"
-
           placeholder="Select Regions"
         />
       )}
