@@ -5,8 +5,11 @@ import { Color } from "../../nonview/base";
 export default function ColorPicker({
   selectedColor,
   onChangeSelectedColor,
-  expandedColors,
+
 }) {
+
+  const expandedColors = Color.expand(selectedColor);
+
   return (
     <Box>
       <TwitterPicker

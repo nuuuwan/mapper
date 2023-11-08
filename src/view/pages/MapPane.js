@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/material";
 import PaletteIcon from "@mui/icons-material/Palette";
-import { Color } from "../../nonview/base";
+
 import { ShowHide } from "../atoms";
 import { MultiRegionViewSVG, ScreenShot, ColorPicker } from "../molecules";
 import { STYLE } from "./HomePageStyle";
@@ -13,7 +13,7 @@ export default function MapPane({
   onChangeSelectedColor,
   onClickRegion,
 }) {
-  const expandedColors = Color.expand(selectedColor);
+
   const screenshotLabel = "map-" + config.hash;
 
   return (
@@ -30,9 +30,9 @@ export default function MapPane({
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
         <ShowHide Icon={PaletteIcon} isShow={false}>
           <ColorPicker
-            color={selectedColor}
-            onChangeComplete={onChangeSelectedColor}
-            colors={[].concat(Color.DEFAULT_COLORS, expandedColors)}
+            selectedColor={selectedColor}
+            onChangeSelectedColor={onChangeSelectedColor}
+       
           />
         </ShowHide>
       </div>

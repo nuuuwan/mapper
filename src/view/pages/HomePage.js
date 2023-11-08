@@ -23,7 +23,7 @@ export default class HomePage extends Component {
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
 
-      pageId: "data",
+      pageId: "map",
     };
   }
 
@@ -38,8 +38,8 @@ export default class HomePage extends Component {
     const regionIdList = config.regionInfoList.map(
       (regionInfo) => regionInfo.id
     );
-    const overlapPairs = await Geo.getOverlapGraph(regionIdList);
-    console.debug("overlapPairs", overlapPairs);
+    // const overlapPairs = await Geo.getOverlapGraph(regionIdList);
+    // console.debug("overlapPairs", overlapPairs);
     const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
       Object.values(regionIdToPolygonList)
