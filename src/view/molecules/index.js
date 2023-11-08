@@ -3,24 +3,24 @@ import ConfigTableView from "./ConfigTableView";
 import DataUpDownloader from "./DataUpDownloader";
 import FooterView from "./FooterView";
 import HeaderView from "./HeaderView";
-import MultiRegionPicker from "./MultiRegionPicker";
 import MultiRegionViewSVG from "./MultiRegionViewSVG";
 import PolygonListView from "./PolygonListView";
 import PolygonView from "./PolygonView";
 import RegionPicker from "./RegionPicker";
 import ScreenShot from "./ScreenShot";
 import __ConfigEditorView from "./__ConfigEditorView";
+import __MultiRegionPicker from "./__MultiRegionPicker";
 
 export {
   ConfigTableView,
   DataUpDownloader,
   FooterView,
   HeaderView,
-  MultiRegionPicker,
   MultiRegionViewSVG,
   PolygonListView,
   PolygonView,
   RegionPicker,
   ScreenShot,
   __ConfigEditorView,
+  __MultiRegionPicker,
 };

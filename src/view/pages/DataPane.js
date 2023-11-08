@@ -1,11 +1,12 @@
 import { Box } from "@mui/material";
 import {
   RegionPicker,
-  MultiRegionPicker,
   ConfigTableView,
   DataUpDownloader,
 } from "../molecules";
 import { STYLE } from "./HomePageStyle";
+
+import { RegionGroupPicker } from "../organisms";
 
 export default function DataPane({
   config,
@@ -23,7 +24,7 @@ export default function DataPane({
           regionIDs={regionIDs}
           onAddRegions={onAddRegions}
         />
-        <MultiRegionPicker
+        <RegionGroupPicker
           regionIDs={regionIDs}
           onAddRegions={onAddRegions}
           onRemoveRegions={onRemoveRegions}

@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 import { Ent } from "../../nonview/base";
 export default function RegionPicker({ regionIDs, allEntIdx, onAddRegions }) {
   const onChange = function (_, ent) {
-    onAddRegions([ent]);
+    onAddRegions([ent.id]);
   };
   const entList = Object.values(allEntIdx);
   const key = regionIDs.join(",");

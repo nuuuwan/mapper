@@ -35,9 +35,8 @@ export default class Config {
     this.regionInfoIdx[regionID] = newInfo;
   }
 
-  addRegions(regionEnts) {
-    for (const regionEnt of regionEnts) {
-      const id = regionEnt.id;
+  addRegions(regionIds) {
+    for (const id of regionIds) {
       if (this.regionInfoIdx[id]) {
         continue;
       }
