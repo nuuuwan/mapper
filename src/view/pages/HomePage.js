@@ -49,9 +49,9 @@ export default class HomePage extends Component {
     this.setState({ selectedColor: colorInfo.hex });
   }
 
-  async onChangeRegionIDs(regionIDs) {
+  async onAddRegions(regionEnts) {
     const { config } = this.state;
-    config.setRegionIDs(regionIDs);
+    config.addRegions(regionEnts);
     const bbox = await HomePage.getBBox(config);
     this.setState({ config, configStr: config.toString(), bbox });
   }
@@ -112,7 +112,7 @@ export default class HomePage extends Component {
           <DataPane
             config={config}
             allEntIdx={allEntIdx}
-            onChangeRegionIDs={this.onChangeRegionIDs.bind(this)}
+            onAddRegions={this.onAddRegions.bind(this)}
             onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );

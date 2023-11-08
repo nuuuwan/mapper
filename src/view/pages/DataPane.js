@@ -10,7 +10,7 @@ import { STYLE } from "./HomePageStyle";
 export default function DataPane({
   config,
   allEntIdx,
-  onChangeRegionIDs,
+  onAddRegions,
   onChangeConfig,
 }) {
   const regionIDs = config.regionInfoList.map((info) => info.id);
@@ -20,9 +20,9 @@ export default function DataPane({
         <RegionPicker
           allEntIdx={allEntIdx}
           regionIDs={regionIDs}
-          onChange={onChangeRegionIDs}
+          onAddRegions={onAddRegions}
         />
-        <MultiRegionPicker regionIDs={regionIDs} onChange={onChangeRegionIDs} />
+        <MultiRegionPicker regionIDs={regionIDs} onAddRegions={onAddRegions} />
         <ConfigTableView config={config} />
         <DataUpDownloader
           data={config.toData()}

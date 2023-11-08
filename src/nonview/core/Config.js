@@ -35,8 +35,14 @@ export default class Config {
     this.regionInfoIdx[regionID] = newInfo;
   }
 
-  setRegionIDs(regionIDList) {
-    this.regionInfoIdx = Config.regionIDListToIdx(regionIDList);
+  addRegions(regionEnts) {
+    for (const regionEnt of regionEnts) {
+      const id = regionEnt.id;
+      if (this.regionInfoIdx[id]) {
+        continue;
+      }
+      this.regionInfoIdx[id] = Config.initItem({id});
+    }  
   }
 
   // Serializing / Loaders

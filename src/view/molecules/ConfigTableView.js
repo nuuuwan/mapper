@@ -44,7 +44,8 @@ export default function ConfigTableView({ config }) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {Object.entries(config.regionInfoIdx).map(function ([id, info]) {
+            {config.sortedRegionInfoList.map(function (info) {
+              const id = info.id;
               return <ConfigTableViewRow key={id} id={id} info={info} />;
             })}
           </TableBody>
