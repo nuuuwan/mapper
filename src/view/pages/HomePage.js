@@ -22,8 +22,8 @@ export default class HomePage extends Component {
       configStr: config.toString(),
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
-      isColorPickerOpen: false,
-      pageId: "data",
+
+      pageId: "map",
     };
   }
 
@@ -69,10 +69,6 @@ export default class HomePage extends Component {
     this.setState({ config, configStr: config.toString() });
   }
 
-  onToggleColorPicker() {
-    this.setState({ isColorPickerOpen: !this.state.isColorPickerOpen });
-  }
-
   onClickPage(pageId) {
     this.setState({ pageId });
   }
@@ -84,14 +80,7 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const {
-      bbox,
-      config,
-      selectedColor,
-      pageId,
-      allEntIdx,
-      isColorPickerOpen,
-    } = this.state;
+    const { bbox, config, selectedColor, pageId, allEntIdx } = this.state;
     if (!bbox) {
       return (
         <Box sx={STYLE.LOADING}>
@@ -111,7 +100,6 @@ export default class HomePage extends Component {
             selectedColor={selectedColor}
             onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
             onClickRegion={this.onClickRegion.bind(this)}
-            isColorPickerOpen={isColorPickerOpen}
           />
         );
       case "data":
@@ -130,7 +118,7 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { pageId, config, isColorPickerOpen, selectedColor } = this.state;
+    const { pageId, config, selectedColor } = this.state;
     const nRegions = config.nRegions;
     return (
       <Box sx={STYLE.ALL}>
@@ -142,8 +130,6 @@ export default class HomePage extends Component {
           <FooterView
             onClickPage={this.onClickPage.bind(this)}
             pageId={pageId}
-            isColorPickerOpen={isColorPickerOpen}
-            onToggleColorPicker={this.onToggleColorPicker.bind(this)}
           />
         </Box>
       </Box>

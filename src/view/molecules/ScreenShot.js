@@ -1,9 +1,9 @@
 import { useScreenshot } from "use-react-screenshot";
-import { Grid, Tooltip, IconButton } from "@mui/material";
+import { Tooltip, IconButton } from "@mui/material";
 import React from "react";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
-import { SnackbarLight } from "../atoms";
-
+import { AlignRight, SnackbarLight } from "../atoms";
+import { STYLE } from "../pages/HomePageStyle";
 export default function ScreenShot({ label, children }) {
   const ref = React.useRef(null);
 
@@ -25,19 +25,22 @@ export default function ScreenShot({ label, children }) {
 
   return (
     <div>
-      <Grid container justifyContent="flex-end" sx={{ paddingRight: 2 }}>
-        <Tooltip title="Download Image">
-          <IconButton onClick={onClick}>
-            <CloudDownloadIcon sx={{ color: "#ccc" }} />
-          </IconButton>
-        </Tooltip>
-        <SnackbarLight
-          key={"snackbar-" + snackbarMessage}
-          snackbarMessage={snackbarMessage}
-        />
-      </Grid>
       <div ref={ref} id={label}>
         {children}
+      </div>
+
+      <div style={STYLE.BODY_CONTROLS}>
+        <AlignRight>
+          <Tooltip title="Download Image">
+            <IconButton onClick={onClick}>
+              <CloudDownloadIcon />
+            </IconButton>
+          </Tooltip>
+          <SnackbarLight
+            key={"snackbar-" + snackbarMessage}
+            snackbarMessage={snackbarMessage}
+          />
+        </AlignRight>
       </div>
     </div>
   );

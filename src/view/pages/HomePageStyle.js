@@ -27,7 +27,7 @@ export const STYLE = {
 
   BODY_CONTROLS: {
     position: "fixed",
-    bottom: BLOCK_SIZE,
+    bottom: BLOCK_SIZE - 5,
     right: 0,
 
     margin: "auto",
@@ -35,8 +35,8 @@ export const STYLE = {
 
   BODY_CONTENT: {
     position: "fixed",
-    top: BLOCK_SIZE - 30,
-    bottom: BLOCK_SIZE + 30,
+    top: BLOCK_SIZE,
+    bottom: BLOCK_SIZE,
     right: 0,
     left: 0,
   },
