@@ -1,12 +1,16 @@
-import { Box, IconButton } from "@mui/material";
+import { Paper, Button } from "@mui/material";
 import { TwitterPicker } from "react-color";
 import { Color } from "../../nonview/base";
 
-export default function ColorPicker({ selectedColor, onChangeSelectedColor }) {
+export default function ColorPicker({
+  selectedColor,
+  onChangeSelectedColor,
+  onClickAutoColor,
+}) {
   const expandedColors = Color.expand(selectedColor);
 
   return (
-    <Box>
+    <Paper sx={{ p: 1, m: 1 }} elevation={1}>
       <TwitterPicker
         color={selectedColor}
         onChangeComplete={onChangeSelectedColor}
@@ -14,6 +18,7 @@ export default function ColorPicker({ selectedColor, onChangeSelectedColor }) {
         width="320px"
         triangle="hide"
       />
-    </Box>
+      <Button onClick={onClickAutoColor}>Auto Color</Button>
+    </Paper>
   );
 }

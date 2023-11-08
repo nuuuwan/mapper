@@ -12,6 +12,7 @@ export default function MapPane({
   selectedColor,
   onChangeSelectedColor,
   onClickRegion,
+  onClickAutoColor,
 }) {
   const screenshotLabel = "map-" + config.hash;
 
@@ -31,6 +32,7 @@ export default function MapPane({
           <ColorPicker
             selectedColor={selectedColor}
             onChangeSelectedColor={onChangeSelectedColor}
+            onClickAutoColor={onClickAutoColor}
           />
         </ShowHide>
       </div>

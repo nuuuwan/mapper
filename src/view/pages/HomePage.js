@@ -38,8 +38,7 @@ export default class HomePage extends Component {
     const regionIdList = config.regionInfoList.map(
       (regionInfo) => regionInfo.id
     );
-    // const overlapPairs = await Geo.getOverlapGraph(regionIdList);
-    // console.debug("overlapPairs", overlapPairs);
+
     const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
       Object.values(regionIdToPolygonList)
@@ -81,6 +80,22 @@ export default class HomePage extends Component {
     this.setState({ config, configStr: config.toString(), bbox });
   }
 
+  async onClickAutoColor() {
+    const { config } = this.state;
+    const regionIdList = config.regionInfoList.map(
+      (regionInfo) => regionInfo.id
+    );
+    const overlapPairs = await Geo.getOverlapGraph(regionIdList);
+
+    const regionIdToColor = Color.autoColor(overlapPairs, regionIdList);
+    Object.entries(regionIdToColor).map(function ([regionId, color]) {
+      config.update(regionId, { fill: color });
+      return true;
+    });
+
+    this.setState({ config, configStr: config.toString() });
+  }
+
   renderBody() {
     const { bbox, config, selectedColor, pageId, allEntIdx } = this.state;
     if (!bbox) {
@@ -102,6 +117,7 @@ export default class HomePage extends Component {
             selectedColor={selectedColor}
             onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
             onClickRegion={this.onClickRegion.bind(this)}
+            onClickAutoColor={this.onClickAutoColor.bind(this)}
           />
         );
       case "data":

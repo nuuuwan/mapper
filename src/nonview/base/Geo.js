@@ -33,7 +33,12 @@ export default class Geo {
     const idToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     return Object.fromEntries(
       Object.entries(idToPolygonList).map(function ([id, polygonList]) {
-        return [id, new Set(LngLat.fromPolygonList(polygonList))];
+        return [
+          id,
+          new Set(
+            LngLat.fromPolygonList(polygonList).map((lngLat) => lngLat.id)
+          ),
+        ];
       })
     );
   }
@@ -56,10 +61,11 @@ export default class Geo {
     for (let i1 = 0; i1 < n - 1; i1++) {
       const regionId1 = regionIdList[i1];
       const lngLatSet1 = idToLngLatSet[regionId1];
-      for (let i2 = i1 + 1; i2 < n - 1; i2++) {
-        console.debug(i1, i2, n);
+
+      for (let i2 = i1 + 1; i2 < n; i2++) {
         const regionId2 = regionIdList[i2];
-        const lngLatSet2 = idToLngLatSet[regionId1];
+        const lngLatSet2 = idToLngLatSet[regionId2];
+
         const isOverlapping = Geo.hasIntersection(lngLatSet1, lngLatSet2);
         if (isOverlapping) {
           overlapPairs.push([regionId1, regionId2]);
@@ -67,6 +73,7 @@ export default class Geo {
       }
     }
     console.timeEnd(timerLabel);
+
     return overlapPairs;
   }
 }

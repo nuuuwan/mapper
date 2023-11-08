@@ -96,5 +96,15 @@ export default class Config {
   }
 
   // Instances
-  static DEFAULT = Config.fromRegionIdList(["EC-02A", "EC-01A", "EC-01B"]);
+  static DEFAULT = Config.fromRegionIdList([
+    "LK-1",
+    "LK-2",
+    "LK-3",
+    "LK-4",
+    "LK-5",
+    "LK-6",
+    "LK-7",
+    "LK-8",
+    "LK-9",
+  ]);
 }

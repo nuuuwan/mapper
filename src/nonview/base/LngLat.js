@@ -5,7 +5,11 @@ export default class LngLat {
   }
 
   equals(lngLat) {
-    return this.lng === lngLat.lng && this.lat === lngLat.lat;
+    return this.id === lngLat.id;
+  }
+
+  get id() {
+    return `${this.lng.toFixed(4)},${this.lat.toFixed(4)}`;
   }
 
   static fromCoordinate(coordinate) {

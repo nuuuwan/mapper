@@ -127,6 +127,48 @@ export default class Color {
     return "#111";
   }
 
+  // Auto Color
+
+  static autoColor(overlapKeyPairs, keyList) {
+    const MAX_N_COLORS = 8;
+    const MAX_ATTEMPTS = 20_000;
+    let minNOverlaps = Infinity;
+    let bestKeyToColor = null;
+    let bestOverlapPairs = null;
+    for (let nColors = 2; nColors < MAX_N_COLORS; nColors++) {
+      for (let i = 0; i < MAX_ATTEMPTS; i++) {
+        let keyToColor = {};
+        let overlapPairs = [];
+        for (const key of keyList) {
+          keyToColor[key] = Color.randomDefaultColor(nColors);
+        }
+
+        // check if coloring valid
+        for (const [key1, key2] of overlapKeyPairs) {
+          if (keyToColor[key1] === keyToColor[key2]) {
+            overlapPairs.push([key1, key2]);
+          }
+        }
+        const nOverlaps = overlapPairs.length;
+        if (nOverlaps === 0) {
+          console.debug('Solution', { nColors });
+          return keyToColor;
+          
+        }
+        if (nOverlaps < minNOverlaps) {
+          minNOverlaps = nOverlaps;
+          bestKeyToColor = keyToColor;
+          bestOverlapPairs = overlapPairs;
+        }
+      }
+      console.debug('Partial Solution', { nColors, bestOverlapPairs })
+    }
+    
+    return bestKeyToColor;
+  }
+
+  // Default Colors
+
   static DEFAULT_COLORS = [
     // Sri Lanka
     "#941E32",
@@ -140,9 +182,7 @@ export default class Color {
     "#eeeeee",
   ];
 
-  static randomDefaultColor() {
-    return Color.DEFAULT_COLORS[
-      Random.randomInt(0, Color.DEFAULT_COLORS.length)
-    ];
+  static randomDefaultColor(nColors) {
+    return Color.DEFAULT_COLORS[Random.randomInt(0, nColors)];
   }
 }
