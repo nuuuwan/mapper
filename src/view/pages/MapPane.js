@@ -28,7 +28,7 @@ export default function MapPane({
         </ScreenShot>
       </div>
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
-        <ShowHide Icon={PaletteIcon} isShow={false}>
+        <ShowHide Icon={PaletteIcon} isShow={true}>
           <ColorPicker
             selectedColor={selectedColor}
             onChangeSelectedColor={onChangeSelectedColor}

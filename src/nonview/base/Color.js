@@ -130,41 +130,44 @@ export default class Color {
   // Auto Color
 
   static autoColor(overlapKeyPairs, keyList) {
-    const MAX_N_COLORS = 8;
-    const MAX_ATTEMPTS = 20_000;
+    const [MIN_N_COLORS, MAX_N_COLORS] = [4,4];
+    const MAX_ATTEMPTS = 10_000;
     let minNOverlaps = Infinity;
     let bestKeyToColor = null;
     let bestOverlapPairs = null;
-    for (let nColors = 2; nColors < MAX_N_COLORS; nColors++) {
+    for (let nColors = MIN_N_COLORS; nColors <= MAX_N_COLORS; nColors++) {
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
-        let keyToColor = {};
+        let keyToIColor = {};
         let overlapPairs = [];
+        // Assign Color
         for (const key of keyList) {
-          keyToColor[key] = Color.randomDefaultColor(nColors);
+          keyToIColor[key] = Random.randomInt(0, nColors);
         }
 
         // check if coloring valid
         for (const [key1, key2] of overlapKeyPairs) {
-          if (keyToColor[key1] === keyToColor[key2]) {
+          if (keyToIColor[key1] === keyToIColor[key2]) {
             overlapPairs.push([key1, key2]);
           }
         }
         const nOverlaps = overlapPairs.length;
         if (nOverlaps === 0) {
           console.debug('Solution', { nColors });
-          return keyToColor;
+          return keyToIColor;
           
         }
         if (nOverlaps < minNOverlaps) {
           minNOverlaps = nOverlaps;
-          bestKeyToColor = keyToColor;
+          bestKeyToColor = keyToIColor;
           bestOverlapPairs = overlapPairs;
         }
       }
       console.debug('Partial Solution', { nColors, bestOverlapPairs })
     }
     
-    return bestKeyToColor;
+    return Object.fromEntries(
+      Object.entries(bestKeyToColor).map(([key, iColor]) => [key, Color.DEFAULT_COLORS[iColor]])
+    );
   }
 
   // Default Colors
