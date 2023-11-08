@@ -42,4 +42,10 @@ export const STYLE = {
 
     margin: "auto",
   },
+
+  LOADING: {
+  
+    margin: 1,
+  },
+  
 };

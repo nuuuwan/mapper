@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Box, CircularProgress } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { BBox, LngLat, Ent, Geo, Color, EntType } from "../../nonview/base";
 import { Config } from "../../nonview/core";
 
@@ -86,8 +86,16 @@ export default class HomePage extends Component {
       allEntList,
       isColorPickerOpen,
     } = this.state;
-    if (!bbox) {
-      return <CircularProgress />;
+    if (!bbox ) {
+      
+      return (
+        <Box sx={STYLE.LOADING}>
+          <CircularProgress />
+        <Typography variant="subtitle" component="div" gutterBottom>
+          Loading {config.nRegions} regions...
+        </Typography>
+        </Box>
+      )
     }
     switch (pageId) {
       case "map":
