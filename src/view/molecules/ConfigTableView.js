@@ -9,11 +9,14 @@ import {
   TableRow,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Number } from "../../nonview/base";
 
 function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
   return (
     <TableRow key={id}>
-      <TableCell>{ent.label}</TableCell>
+      <TableCell>{ent.name}</TableCell>
+      <TableCell>{ent.entType.shortName}</TableCell>
+      <TableCell>{Number.humanize(ent.population)}</TableCell>
       <TableCell>
         <span
           style={{
@@ -42,6 +45,8 @@ function ConfigTableViewHeaderRow() {
   return (
     <TableRow>
       <TableCell>Region</TableCell>
+      <TableCell></TableCell>
+      <TableCell>Population</TableCell>
       <TableCell>Fill</TableCell>
       <TableCell></TableCell>
 
@@ -50,7 +55,11 @@ function ConfigTableViewHeaderRow() {
   );
 }
 
-export default function ConfigTableView({ allEntIdx, config, onRemoveRegions }) {
+export default function ConfigTableView({
+  allEntIdx,
+  config,
+  onRemoveRegions,
+}) {
   return (
     <Box>
       <TableContainer>

@@ -10,7 +10,9 @@ export default function RegionPicker({ regionIDs, allEntIdx, onAddRegions }) {
     <Autocomplete
       key={key}
       disablePortal
-      options={entList.sort((a, b) => Ent.cmp(a, b))}
+      options={entList
+        .filter((ent) => !regionIDs.includes(ent.id))
+        .sort((a, b) => Ent.cmp(a, b))}
       groupBy={(ent) => ent.name.substring(0, 2)}
       onChange={onChange}
       renderInput={(params) => (
