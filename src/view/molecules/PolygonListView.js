@@ -6,7 +6,7 @@ export default function PolygonListView({ polygonList, t, info }) {
       fill: info.fill || "#ccc",
       fillOpacity: info.fillOpacity || 1,
       stroke: info.stroke || "#888",
-      strokeWidth: info.strokeWidth || 2,
+      strokeWidth: info.strokeWidth || 0.5,
     };
 
     return (
