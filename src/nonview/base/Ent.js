@@ -24,6 +24,11 @@ export default class Ent {
     return this.entType.getParentId(this.id);
   }
 
+  async getSiblingEnts() {
+    const entList = await Ent.listFromType(this.entType);
+    return entList.filter((ent) => ent.parentId === this.parentId);
+  }
+
   // Serializing
   toDict() {
     return {
@@ -78,5 +83,13 @@ export default class Ent {
   static async idxFromTypeList(entTypeList) {
     const entList = await Ent.listFromTypeList(entTypeList);
     return Ent._idxFromList(entList);
+  }
+
+  static async getSimilarEnts(entList) {
+    const similarEnts = [];
+    for (const ent of entList) {
+      similarEnts.push(...(await ent.getSiblingEnts()));
+    }
+    return similarEnts;
   }
 }

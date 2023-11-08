@@ -32,7 +32,7 @@ export default class EntType {
   // static instances
   static PROVINCE = new EntType(
     "province",
-    (entId) => EntType.isLKRegion(entId) && entId.length === 4.
+    (entId) => EntType.isLKRegion(entId) && entId.length === 4,
     (entId) => 'LK',
   );
   static DISTRICT = new EntType(
