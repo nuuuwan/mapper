@@ -1,5 +1,5 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
-import PaletteIcon from '@mui/icons-material/Palette';
+import PaletteIcon from "@mui/icons-material/Palette";
 import BugIcon from "@mui/icons-material/BugReport";
 
 import { PAGE_IDX } from "../pages/pages.js";
@@ -13,8 +13,6 @@ export default function FooterView({
   const onClickBug = function () {
     window.open("https://github.com/nuuuwan/mapper/issues/new", "_blank");
   };
-
-
 
   return (
     <BottomNavigation>
@@ -36,12 +34,13 @@ export default function FooterView({
         );
       })}
       {selectedPageId === "map" ? (
-      <BottomNavigationAction
-        icon={<PaletteIcon />}
-        onClick={onToggleColorPicker}
-        disabled={!isColorPickerOpen}
-        sx={{ color: isColorPickerOpen ? "#eee" : "#000" }}
-      />) : null}
+        <BottomNavigationAction
+          icon={<PaletteIcon />}
+          onClick={onToggleColorPicker}
+          disabled={!isColorPickerOpen}
+          sx={{ color: isColorPickerOpen ? "#eee" : "#000" }}
+        />
+      ) : null}
     </BottomNavigation>
   );
 }
