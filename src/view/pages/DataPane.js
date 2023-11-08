@@ -22,11 +22,7 @@ export default function DataPane({
           regionIDs={regionIDs}
           onChange={onChangeRegionIDs}
         />
-        <MultiRegionPicker
-
-          regionIDs={regionIDs}
-          onChange={onChangeRegionIDs}
-        />
+        <MultiRegionPicker regionIDs={regionIDs} onChange={onChangeRegionIDs} />
         <ConfigTableView config={config} />
         <DataUpDownloader
           data={config.toData()}

@@ -5,7 +5,7 @@ export default function RegionPicker({ regionIDs, allEntIdx, onChange }) {
     const newRegionsIDs = entList.map((ent) => ent.id);
     onChange(newRegionsIDs);
   };
-  const entList  = Object.values(allEntIdx);
+  const entList = Object.values(allEntIdx);
   const key = regionIDs.join(",");
   return (
     <Autocomplete
