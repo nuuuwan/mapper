@@ -41,7 +41,7 @@ export default class RegionViewLabelSVG extends Component {
     const X_SPAN_BIAS = 1.2;
     const isVertical = ySpan > xSpan * X_SPAN_BIAS;
     const angle = isVertical ? -90 : 0;
-    const fontSize = (isVertical ? ySpan :xSpan) / 10;
+    const fontSize = (isVertical ? ySpan : xSpan) / 10;
 
     const onClick = function () {
       onClickRegion(regionID);
