@@ -5,8 +5,8 @@ export default function PolygonListView({ polygonList, t, info }) {
     const infoInner = {
       fill: info.fill || "#ccc",
       fillOpacity: info.fillOpacity || 1,
-      stroke: info.stroke || "#fff",
-      strokeWidth: info.strokeWidth || 0,
+      stroke: info.stroke || "#888",
+      strokeWidth: info.strokeWidth ||2,
     };
 
     return (
