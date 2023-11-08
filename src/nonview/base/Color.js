@@ -141,6 +141,8 @@ export default class Color {
   ];
 
   static randomDefaultColor() {
-    return Color.DEFAULT_COLORS[Random.randomInt(0, Color.DEFAULT_COLORS.length)];
+    return Color.DEFAULT_COLORS[
+      Random.randomInt(0, Color.DEFAULT_COLORS.length)
+    ];
   }
 }

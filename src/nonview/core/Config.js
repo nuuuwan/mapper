@@ -1,4 +1,4 @@
-import {Color} from "../../nonview/base";
+import { Color } from "../../nonview/base";
 var md5 = require("md5");
 
 export default class Config {
@@ -60,11 +60,13 @@ export default class Config {
     return {
       id: d.id,
       fill: d.color || Color.randomDefaultColor(),
-    };    
+    };
   }
 
   static regionIDListToIdx(regionIDList) {
-    return Object.fromEntries(regionIDList.map((id) => [id, Config.initItem({id})]));
+    return Object.fromEntries(
+      regionIDList.map((id) => [id, Config.initItem({ id })])
+    );
   }
 
   static fromRegionIDList(regionIDList) {

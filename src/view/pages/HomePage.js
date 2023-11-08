@@ -86,16 +86,15 @@ export default class HomePage extends Component {
       allEntList,
       isColorPickerOpen,
     } = this.state;
-    if (!bbox ) {
-      
+    if (!bbox) {
       return (
         <Box sx={STYLE.LOADING}>
           <CircularProgress />
-        <Typography variant="subtitle" component="div" gutterBottom>
-          Loading {config.nRegions} regions...
-        </Typography>
+          <Typography variant="subtitle" component="div" gutterBottom>
+            Loading {config.nRegions} regions...
+          </Typography>
         </Box>
-      )
+      );
     }
     switch (pageId) {
       case "map":

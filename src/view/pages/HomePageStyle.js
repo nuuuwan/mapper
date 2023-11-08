@@ -44,8 +44,6 @@ export const STYLE = {
   },
 
   LOADING: {
-  
     margin: 1,
   },
-  
 };
