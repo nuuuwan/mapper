@@ -139,4 +139,8 @@ export default class Color {
     "#cccccc",
     "#eeeeee",
   ];
+
+  static randomDefaultColor() {
+    return Color.DEFAULT_COLORS[Random.randomInt(0, Color.DEFAULT_COLORS.length)];
+  }
 }
