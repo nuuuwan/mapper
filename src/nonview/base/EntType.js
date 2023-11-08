@@ -33,29 +33,29 @@ export default class EntType {
   static PROVINCE = new EntType(
     "province",
     (entId) => EntType.isLKRegion(entId) && entId.length === 4,
-    (entId) => 'LK',
+    (entId) => "LK"
   );
   static DISTRICT = new EntType(
     "district",
     (entId) => EntType.isLKRegion(entId) && entId.length === 5,
-    (entId) => entId.substring(0, 4),
-    );
+    (entId) => entId.substring(0, 4)
+  );
   static DSD = new EntType(
     "dsd",
     (entId) => EntType.isLKRegion(entId) && entId.length === 7,
-    (entId) => entId.substring(0, 5),
+    (entId) => entId.substring(0, 5)
   );
 
   static ED = new EntType(
     "ed",
     (entId) => EntType.isECRegion(entId) && entId.length === 5,
-    (entId) => 'LK',
+    (entId) => "LK"
   );
   static PD = new EntType(
     "pd",
     (entId) => EntType.isECRegion(entId) && entId.length === 6,
-    (entId) => entId.substring(0, 5),
-    );
+    (entId) => entId.substring(0, 5)
+  );
 
   static ALL = [
     EntType.PROVINCE,
