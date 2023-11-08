@@ -10,8 +10,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-function ConfigTableViewRow({ id, info , onDeleteRegions}) {
-
+function ConfigTableViewRow({ id, info, onDeleteRegions }) {
   return (
     <TableRow key={id}>
       <TableCell>{id}</TableCell>
@@ -45,7 +44,7 @@ function ConfigTableViewHeaderRow() {
       <TableCell>Region</TableCell>
       <TableCell>Fill</TableCell>
       <TableCell></TableCell>
-      
+
       {/* Add more TableCell components here for additional columns */}
     </TableRow>
   );
@@ -62,7 +61,14 @@ export default function ConfigTableView({ config, onDeleteRegions }) {
           <TableBody>
             {config.sortedRegionInfoList.map(function (info) {
               const id = info.id;
-              return <ConfigTableViewRow key={id} id={id} info={info} onDeleteRegions={onDeleteRegions}/>;
+              return (
+                <ConfigTableViewRow
+                  key={id}
+                  id={id}
+                  info={info}
+                  onDeleteRegions={onDeleteRegions}
+                />
+              );
             })}
           </TableBody>
         </Table>

@@ -24,7 +24,7 @@ export default function DataPane({
           onAddRegions={onAddRegions}
         />
         <MultiRegionPicker regionIDs={regionIDs} onAddRegions={onAddRegions} />
-        <ConfigTableView config={config} onDeleteRegions={onDeleteRegions}/>
+        <ConfigTableView config={config} onDeleteRegions={onDeleteRegions} />
         <DataUpDownloader
           data={config.toData()}
           setData={onChangeConfig}

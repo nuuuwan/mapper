@@ -41,8 +41,8 @@ export default class Config {
       if (this.regionInfoIdx[id]) {
         continue;
       }
-      this.regionInfoIdx[id] = Config.initItem({id});
-    }  
+      this.regionInfoIdx[id] = Config.initItem({ id });
+    }
   }
 
   deleteRegions(regionIds) {

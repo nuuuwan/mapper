@@ -61,7 +61,7 @@ export default class HomePage extends Component {
     config.deleteRegions(regionIDs);
     const bbox = await HomePage.getBBox(config);
     this.setState({ config, configStr: config.toString(), bbox });
-  }  
+  }
 
   onClickRegion(regionID) {
     const { selectedColor, config } = this.state;

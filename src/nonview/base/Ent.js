@@ -2,7 +2,6 @@ import WWW from "./WWW.js";
 
 import EntType from "./EntType.js";
 
-
 export default class Ent {
   constructor(id, name, centroid, population, area) {
     this.id = id;
