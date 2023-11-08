@@ -16,8 +16,8 @@ function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
     <TableRow key={id}>
       <TableCell>{ent.name}</TableCell>
       <TableCell>{ent.entType.shortName}</TableCell>
-      <TableCell>{Number.humanize(ent.population)}</TableCell>
-      <TableCell>
+      <TableCell align="right">{Number.humanize(ent.population)}</TableCell>
+      <TableCell align="right">
         <span
           style={{
             background: info.fill,
@@ -26,6 +26,7 @@ function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
             borderRadius: 3,
             margin: 3,
             textAlign: "center",
+            fontFamily: "monospace",
           }}
         >
           {" "}
