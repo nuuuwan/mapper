@@ -25,12 +25,9 @@ export default class RegionGroupPicker extends Component {
       <Box sx={{ p: 1, m: 1 }}>
         {regionGroups.map(function (regionGroup) {
           const onClick = async function () {
-            
-      
             onAddRegions(regionGroup.regionIdList);
           };
-         
- 
+
           const key = "button-" + regionGroup.name;
           return (
             <Button key={key} variant="text" onClick={onClick}>

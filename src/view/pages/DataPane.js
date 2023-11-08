@@ -1,9 +1,5 @@
 import { Box } from "@mui/material";
-import {
-  RegionPicker,
-  ConfigTableView,
-  DataUpDownloader,
-} from "../molecules";
+import { RegionPicker, ConfigTableView, DataUpDownloader } from "../molecules";
 import { STYLE } from "./HomePageStyle";
 
 import { RegionGroupPicker } from "../organisms";
