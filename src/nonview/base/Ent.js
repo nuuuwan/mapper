@@ -1,7 +1,7 @@
 import WWW from "./WWW.js";
 
 import EntType from "./EntType.js";
-import { EmailTwoTone } from "@mui/icons-material";
+
 
 export default class Ent {
   constructor(id, name, centroid, population, area) {
