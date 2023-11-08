@@ -20,6 +20,10 @@ export default class Ent {
     return this.name + " " + this.entType.shortName;
   }
 
+  get parentId() {
+    return this.entType.getParentId(this.id);
+  }
+
   // Serializing
   toDict() {
     return {
