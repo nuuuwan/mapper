@@ -45,13 +45,6 @@ export default class HomePage extends Component {
     return BBox.fromLngLatList(lngLatList);
   }
 
-  async onChangeConfig(configStr) {
-    let { config, bbox } = this.state;
-    config = Config.fromString(configStr);
-    bbox = await HomePage.getBBox(config);
-    this.setState({ config, bbox, configStr });
-  }
-
   onChangeSelectedColor(colorInfo) {
     this.setState({ selectedColor: colorInfo.hex });
   }
@@ -75,6 +68,12 @@ export default class HomePage extends Component {
 
   onClickPage(pageId) {
     this.setState({ pageId });
+  }
+
+  async onChangeConfig(newConfigData) {
+    const config = Config.fromData(newConfigData);
+    const bbox = await HomePage.getBBox(config);
+    this.setState({ config, configStr: config.toString(), bbox });
   }
 
   renderBody() {
@@ -114,6 +113,7 @@ export default class HomePage extends Component {
             config={config}
             allEntList={allEntList}
             onChangeRegionIDs={this.onChangeRegionIDs.bind(this)}
+            onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );
       default:

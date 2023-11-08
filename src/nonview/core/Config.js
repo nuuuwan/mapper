@@ -34,15 +34,21 @@ export default class Config {
     this.regionInfoIdx = Config.regionIDListToIdx(regionIDList);
   }
 
-  // Serializing
-  toString() {
-    return JSON.stringify(this.regionInfoList, null, 2);
+  // Serializing / Loaders
+  toData() {
+    return this.regionInfoIdx;
   }
 
-  // Loaders
+  static fromData(data) {
+    return new Config(data);
+  }
+
+  toString() {
+    return JSON.stringify(this.toData(), null, 2);
+  }
 
   static fromString(str) {
-    return new Config(JSON.parse(str));
+    return Config.fromData(JSON.parse(str));
   }
 
   static fromStringSafe(str) {
