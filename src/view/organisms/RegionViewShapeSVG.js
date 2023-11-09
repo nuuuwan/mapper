@@ -1,7 +1,6 @@
 import { Component } from "react";
-import { Ent, Geo, BBox, LngLat } from "../../nonview/base";
+import { Ent, Geo, GeoBlock, LngLat } from "../../nonview/base";
 import PolygonListView from "../molecules/PolygonListView";
-
 export default class RegionViewShapeSVG extends Component {
   constructor(props) {
     super(props);
@@ -19,18 +18,38 @@ export default class RegionViewShapeSVG extends Component {
   }
 
   static renderPolygonList(t, info, polygonList) {
-    return ( <PolygonListView t={t} info={info} polygonList={polygonList} />)
+    return <PolygonListView t={t} info={info} polygonList={polygonList} />;
   }
 
-  static renderPolygonBBox(t, polygonList) {
-    const bbox = BBox.fromPolygonList(polygonList);
-
-    const [xMin, yMin] = t([bbox.minLngLat.lng, bbox.minLngLat.lat]);
-    const [xMax, yMax] =  t([bbox.maxLngLat.lng, bbox.maxLngLat.lat]);
-    const [width, height] = [xMax - xMin, yMin - yMax];
+  static renderBlock(t, blockLngLat, blockDim) {
+    const [lng, lat] = blockLngLat.toArray();
+    const [x1, y1] = t([lng, lat]);
+    const [x2, y2] = t([lng + blockDim, lat + blockDim]);
+    const [width, height] = [x2 - x1, y1 - y2];
     return (
-      <rect x={xMin} y={yMax} width={width} height={height} fill="none" stroke="#0002" strokeWidth={1} />
-    )
+      <rect
+        x={x1}
+        y={y2}
+        width={width}
+        height={height}
+        fill="none"
+        stroke="black"
+        strokeWidth="1"
+      />
+    );
+  }
+
+  static renderBlocks(t, polygonList) {
+    const BLOCK_DIM = 0.15;
+
+    const blockLngLatList = GeoBlock.getBlockLngLatList(
+      LngLat.fromPolygonList(polygonList),
+      BLOCK_DIM
+    );
+
+    return blockLngLatList.map(function (blockLngLat) {
+      return RegionViewShapeSVG.renderBlock(t, blockLngLat, BLOCK_DIM);
+    });
   }
 
   render() {
@@ -45,7 +64,6 @@ export default class RegionViewShapeSVG extends Component {
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>
         {RegionViewShapeSVG.renderPolygonList(t, info, polygonList)}
-        {RegionViewShapeSVG.renderPolygonBBox(t, polygonList)}
       </g>
     );
   }
