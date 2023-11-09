@@ -18,9 +18,6 @@ export default class RegionViewShapeSVG extends Component {
     this.setState({ polygonList, ent });
   }
 
-  renderRegion(regionId) {
-    return regionId;
-  }
 
   render() {
     const { polygonList, ent } = this.state;
