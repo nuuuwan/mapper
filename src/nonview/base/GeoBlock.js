@@ -20,7 +20,8 @@ export default class GeoBlock {
     const [lngMin, latMin, lngMax, latMax] = this.bbox.toArray();
     const [lngSpan, latSpan] = [lngMax - lngMin, latMax - latMin];
     const minSpan = Math.min(lngSpan, latSpan);
-    const dim = minSpan / 4;
+    const N_DIMS = 3;
+    const dim = minSpan / N_DIMS;
     const nLat = Math.ceil(latSpan / dim);
     const nLng = Math.ceil(lngSpan / dim);
     const dimLat = latSpan / nLat;
