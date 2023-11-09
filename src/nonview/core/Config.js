@@ -97,7 +97,7 @@ export default class Config {
 
   // Instances
   static DEFAULT = Config.fromRegionIdList([
-// Provinces
+    // Provinces
     // "LK-1",
     // "LK-2",
     // "LK-3",
