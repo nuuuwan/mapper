@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Ent, Geo } from "../../nonview/base";
+import { Ent, Geo, BBox, LngLat } from "../../nonview/base";
 import PolygonListView from "../molecules/PolygonListView";
 
 export default class RegionViewShapeSVG extends Component {
@@ -18,6 +18,20 @@ export default class RegionViewShapeSVG extends Component {
     this.setState({ polygonList, ent });
   }
 
+  static renderPolygonList(t, info, polygonList) {
+    return ( <PolygonListView t={t} info={info} polygonList={polygonList} />)
+  }
+
+  static renderPolygonBBox(t, polygonList) {
+    const bbox = BBox.fromPolygonList(polygonList);
+
+    const [xMin, yMin] = t([bbox.minLngLat.lng, bbox.minLngLat.lat]);
+    const [xMax, yMax] =  t([bbox.maxLngLat.lng, bbox.maxLngLat.lat]);
+    const [width, height] = [xMax - xMin, yMin - yMax];
+    return (
+      <rect x={xMin} y={yMax} width={width} height={height} fill="none" stroke="#0002" strokeWidth={1} />
+    )
+  }
 
   render() {
     const { polygonList, ent } = this.state;
@@ -30,7 +44,8 @@ export default class RegionViewShapeSVG extends Component {
     };
     return (
       <g onClick={onClick} style={{ cursor: "pointer" }}>
-        <PolygonListView t={t} info={info} polygonList={polygonList} />
+        {RegionViewShapeSVG.renderPolygonList(t, info, polygonList)}
+        {RegionViewShapeSVG.renderPolygonBBox(t, polygonList)}
       </g>
     );
   }
