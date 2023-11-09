@@ -5,6 +5,7 @@ import Color from "./Color";
 import Ent from "./Ent";
 import EntType from "./EntType";
 import Geo from "./Geo";
+import GeoBlock from "./GeoBlock";
 import LngLat from "./LngLat";
 import Number from "./Number";
 import Random from "./Random";
@@ -19,6 +20,7 @@ export {
   Ent,
   EntType,
   Geo,
+  GeoBlock,
   LngLat,
   Number,
   Random,
