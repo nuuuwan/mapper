@@ -1,4 +1,4 @@
-import { RegionViewShapeSVG, RegionViewLabelSVG } from "../organisms";
+import { RegionViewShapeSVG } from "../organisms";
 
 const SVG_WIDTH = 1000;
 const SVG_PADDING = 10;
@@ -19,6 +19,7 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
         regionId={regionId}
         info={info}
         t={t}
+        showPolygonList={true}
         onClickRegion={onClickRegion}
       />
     );
@@ -29,12 +30,14 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
     const key = "region-label-" + regionId;
 
     return (
-      <RegionViewLabelSVG
+      <RegionViewShapeSVG
         key={key}
         regionId={regionId}
         info={info}
         t={t}
         onClickRegion={onClickRegion}
+        showLabel={true}
+        showBBox={false}
       />
     );
   });

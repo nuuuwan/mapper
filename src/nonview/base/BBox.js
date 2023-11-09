@@ -6,6 +6,16 @@ export default class BBox {
     this.maxLngLat = maxLngLat;
   }
 
+  // Getters
+  toArray() {
+    return [
+      this.minLngLat.lng,
+      this.minLngLat.lat,
+      this.maxLngLat.lng,
+      this.maxLngLat.lat,
+    ];
+  }
+
   static fromLngLatList(lngLatList) {
     const [minLng, minLat, maxLng, maxLat] = lngLatList.reduce(
       function ([minLng, minLat, maxLng, maxLat], lngLat) {
