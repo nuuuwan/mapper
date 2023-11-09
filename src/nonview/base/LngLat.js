@@ -12,6 +12,13 @@ export default class LngLat {
     return `${this.lng.toFixed(4)},${this.lat.toFixed(4)}`;
   }
 
+  // Getters
+  toArray() {
+    return [this.lng, this.lat];
+  }
+
+  // Loaders
+
   static fromCoordinate(coordinate) {
     const [lng, lat] = coordinate;
     return new LngLat(lng, lat);
@@ -40,6 +47,14 @@ export default class LngLat {
     return polygonListListList.reduce(function (lngLatList, polygonListList) {
       return [].concat(lngLatList, LngLat.fromPolygonListList(polygonListList));
     }, []);
+  }
+
+  static unique(lngLatList) {
+    const idToLngLat = lngLatList.reduce(function (idToLngLat, lngLat) {
+      idToLngLat[lngLat.id] = lngLat;
+      return idToLngLat;
+    }, {});
+    return Object.values(idToLngLat);
   }
 
   // constants
