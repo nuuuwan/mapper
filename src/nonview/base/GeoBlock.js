@@ -20,7 +20,7 @@ export default class GeoBlock {
     const [lngMin, latMin, lngMax, latMax] = this.bbox.toArray();
     const [lngSpan, latSpan] = [lngMax - lngMin, latMax - latMin];
     const minSpan = Math.min(lngSpan, latSpan);
-    const dim = minSpan / 2;
+    const dim = minSpan /4;
     const nLat = Math.ceil(latSpan / dim);
     const nLng = Math.ceil(lngSpan / dim);
     const dimLat = latSpan / nLat;
@@ -95,15 +95,16 @@ export default class GeoBlock {
     );
 
     function isRectComplete(sLng, sLat, iLng0, iLat0) {
-      for (let iLng = iLng0; iLng < iLng0 + sLng; iLng++) {
-        for (let iLat = iLat0; iLat < iLat0 + sLat; iLat++) {
-          const id = [iLat, iLng].join("-");
-          if (!containedIdSet.has(id)) {
-            return false;
-          }
-        }
-      }
-      return true;
+      const id00 = [iLat0, iLng0].join("-");
+      const id11 = [iLat0 + sLat - 1, iLng0 + sLng - 1].join("-");
+      const id10 = [iLat0 + sLat - 1, iLng0].join("-");
+      const id01 = [iLat0, iLng0 + sLng - 1].join("-");
+      return containedIdSet.has(id00) && containedIdSet.has(id11)&& containedIdSet.has(id10)&& containedIdSet.has(id01);;
+    }
+
+    function cmpDim(sLng, sLat) {
+      // return Math.max(sLng , sLat);
+      return sLng * sLat;
     }
 
     function findCompleteRect() {
@@ -115,7 +116,11 @@ export default class GeoBlock {
       }
 
       const sortedDimPairs = dimPairs.sort(([sLng1, sLat1], [sLng2, sLat2]) => {
-        return sLng2 * sLat2 - sLng1 * sLat1;
+        const c1 =  cmpDim(sLng2, sLat2) - cmpDim(sLng1 , sLat1);
+        if (c1 !== 0) {
+          return c1;
+        }
+        return sLng2 - sLng1;
       });
 
       for (let [sLng, sLat] of sortedDimPairs) {

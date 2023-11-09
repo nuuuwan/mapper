@@ -121,7 +121,7 @@ export default class Color {
     }
     const [r, g, b] = Color.hexToRGBVec(hexColor);
     const l = Color.rgbVecToHSLVec([r, g, b])[2];
-    if (l < 50) {
+    if (l < 40) {
       return "#eee";
     }
     return "#111";
@@ -131,10 +131,14 @@ export default class Color {
 
   static autoColor(overlapKeyPairs, keyList) {
     const [MIN_N_COLORS, MAX_N_COLORS] = [4, 4];
-    const MAX_ATTEMPTS = 10_000;
+    const MAX_ATTEMPTS = 100;
     let minNOverlaps = Infinity;
     let bestKeyToColor = null;
     let bestOverlapPairs = null;
+
+    
+
+
     for (let nColors = MIN_N_COLORS; nColors <= MAX_N_COLORS; nColors++) {
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
         let keyToIColor = {};
@@ -151,15 +155,20 @@ export default class Color {
           }
         }
         const nOverlaps = overlapPairs.length;
-        if (nOverlaps === 0) {
-          console.debug("Solution", { nColors });
-          return keyToIColor;
-        }
+
         if (nOverlaps < minNOverlaps) {
           minNOverlaps = nOverlaps;
           bestKeyToColor = keyToIColor;
           bestOverlapPairs = overlapPairs;
         }
+
+        if (nOverlaps === 0) {
+          console.debug("Solution", { nColors, keyToIColor });
+          break;
+        }
+      }
+      if (minNOverlaps ===0) {
+        break;
       }
       console.debug("Partial Solution", { nColors, bestOverlapPairs });
     }

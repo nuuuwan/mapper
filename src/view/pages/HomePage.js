@@ -30,7 +30,8 @@ export default class HomePage extends Component {
   async componentDidMount() {
     const bbox = await HomePage.getBBox(this.state.config);
     const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
-
+    // HACK!
+    // await this.onClickAutoColor();
     this.setState({ bbox, allEntIdx });
   }
 

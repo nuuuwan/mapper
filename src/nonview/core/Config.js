@@ -96,18 +96,19 @@ export default class Config {
   }
 
   // Instances
-  static DEFAULT = Config.fromRegionIdList([
-    // Provinces
-    // "LK-1",
-    // "LK-2",
-    // "LK-3",
-    // "LK-4",
-    // "LK-5",
-    // "LK-6",
-    // "LK-7",
-    // "LK-8",
-    // "LK-9",
-    // District
+  static PROVINCES = [
+    "LK-1",
+    "LK-2",
+    "LK-3",
+    "LK-4",
+    "LK-5",
+    "LK-6",
+    "LK-7",
+    "LK-8",
+    "LK-9",
+  ];
+  
+  static DISTRICTS = [
     "LK-11",
     "LK-12",
     "LK-13",
@@ -133,11 +134,18 @@ export default class Config {
     "LK-82",
     "LK-91",
     "LK-92",
-    // Districts with Interesting Shapes
-    // "LK-11",
-    // "LK-33",
-    // "LK-41",
-    // "LK-52",
-    // "LK-62",
-  ]);
+  ];
+  
+  static DISTRICTS_INTERESTING = [
+    "LK-11",
+    "LK-23",
+    "LK-33",
+    "LK-41",
+    "LK-52",
+    "LK-62",
+    "LK-71",
+    "LK-91",
+  ]
+  
+  static DEFAULT = Config.fromRegionIdList(Config.DISTRICTS);
 }

@@ -35,7 +35,7 @@ export default class RegionViewShapeSVG extends Component {
           width={width}
           height={height}
           fill={fill}
-          stroke="#888"
+          stroke="#0001"
           strokeWidth="1"
         />
       </g>
@@ -53,26 +53,28 @@ export default class RegionViewShapeSVG extends Component {
         {blockBBoxList.map(function (bbox, i) {
           return (
             <g key={"bbox-" + i}>
-              {RegionViewShapeSVG.renderBBox(t, bbox, "#08f4")}
+              {RegionViewShapeSVG.renderBBox(t, bbox, "#08f1")}
             </g>
           );
         })}
-        {RegionViewShapeSVG.renderBBox(t, largestRectBBox, "#f004")}
+        {RegionViewShapeSVG.renderBBox(t, largestRectBBox, "#f001")}
         <line
           x1={xMid}
           y1={y1}
           x2={xMid}
           y2={y2}
-          stroke="#f008"
-          strokeWidth="2"
+          stroke="#f002"
+          strokeWidth="5"
+          strokeDasharray={"10, 10"}
         />
         <line
           x1={x1}
           y1={yMid}
           x2={x2}
           y2={yMid}
-          stroke="#f008"
-          strokeWidth="2"
+          stroke="#f002"
+          strokeWidth="5"
+          strokeDasharray={"10, 10"}
         />
       </g>
     );
@@ -85,15 +87,16 @@ export default class RegionViewShapeSVG extends Component {
     const [xMid, yMid] = [(x1 + x2) / 2, (y1 + y2) / 2];
     const [width, height] = [x2 - x1, y1 - y2];
 
-    const HORIZONTAL_BIAS = 1.2;
+    const HORIZONTAL_BIAS = 1.1;
     const isVertical = height > width * HORIZONTAL_BIAS;
     const angle = isVertical ? -90 : 0;
 
     const label = ent.name;
-    const fontSize = (Math.min(width, height) * 1.5) / label.length;
-
+    const fontDim = isVertical ? height : width;
+    const fontSize = fontDim * 1.3 /label.length;
     const fill =
       info.labelFill || (info.fill ? Color.getCompliment(info.fill) : "#000");
+
     return (
       <text
         x={xMid}
