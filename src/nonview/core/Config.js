@@ -107,7 +107,7 @@ export default class Config {
     "LK-8",
     "LK-9",
   ];
-  
+
   static DISTRICTS = [
     "LK-11",
     "LK-12",
@@ -135,7 +135,7 @@ export default class Config {
     "LK-91",
     "LK-92",
   ];
-  
+
   static DISTRICTS_INTERESTING = [
     "LK-11",
     "LK-23",
@@ -145,7 +145,7 @@ export default class Config {
     "LK-62",
     "LK-71",
     "LK-91",
-  ]
-  
+  ];
+
   static DEFAULT = Config.fromRegionIdList(Config.DISTRICTS);
 }

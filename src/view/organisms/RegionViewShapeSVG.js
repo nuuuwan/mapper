@@ -93,7 +93,7 @@ export default class RegionViewShapeSVG extends Component {
 
     const label = ent.name;
     const fontDim = isVertical ? height : width;
-    const fontSize = fontDim * 1.3 /label.length;
+    const fontSize = (fontDim * 1.3) / label.length;
     const fill =
       info.labelFill || (info.fill ? Color.getCompliment(info.fill) : "#000");
 

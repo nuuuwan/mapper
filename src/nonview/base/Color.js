@@ -136,9 +136,6 @@ export default class Color {
     let bestKeyToColor = null;
     let bestOverlapPairs = null;
 
-    
-
-
     for (let nColors = MIN_N_COLORS; nColors <= MAX_N_COLORS; nColors++) {
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
         let keyToIColor = {};
@@ -167,7 +164,7 @@ export default class Color {
           break;
         }
       }
-      if (minNOverlaps ===0) {
+      if (minNOverlaps === 0) {
         break;
       }
       console.debug("Partial Solution", { nColors, bestOverlapPairs });

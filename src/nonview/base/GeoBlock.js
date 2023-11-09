@@ -20,7 +20,7 @@ export default class GeoBlock {
     const [lngMin, latMin, lngMax, latMax] = this.bbox.toArray();
     const [lngSpan, latSpan] = [lngMax - lngMin, latMax - latMin];
     const minSpan = Math.min(lngSpan, latSpan);
-    const dim = minSpan /4;
+    const dim = minSpan / 4;
     const nLat = Math.ceil(latSpan / dim);
     const nLng = Math.ceil(lngSpan / dim);
     const dimLat = latSpan / nLat;
@@ -99,7 +99,12 @@ export default class GeoBlock {
       const id11 = [iLat0 + sLat - 1, iLng0 + sLng - 1].join("-");
       const id10 = [iLat0 + sLat - 1, iLng0].join("-");
       const id01 = [iLat0, iLng0 + sLng - 1].join("-");
-      return containedIdSet.has(id00) && containedIdSet.has(id11)&& containedIdSet.has(id10)&& containedIdSet.has(id01);;
+      return (
+        containedIdSet.has(id00) &&
+        containedIdSet.has(id11) &&
+        containedIdSet.has(id10) &&
+        containedIdSet.has(id01)
+      );
     }
 
     function cmpDim(sLng, sLat) {
@@ -116,7 +121,7 @@ export default class GeoBlock {
       }
 
       const sortedDimPairs = dimPairs.sort(([sLng1, sLat1], [sLng2, sLat2]) => {
-        const c1 =  cmpDim(sLng2, sLat2) - cmpDim(sLng1 , sLat1);
+        const c1 = cmpDim(sLng2, sLat2) - cmpDim(sLng1, sLat1);
         if (c1 !== 0) {
           return c1;
         }
