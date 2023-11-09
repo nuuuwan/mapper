@@ -21,6 +21,10 @@ export default class BBox {
     return new BBox(new LngLat(minLng, minLat), new LngLat(maxLng, maxLat));
   }
 
+  static fromPolygonList(polygonList) {
+    return BBox.fromLngLatList(LngLat.fromPolygonList(polygonList));
+  }
+
   getTransform(width, height, padding) {
     const [minLng, minLat, maxLng, maxLat] = [
       this.minLngLat.lng,
