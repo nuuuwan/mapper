@@ -61,7 +61,9 @@ export default class ConfigFactory {
   static async gig2() {
     const MAX_TABLES_HACK = 1;
     const configList = await Promise.all(
-      GIG2_TABLE_NAMES.slice(0, MAX_TABLES_HACK).map(async function (tableName) {
+      GIG2_TABLE_NAMES.slice(0, MAX_TABLES_HACK).map(async function (
+        tableName
+      ) {
         return await ConfigFactory.fromTableName(tableName);
       })
     );
