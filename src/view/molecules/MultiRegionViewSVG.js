@@ -57,7 +57,11 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
       </defs>
       {innerShapes}
       {innerLabels}
-      <ColorLegendSVG config={config} />
+      
+      <text x={950} y={40}  fill="black" fontFamily="Akshar" fontSize="40" textAnchor="end">
+        {config.name}
+      </text>
+      <ColorLegendSVG config={config} x={950} y={75} />
     </svg>
   );
 }

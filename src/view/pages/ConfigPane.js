@@ -9,8 +9,8 @@ import {
   ListItemButton,
 } from "@mui/material";
 import PublicIcon from "@mui/icons-material/Public";
-import { ConfigFactory } from "../../nonview/core";
-import { ColorView, LoadingProgress } from "../atoms";
+
+import { ColorView } from "../atoms";
 
 function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const onClick = function () {
