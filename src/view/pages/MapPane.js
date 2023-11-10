@@ -35,9 +35,11 @@ export default function MapPane({
       </div>
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
         <Stack direction="row" spacing={0}>
-        <RegionEntTypePicker />
+          <RegionEntTypePicker />
           <TimePicker
-            tableName={tableName} onChangeTableName={onChangeTableName} />
+            tableName={tableName}
+            onChangeTableName={onChangeTableName}
+          />
           <ColorPicker
             selectedColor={selectedColor}
             onChangeSelectedColor={onChangeSelectedColor}

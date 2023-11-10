@@ -65,8 +65,6 @@ export default function MeasurementPicker({ onChangeTableName }) {
               const tableNameList = idxMT[measurement];
               const lastTableName = tableNameList.slice(-1)[0];
               const onClick = async function () {
-     
-
                 await onChangeTableName(lastTableName);
               };
               return (

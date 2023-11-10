@@ -89,8 +89,15 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { bbox, tableName,config, selectedColor, pageId, allEntIdx, configList } =
-      this.state;
+    const {
+      bbox,
+      tableName,
+      config,
+      selectedColor,
+      pageId,
+      allEntIdx,
+      configList,
+    } = this.state;
     if (!(config && configList)) {
       return <LoadingProgress />;
     }
@@ -99,7 +106,7 @@ export default class HomePage extends Component {
       case "map":
         return (
           <MapPane
-          tableName={tableName}
+            tableName={tableName}
             config={config}
             bbox={bbox}
             selectedColor={selectedColor}
