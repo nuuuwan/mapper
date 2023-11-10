@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import PublicIcon from "@mui/icons-material/Public";
 import { ConfigFactory } from "../../nonview/core";
-import { ColorView } from "../atoms";
+import { ColorView, LoadingProgress } from "../atoms";
 
 function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const onClick = function () {
@@ -47,7 +47,7 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
 export default class ConfigPane extends Component {
   constructor(props) {
     super(props);
-    this.state = { configList: [] };
+    this.state = { configList: null };
   }
 
   async componentDidMount() {
@@ -57,6 +57,9 @@ export default class ConfigPane extends Component {
 
   render() {
     const { configList } = this.state;
+    if (!configList) {
+      return <LoadingProgress />;
+    }
     const { onChangeConfig, config: selectedConfig } = this.props;
     return (
       <List>

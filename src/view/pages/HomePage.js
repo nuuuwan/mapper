@@ -1,8 +1,8 @@
 import { Component } from "react";
-import { Box, CircularProgress, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { BBox, LngLat, Ent, Geo, Color, EntType } from "../../nonview/base";
 import { ConfigFactory } from "../../nonview/core";
-
+import { LoadingProgress } from "../atoms";
 import { HeaderView, FooterView } from "../molecules";
 
 import DataPane from "./DataPane";
@@ -82,14 +82,7 @@ export default class HomePage extends Component {
   renderBody() {
     const { bbox, config, selectedColor, pageId, allEntIdx } = this.state;
     if (!config) {
-      return (
-        <Box sx={STYLE.LOADING}>
-          <CircularProgress />
-          <Typography variant="subtitle" component="div" gutterBottom>
-            Loading...
-          </Typography>
-        </Box>
-      );
+      return <LoadingProgress />;
     }
 
     switch (pageId) {

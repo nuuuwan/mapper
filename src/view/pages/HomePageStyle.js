@@ -51,7 +51,4 @@ export const STYLE = {
     overflow: "scroll",
     overflowX: "hidden",
   },
-  LOADING: {
-    margin: 1,
-  },
 };
