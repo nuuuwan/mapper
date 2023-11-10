@@ -10,17 +10,17 @@ import {
 } from "@mui/material";
 import PublicIcon from "@mui/icons-material/Public";
 import { GIG2, StringX } from "../../nonview/base";
-import {ConfigFactory} from "../../nonview/core";
+import { ConfigFactory } from "../../nonview/core";
 import { MEASUREMENT_TO_ICON } from "../../nonview/constants";
 
-const DEFAULT_ICON  = PublicIcon;
+const DEFAULT_ICON = PublicIcon;
 function getMeasurementIcon(measurement) {
-    let Icon = MEASUREMENT_TO_ICON[measurement];
-    if (Icon) {
-      return Icon;
-    }
-    return DEFAULT_ICON;
+  let Icon = MEASUREMENT_TO_ICON[measurement];
+  if (Icon) {
+    return Icon;
   }
+  return DEFAULT_ICON;
+}
 
 function MeasurementListItem({ measurement, isSelected, onClick }) {
   const background = isSelected ? "#eee" : "#fff";
@@ -29,11 +29,10 @@ function MeasurementListItem({ measurement, isSelected, onClick }) {
   const superTitle = StringX.toTitleCase(tokens.slice(0, 1).join(" "));
   const title = StringX.toTitleCase(tokens.slice(1).join(" "));
 
-  const Icon = getMeasurementIcon(measurement) ;
+  const Icon = getMeasurementIcon(measurement);
 
   return (
     <ListItem>
-
       <ListItemButton onClick={onClick} sx={{ background, borderRadius: 6 }}>
         <ListItemAvatar>
           <Avatar>
@@ -53,7 +52,7 @@ function MeasurementListItem({ measurement, isSelected, onClick }) {
   );
 }
 
-export default function MeasurementPicker({onChangeConfig}) {
+export default function MeasurementPicker({ onChangeConfig }) {
   const idxGMT = GIG2.getGroupToMeasurementToTableNames();
 
   return (
@@ -65,12 +64,18 @@ export default function MeasurementPicker({onChangeConfig}) {
             {measurementList.map(function (measurement) {
               const tableNameList = idxMT[measurement];
               const lastTableName = tableNameList.slice(-1)[0];
-              const onClick = async function() {
+              const onClick = async function () {
                 const config = await ConfigFactory.fromTableName(lastTableName);
 
                 await onChangeConfig(config, "map");
-              }
-              return <MeasurementListItem key={"list-item-" + measurement} measurement={measurement} onClick={onClick} />;
+              };
+              return (
+                <MeasurementListItem
+                  key={"list-item-" + measurement}
+                  measurement={measurement}
+                  onClick={onClick}
+                />
+              );
             })}
           </List>
         );
