@@ -4,7 +4,6 @@ export default function LoadingProgress() {
   return (
     <Box sx={{ margin: 1 }}>
       <CircularProgress />
-
     </Box>
   );
 }
