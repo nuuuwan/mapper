@@ -12,6 +12,7 @@ export default function HeaderView({ config, pageId, selectedColor }) {
 
   const title =
     config && pageId !== "config" ? config.name : "#Mapper - v" + DATETIME_STR;
+    document.title = title;
 
   return (
     <AppBar
