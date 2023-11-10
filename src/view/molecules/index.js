@@ -5,6 +5,7 @@ import ConfigTableView from "./ConfigTableView";
 import DataUpDownloader from "./DataUpDownloader";
 import FooterView from "./FooterView";
 import HeaderView from "./HeaderView";
+import MeasurementPicker from "./MeasurementPicker";
 import MultiRegionViewSVG from "./MultiRegionViewSVG";
 import PolygonListView from "./PolygonListView";
 import PolygonView from "./PolygonView";
@@ -20,6 +21,7 @@ export {
   DataUpDownloader,
   FooterView,
   HeaderView,
+  MeasurementPicker,
   MultiRegionViewSVG,
   PolygonListView,
   PolygonView,

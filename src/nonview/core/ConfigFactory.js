@@ -29,7 +29,7 @@ export default class ConfigFactory {
     if (entityKind === "regions-ec") {
       entType = EntType.ED;
     } else {
-      entType = EntType.PROVINCE;
+      entType = EntType.DISTRICT;
     }
     const ents = await Ent.listFromType(entType);
     const regionIds = ents.map((ent) => ent.id);
