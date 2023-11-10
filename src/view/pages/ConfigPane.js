@@ -11,6 +11,7 @@ import {
 import PublicIcon from "@mui/icons-material/Public";
 
 import { ColorView } from "../atoms";
+import { STYLE } from "./HomePageStyle";
 
 function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const onClick = function () {
@@ -48,18 +49,20 @@ export default class ConfigPane extends Component {
   render() {
     const { configList, onChangeConfig, config: selectedConfig } = this.props;
     return (
-      <List>
-        {configList.map(function (config, iConfig) {
-          return (
-            <ConfigListItem
-              key={"config-list-item" + iConfig}
-              config={config}
-              onChangeConfig={onChangeConfig}
-              isSelected={selectedConfig.equal(config)}
-            />
-          );
-        })}
-      </List>
+      <div style={STYLE.BODY_CONTENT_SCROLLABLE}>
+        <List>
+          {configList.map(function (config, iConfig) {
+            return (
+              <ConfigListItem
+                key={"config-list-item" + iConfig}
+                config={config}
+                onChangeConfig={onChangeConfig}
+                isSelected={selectedConfig.equal(config)}
+              />
+            );
+          })}
+        </List>
+      </div>
     );
   }
 }

@@ -1,6 +1,6 @@
 import Config from "./Config";
-import { EntType, Ent } from "../base";
-
+import { EntType, Ent, GIG2, GIG2TableMetadata, GIG2TableStyle } from "../base";
+import { GIG2_TABLE_NAMES } from "../constants";
 export default class ConfigFactory {
   static async fromEntType(entType) {
     const ents = await Ent.listFromType(entType);
@@ -20,8 +20,52 @@ export default class ConfigFactory {
     );
   }
 
+  static async fromTableName(tableName) {
+    const table = await GIG2.getTable(tableName);
+    const tableMetaData = new GIG2TableMetadata(tableName);
+    const entityKind = tableMetaData.entity;
+
+    let entType = EntType.PROVINCE;
+    if (entityKind === "regions-ec") {
+      entType = EntType.ED;
+    } else {
+      entType = EntType.PROVINCE;
+    }
+    const ents = await Ent.listFromType(entType);
+    const regionIds = ents.map((ent) => ent.id);
+
+    const regionIdToValue = Object.fromEntries(
+      regionIds.map(function (regionId) {
+        const value = table.getRowByID(regionId).getMaxValueKeyAndValue()[0];
+        return [regionId, value];
+      })
+    );
+    const values = Object.values(regionIdToValue);
+    const valueToColor = Object.fromEntries(
+      values.map(function (value) {
+        const color = GIG2TableStyle.getValueKeyColor(value);
+        return [value, color];
+      })
+    );
+
+    const configName =
+      tableMetaData.time +
+      " " +
+      tableMetaData.measurementLowest +
+      " by " +
+      entType.longName;
+    const config = new Config(configName, regionIdToValue, valueToColor);
+
+    return config;
+  }
   static async gig2() {
-    return [];
+    const MAX_TABLES_HACK = 1;
+    const configList = await Promise.all(
+      GIG2_TABLE_NAMES.slice(0, MAX_TABLES_HACK).map(async function (tableName) {
+        return await ConfigFactory.fromTableName(tableName);
+      })
+    );
+    return configList;
   }
 
   static async custom() {
