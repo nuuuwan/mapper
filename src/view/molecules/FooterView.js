@@ -8,7 +8,8 @@ export default function FooterView({ onClickPage, pageId: selectedPageId }) {
       {Object.entries(PAGE_IDX).map(function ([pageId, d]) {
         const key = "button-" + pageId;
         const isSelected = pageId === selectedPageId;
-        const color = isSelected ? "#eee" : "#000";
+        const color = isSelected ? "#fff" : "#000";
+        const background = isSelected ? "#eee" : "#fff";
         return (
           <BottomNavigationAction
             key={key}
@@ -17,7 +18,7 @@ export default function FooterView({ onClickPage, pageId: selectedPageId }) {
               onClickPage(pageId);
             }}
             disabled={isSelected}
-            sx={{ color: color }}
+            sx={{ color, background }}
           />
         );
       })}

@@ -17,12 +17,12 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
     onChangeConfig(config, "map");
   };
 
-  const background = isSelected ? "#ccc" : "#fff";
+  const background = isSelected ? "#eee" : "#fff";
 
   return (
     <ListItem>
       {" "}
-      <ListItemButton onClick={onClick} sx={{ background }}>
+      <ListItemButton onClick={onClick} sx={{ background ,borderRadius: 6}}>
         <ListItemAvatar>
           <Avatar>
             <PublicIcon />
