@@ -1,8 +1,8 @@
 const COLOR_SL_FLAG = {
-  SINHALA: "hsl(355, 63%, 34%)",
-  TAMIL: "hsl(21, 100%, 50%)",
-  MOOR: "hsl(165, 100%, 17%)",
-  BUDDHIST: "hsl(43, 100%, 50%)",
+  SINHALA: "#941E32",
+  TAMIL: "#F7B718",
+  MOOR: "#005F56",
+  BUDDHIST: "#DF7500",
 };
 
 export default COLOR_SL_FLAG;
