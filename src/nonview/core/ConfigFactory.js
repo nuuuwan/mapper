@@ -5,7 +5,7 @@ export default class ConfigFactory {
   static async fromEntType(entType) {
     const ents = await Ent.listFromType(entType);
     const entIds = ents.map((ent) => ent.id);
-    const name = entType.longName + "s - random coloring";
+    const name = entType.longName + "s colored randomly";
     const config = Config.fromRegionIdList(name, entIds);
     await config.autoColor();
     return config;
