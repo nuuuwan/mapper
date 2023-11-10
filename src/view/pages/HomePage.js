@@ -1,12 +1,13 @@
 import { Component } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { BBox, LngLat, Ent, Geo, Color, EntType } from "../../nonview/base";
-import { Config } from "../../nonview/core";
+import {  ConfigFactory } from "../../nonview/core";
 
 import { HeaderView, FooterView } from "../molecules";
 
 import DataPane from "./DataPane";
 import MapPane from "./MapPane";
+import ConfigPane from "./ConfigPane";
 import { STYLE } from "./HomePageStyle";
 
 const ENT_TYPE_LIST = EntType.ALL;
@@ -15,31 +16,26 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    const config = Config.DEFAULT;
-
+    
     this.state = {
-      config,
-      configStr: config.toString(),
+      config: null,
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
-
-      pageId: "map",
+      pageId: "config",
     };
   }
 
   async componentDidMount() {
-    const bbox = await HomePage.getBBox(this.state.config);
+    const config = await ConfigFactory.default();
+    const bbox = await HomePage.getBBox(config);
     const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
-    // HACK!
-    await this.onClickAutoColor();
-    this.setState({ bbox, allEntIdx });
+    this.setState({ config, bbox, allEntIdx });
   }
 
   static async getBBox(config) {
-    const regionIdList = config.regionInfoList.map(
-      (regionInfo) => regionInfo.id
-    );
 
+    const regionIdList = config.regionIdList;
+   
     const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
       Object.values(regionIdToPolygonList)
@@ -52,17 +48,15 @@ export default class HomePage extends Component {
   }
 
   async onAddRegions(regionEnts) {
-    const { config } = this.state;
+    let { config } = this.state;
     config.addRegions(regionEnts);
-    const bbox = await HomePage.getBBox(config);
-    this.setState({ config, configStr: config.toString(), bbox });
+    await this.onChangeConfig(config);
   }
 
   async onRemoveRegions(regionIds) {
     const { config } = this.state;
     config.deleteRegions(regionIds);
-    const bbox = await HomePage.getBBox(config);
-    this.setState({ config, configStr: config.toString(), bbox });
+    await this.onChangeConfig(config);
   }
 
   onClickRegion(regionId) {
@@ -75,40 +69,32 @@ export default class HomePage extends Component {
     this.setState({ pageId });
   }
 
-  async onChangeConfig(newConfigData) {
-    const config = Config.fromData(newConfigData);
-    const bbox = await HomePage.getBBox(config);
-    this.setState({ config, configStr: config.toString(), bbox });
+  async onChangeConfig(newConfig) {
+    const bbox = await HomePage.getBBox(newConfig);
+    this.setState({ config: newConfig, bbox,pageId: "map" });
   }
 
+
+
   async onClickAutoColor() {
-    const { config } = this.state;
-    const regionIdList = config.regionInfoList.map(
-      (regionInfo) => regionInfo.id
-    );
-    const overlapPairs = await Geo.getOverlapGraph(regionIdList);
-
-    const regionIdToColor = Color.autoColor(overlapPairs, regionIdList);
-    Object.entries(regionIdToColor).map(function ([regionId, color]) {
-      config.update(regionId, { fill: color });
-      return true;
-    });
-
+    let { config } = this.state;
+    await config.autoColor();
     this.setState({ config, configStr: config.toString() });
   }
 
   renderBody() {
     const { bbox, config, selectedColor, pageId, allEntIdx } = this.state;
-    if (!bbox) {
+    if (!config) {
       return (
         <Box sx={STYLE.LOADING}>
           <CircularProgress />
           <Typography variant="subtitle" component="div" gutterBottom>
-            Loading {config.nRegions} regions...
+            Loading...
           </Typography>
         </Box>
       );
     }
+
     switch (pageId) {
       case "map":
         return (
@@ -131,6 +117,14 @@ export default class HomePage extends Component {
             onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );
+      case "config":
+        return (
+          <ConfigPane
+            config={config}
+
+            onChangeConfig={this.onChangeConfig.bind(this)}
+          />
+        );
       default:
         return "Unknown Page: " + pageId;
     }
@@ -138,7 +132,7 @@ export default class HomePage extends Component {
 
   render() {
     const { pageId, config, selectedColor } = this.state;
-    const nRegions = config.nRegions;
+    const nRegions = config? config.nRegions : 0;
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>

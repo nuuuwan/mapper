@@ -1,6 +1,7 @@
 import EntType from "./EntType";
 import WWW from "./WWW";
 import LngLat from "./LngLat";
+import Cache from "./Cache"
 
 const URL_BASE =
   "https://raw.githubusercontent.com/nuuuwan/gig-data/master/geo";
@@ -53,8 +54,17 @@ export default class Geo {
   }
 
   static async getOverlapGraph(regionIdList) {
-    const timerLabel = "Geo.getOverlapGraph-" + regionIdList.join(",");
-    console.time(timerLabel);
+    return await Cache.get(
+      'getOverlapGraph-' + JSON.stringify(regionIdList),
+      function() {
+       return Geo.getOverlapGraphNoCache(regionIdList);
+      }
+    )
+  }
+
+  static async getOverlapGraphNoCache(regionIdList) {
+    // const timerLabel = "Geo.getOverlapGraph-" + regionIdList.join(",");
+    // console.time(timerLabel);
     const idToLngLatSet = await Geo.getIdToLngLatSet(regionIdList);
     let overlapPairs = [];
     const n = regionIdList.length;
@@ -72,7 +82,7 @@ export default class Geo {
         }
       }
     }
-    console.timeEnd(timerLabel);
+    // console.timeEnd(timerLabel);
 
     return overlapPairs;
   }

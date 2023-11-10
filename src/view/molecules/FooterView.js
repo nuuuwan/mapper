@@ -1,13 +1,10 @@
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 
-
 import { PAGE_IDX } from "../pages/pages.js";
 
 export default function FooterView({ onClickPage, pageId: selectedPageId }) {
-
   return (
     <BottomNavigation>
-
       {Object.entries(PAGE_IDX).map(function ([pageId, d]) {
         const key = "button-" + pageId;
         const isSelected = pageId === selectedPageId;

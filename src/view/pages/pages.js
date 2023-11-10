@@ -1,6 +1,8 @@
 import PublicIcon from "@mui/icons-material/Public";
-import DataIcon from "@mui/icons-material/Storage";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
+import ListIcon from "@mui/icons-material/List";
 export const PAGE_IDX = {
-  data: { Icon: DataIcon },
+  config: { Icon: ListIcon },
   map: { Icon: PublicIcon },
+  data: { Icon: MenuOpenIcon },
 };

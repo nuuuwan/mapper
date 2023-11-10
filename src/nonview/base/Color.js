@@ -134,7 +134,7 @@ export default class Color {
     const MAX_ATTEMPTS = 100;
     let minNOverlaps = Infinity;
     let bestKeyToColor = null;
-    let bestOverlapPairs = null;
+
 
     for (let nColors = MIN_N_COLORS; nColors <= MAX_N_COLORS; nColors++) {
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
@@ -156,18 +156,18 @@ export default class Color {
         if (nOverlaps < minNOverlaps) {
           minNOverlaps = nOverlaps;
           bestKeyToColor = keyToIColor;
-          bestOverlapPairs = overlapPairs;
+
         }
 
         if (nOverlaps === 0) {
-          console.debug("Solution", { nColors, keyToIColor });
+          // console.debug("Solution", { nColors, keyToIColor });
           break;
         }
       }
       if (minNOverlaps === 0) {
         break;
       }
-      console.debug("Partial Solution", { nColors, bestOverlapPairs });
+      // console.debug("Partial Solution", { nColors, bestOverlapPairs });
     }
 
     return Object.fromEntries(

@@ -3,17 +3,26 @@ import { Color } from "../../nonview/base";
 export default function ColorView({ color, label }) {
   const backgroundColor = color;
   const foregroundColor = Color.getCompliment(color);
+  const isLabelMode = label !== undefined;
+  const labelFinal = isLabelMode ? label : "";
+  const padding = 4;
+  const height = isLabelMode ? "auto": padding ;
   return (
     <span
       style={{
         background: backgroundColor,
         color: foregroundColor,
-        padding: 3,
-        borderRadius: 3,
-        fontFamily: "monospace",
+
+        padding:padding,
+        borderRadius:padding,
+
+        display:"inline-block",
+        height: height,
+        fontSize: 9,
+
       }}
     >
-      {label || color}
+      {labelFinal}
     </span>
   );
 }

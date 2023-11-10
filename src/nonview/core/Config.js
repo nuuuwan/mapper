@@ -1,3 +1,5 @@
+
+import {Geo, Color} from "../base"
 var md5 = require("md5");
 
 export default class Config {
@@ -5,13 +7,18 @@ export default class Config {
   static HASH_LENGTH = 8;
   static DEFAULT_COLOR = "#cccccc";
 
-  constructor(regionIdToValue, valueToColor) {
+  constructor(name, regionIdToValue, valueToColor) {
+    this.name = name;
     this.regionIdToValue = regionIdToValue;
     this.valueToColor = valueToColor;
   }
 
   get hash() {
     return md5(this.toString()).substring(0, Config.HASH_LENGTH);
+  }
+
+  get regionIdList() {
+     return Object.keys(this.regionIdToValue);
   }
 
   get regionInfoList() {
@@ -44,6 +51,11 @@ export default class Config {
     );
   }
 
+  get colors() {
+    return Object.values(this.valueToColor);
+  }
+
+  
   // Updating
 
   update(regionId, newInfo) {
@@ -97,65 +109,23 @@ export default class Config {
   }
 
   // Loaders
-  static fromRegionIdList(regionIdList) {
+  static fromRegionIdList(name, regionIdList) {
     const regionIdToValue = Object.fromEntries(
       regionIdList.map((id) => [id, Config.DEFAULT_VALUE])
     );
     const valueToColor = { [Config.DEFAULT_VALUE]: Config.DEFAULT_COLOR };
-    return new Config(regionIdToValue, valueToColor);
+    return new Config(name, regionIdToValue, valueToColor);
   }
 
-  // Instances
-  static PROVINCES = [
-    "LK-1",
-    "LK-2",
-    "LK-3",
-    "LK-4",
-    "LK-5",
-    "LK-6",
-    "LK-7",
-    "LK-8",
-    "LK-9",
-  ];
+  // Utilities
+  async autoColor() {
+    const regionIdList = this.regionIdList;
+    const overlapPairs = await Geo.getOverlapGraph(regionIdList);
+    const regionIdToColor = Color.autoColor(overlapPairs, regionIdList);
+    
+    Object.entries(regionIdToColor).forEach(function ([regionId, color]) {
+      this.update(regionId, { fill: color });
+    }.bind(this));
+  }
 
-  static DISTRICTS = [
-    "LK-11",
-    "LK-12",
-    "LK-13",
-    "LK-21",
-    "LK-22",
-    "LK-23",
-    "LK-31",
-    "LK-32",
-    "LK-33",
-    "LK-41",
-    "LK-42",
-    "LK-43",
-    "LK-44",
-    "LK-45",
-    "LK-51",
-    "LK-52",
-    "LK-53",
-    "LK-61",
-    "LK-62",
-    "LK-71",
-    "LK-72",
-    "LK-81",
-    "LK-82",
-    "LK-91",
-    "LK-92",
-  ];
-
-  static DISTRICTS_INTERESTING = [
-    "LK-11",
-    "LK-23",
-    "LK-33",
-    "LK-41",
-    "LK-52",
-    "LK-62",
-    "LK-71",
-    "LK-91",
-  ];
-
-  static DEFAULT = Config.fromRegionIdList(Config.DISTRICTS);
 }
