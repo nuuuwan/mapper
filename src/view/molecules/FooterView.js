@@ -18,7 +18,7 @@ export default function FooterView({ onClickPage, pageId: selectedPageId }) {
               onClickPage(pageId);
             }}
             disabled={isSelected}
-            sx={{ color, background }}
+            sx={{ color, background, borderRadius: 6 }}
           />
         );
       })}
