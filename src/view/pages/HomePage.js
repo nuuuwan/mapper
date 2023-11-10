@@ -21,6 +21,7 @@ export default class HomePage extends Component {
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
       pageId: "config",
+      configList: null,
     };
   }
 
@@ -28,7 +29,8 @@ export default class HomePage extends Component {
     const config = await ConfigFactory.default();
     const bbox = await HomePage.getBBox(config);
     const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
-    this.setState({ config, bbox, allEntIdx });
+    const configList = await ConfigFactory.all();
+    this.setState({ config, bbox, allEntIdx ,configList});
   }
 
   static async getBBox(config) {
@@ -80,8 +82,8 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { bbox, config, selectedColor, pageId, allEntIdx } = this.state;
-    if (!config) {
+    const { bbox, config, selectedColor, pageId, allEntIdx, configList } = this.state;
+    if (! (config && configList)) {
       return <LoadingProgress />;
     }
 
@@ -112,6 +114,7 @@ export default class HomePage extends Component {
           <ConfigPane
             config={config}
             onChangeConfig={this.onChangeConfig.bind(this)}
+            configList={configList}
           />
         );
       default:

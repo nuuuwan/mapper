@@ -20,9 +20,9 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const background = isSelected ? "#ccc" : "#fff";
 
   return (
-    <ListItem sx={{ background }}>
+    <ListItem >
       {" "}
-      <ListItemButton onClick={onClick}>
+      <ListItemButton onClick={onClick} sx={{ background }}>
         <ListItemAvatar>
           <Avatar>
             <PublicIcon />
@@ -45,22 +45,11 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
 }
 
 export default class ConfigPane extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { configList: null };
-  }
 
-  async componentDidMount() {
-    const configList = await ConfigFactory.all();
-    this.setState({ configList });
-  }
 
   render() {
-    const { configList } = this.state;
-    if (!configList) {
-      return <LoadingProgress />;
-    }
-    const { onChangeConfig, config: selectedConfig } = this.props;
+
+    const { configList, onChangeConfig, config: selectedConfig } = this.props;
     return (
       <List>
         {configList.map(function (config, iConfig) {
