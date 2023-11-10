@@ -1,16 +1,18 @@
 import { Color } from "../../nonview/base";
 var md5 = require("md5");
-const HASH_LENGTH = 8;
 
 export default class Config {
-  static DEFAULT_VALUE = "Config.DEFAULT_VALUE";
+  static DEFAULT_VALUE = "Group-1";
+  static HASH_LENGTH = 8;
+  static DEFAULT_COLOR = '#cccccc'
+
   constructor(regionIdToValue, valueToColor) {
     this.regionIdToValue = regionIdToValue;
     this.valueToColor = valueToColor;
   }
 
   get hash() {
-    return md5(this.toString()).substring(0, HASH_LENGTH);
+    return md5(this.toString()).substring(0, Config.HASH_LENGTH);
   }
 
   get regionInfoList() {
@@ -37,12 +39,20 @@ export default class Config {
     return `config-${this.hash}.json`;
   }
 
+  get colorToValue() {
+    return Object.fromEntries(
+      Object.entries(this.valueToColor).map(([value, color]) => [color, value])
+    );
+  }
+
   // Updating
 
   update(regionId, newInfo) {
     const color = newInfo.fill;
-    this.regionIdToValue[regionId] = color;
-    this.valueToColor[color] = color;
+    const colorToValue = this.colorToValue;
+    const value = colorToValue[color] || 'Group-' + (Object.keys(colorToValue).length + 1);
+    this.regionIdToValue[regionId] = value;
+    this.valueToColor[value] = color;
   }
 
   addRegions(regionIds) {
@@ -51,6 +61,7 @@ export default class Config {
         continue;
       }
       this.regionIdToValue[id] = Config.DEFAULT_VALUE;
+      this.valueToColor[Config.DEFAULT_VALUE] = Config.DEFAULT_COLOR;
     }
   }
 
@@ -85,7 +96,7 @@ export default class Config {
     const regionIdToValue = Object.fromEntries(
       regionIdList.map((id) => [id, Config.DEFAULT_VALUE])
     );
-    const valueToColor = { [Config.DEFAULT_VALUE]: Color.DEFAULT };
+    const valueToColor = { [Config.DEFAULT_VALUE]: Config.DEFAULT_COLOR };
     return new Config(regionIdToValue, valueToColor);
   }
 

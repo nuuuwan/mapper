@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Number } from "../../nonview/base";
-import { StyledTableCell, ColorView } from "../atoms";
+import { StyledTableCell, ValueView } from "../atoms";
 
 function RegionActionsView({ id, onRemoveRegions }) {
   return (
@@ -25,7 +25,7 @@ function ConfigTableViewHeaderRow() {
       <StyledTableCell>Region</StyledTableCell>
       <StyledTableCell>Type</StyledTableCell>
       <StyledTableCell>Population</StyledTableCell>
-      <StyledTableCell>Fill</StyledTableCell>
+      <StyledTableCell>Value</StyledTableCell>
       <StyledTableCell>Actions</StyledTableCell>
 
       {/* Add more StyledTableCell components here for additional columns */}
@@ -33,14 +33,14 @@ function ConfigTableViewHeaderRow() {
   );
 }
 
-function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
+function ConfigTableViewRow({ id, value, color, ent, onRemoveRegions }) {
   return (
     <TableRow key={id}>
       <StyledTableCell>{ent.name}</StyledTableCell>
       <StyledTableCell>{ent.entType.shortName}</StyledTableCell>
       <StyledTableCell>{Number.humanize(ent.population)}</StyledTableCell>
       <StyledTableCell>
-        <ColorView color={info.fill} />
+        <ValueView value={value} color={color} />
       </StyledTableCell>
       <StyledTableCell>
         <RegionActionsView id={id} onRemoveRegions={onRemoveRegions} />
@@ -62,13 +62,14 @@ export default function ConfigTableView({
             <ConfigTableViewHeaderRow />
           </TableHead>
           <TableBody>
-            {config.sortedRegionInfoList.map(function (info) {
-              const id = info.id;
+            {Object.entries(config.regionIdToValue).map(function ([id, value]) {
+              const color = config.valueToColor[value];
               return (
                 <ConfigTableViewRow
-                  key={id}
+                  key={'config-table-view-row-'+id}
                   id={id}
-                  info={info}
+                  value={value}
+                  color={color}
                   ent={allEntIdx[id]}
                   onRemoveRegions={onRemoveRegions}
                 />

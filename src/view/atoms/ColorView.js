@@ -1,6 +1,6 @@
 import { Color } from "../../nonview/base";
 
-export default function ColorView({ color }) {
+export default function ColorView({ color, label }) {
   const backgroundColor = color;
   const foregroundColor = Color.getCompliment(color);
   return (
@@ -13,7 +13,7 @@ export default function ColorView({ color }) {
         fontFamily: "monospace",
       }}
     >
-      {color}
+      {label || color}
     </span>
   );
 }

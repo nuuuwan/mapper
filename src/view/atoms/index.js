@@ -4,5 +4,5 @@ import ColorView from "./ColorView";
 import ShowHide from "./ShowHide";
 import SnackbarLight from "./SnackbarLight";
 import StyledTableCell from "./StyledTableCell";
-
-export { AlignRight, ColorView, ShowHide, SnackbarLight, StyledTableCell };
+import ValueView from "./ValueView";
+export { AlignRight, ColorView, ShowHide, SnackbarLight, StyledTableCell ,ValueView};
