@@ -25,7 +25,6 @@ function ConfigTableViewHeaderRow() {
       <StyledTableCell></StyledTableCell>
       <StyledTableCell>Region</StyledTableCell>
 
-
       <StyledTableCell>Value</StyledTableCell>
       <StyledTableCell>Actions</StyledTableCell>
 
@@ -39,7 +38,6 @@ function ConfigTableViewRow({ id, value, color, ent, onRemoveRegions }) {
     <TableRow key={id}>
       <StyledTableCell>{ent.id}</StyledTableCell>
       <StyledTableCell>{ent.label}</StyledTableCell>
-
 
       <StyledTableCell>
         <ValueView value={value} color={color} />
