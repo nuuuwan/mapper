@@ -1,7 +1,7 @@
 var md5 = require("md5");
 
 export default class Config {
-  static DEFAULT_VALUE = "Group-1";
+  static DEFAULT_VALUE = "Group-Default";
   static HASH_LENGTH = 8;
   static DEFAULT_COLOR = "#cccccc";
 
@@ -50,9 +50,14 @@ export default class Config {
     const color = newInfo.fill;
     const colorToValue = this.colorToValue;
     const value =
-      colorToValue[color] || "Group-" + (Object.keys(colorToValue).length + 1);
-    this.regionIdToValue[regionId] = value;
+      colorToValue[color] || "Group-" + (Object.keys(colorToValue).length);
+    const isAlreadySet = this.regionIdToValue[regionId] === value;
+    if (isAlreadySet) {
+      this.regionIdToValue[regionId] = Config.DEFAULT_VALUE;
+    } else {
+    this.regionIdToValue[regionId] = value ;
     this.valueToColor[value] = color;
+    }
   }
 
   addRegions(regionIds) {
