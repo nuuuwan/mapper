@@ -2,9 +2,12 @@ import { Color } from "../../nonview/base";
 var md5 = require("md5");
 const HASH_LENGTH = 8;
 
+
 export default class Config {
-  constructor(regionInfoIdx) {
-    this.regionInfoIdx = regionInfoIdx;
+  static DEFAULT_VALUE = "Config.DEFAULT_VALUE"
+  constructor(regionIdToValue, valueToColor) {
+    this.regionIdToValue = regionIdToValue;
+    this.valueToColor = valueToColor;
   }
 
   get hash() {
@@ -12,17 +15,25 @@ export default class Config {
   }
 
   get regionInfoList() {
-    return Object.entries(this.regionInfoIdx).map(([id, info]) =>
-      Object.assign({}, info, { id })
+
+    return Object.entries(this.regionIdToValue).map(
+      function([id, value]) {
+        return {
+          id,
+          value,
+          fill: this.valueToColor[value],
+        };
+      }.bind(this)
     );
   }
 
   get sortedRegionInfoList() {
+
     return this.regionInfoList.sort((a, b) => a.id.localeCompare(b.id));
   }
 
   get nRegions() {
-    return this.regionInfoList.length;
+    return Object.keys(this.regionIdToValue).length;
   }
 
   get fileName() {
@@ -32,31 +43,37 @@ export default class Config {
   // Updating
 
   update(regionId, newInfo) {
-    this.regionInfoIdx[regionId] = newInfo;
+
+    const color = newInfo.fill;
+    this.regionIdToValue[regionId] = color;
+    this.valueToColor[color] = color;
   }
 
   addRegions(regionIds) {
     for (const id of regionIds) {
-      if (this.regionInfoIdx[id]) {
+      if (this.regionIdToValue[id]) {
         continue;
       }
-      this.regionInfoIdx[id] = Config.initItem({ id });
+      this.regionIdToValue[id] = Config.DEFAULT_VALUE;
     }
   }
 
   deleteRegions(regionIds) {
     for (const regionId of regionIds) {
-      delete this.regionInfoIdx[regionId];
+      delete this.regionIdToValue[regionId];
     }
   }
 
-  // Serializing / Loaders
+  // Serializing 
   toData() {
-    return this.regionInfoIdx;
+    return {
+      regionIdToValue: this.regionIdToValue,
+      valueToColor: this.valueToColor,
+    }; 
   }
 
   static fromData(data) {
-    return new Config(data);
+    return new Config(data.regionIdToValue, data.valueToColor);
   }
 
   toString() {
@@ -67,32 +84,11 @@ export default class Config {
     return Config.fromData(JSON.parse(str));
   }
 
-  static fromStringSafe(str) {
-    try {
-      return Config.fromString(str);
-    } catch (e) {
-      return "";
-    }
-  }
-
-  static initItem(d) {
-    if (!d.id) {
-      throw new Error("No id");
-    }
-    return {
-      id: d.id,
-      fill: d.color || Color.randomDefaultColor(),
-    };
-  }
-
-  static regionIdListToIdx(regionIdList) {
-    return Object.fromEntries(
-      regionIdList.map((id) => [id, Config.initItem({ id })])
-    );
-  }
-
+  // Loaders 
   static fromRegionIdList(regionIdList) {
-    return new Config(Config.regionIdListToIdx(regionIdList));
+    const regionIdToValue = Object.fromEntries(regionIdList.map((id) => [id, Config.DEFAULT_VALUE]));
+    const valueToColor = { [Config.DEFAULT_VALUE]: Color.DEFAULT };
+    return new Config(regionIdToValue, valueToColor);
   }
 
   // Instances
