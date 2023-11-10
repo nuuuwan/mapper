@@ -22,7 +22,7 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
   return (
     <ListItem>
       {" "}
-      <ListItemButton onClick={onClick} sx={{ background ,borderRadius: 6}}>
+      <ListItemButton onClick={onClick} sx={{ background, borderRadius: 6 }}>
         <ListItemAvatar>
           <Avatar>
             <PublicIcon />
