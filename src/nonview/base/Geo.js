@@ -1,7 +1,7 @@
 import EntType from "./EntType";
 import WWW from "./WWW";
 import LngLat from "./LngLat";
-import Cache from "./Cache"
+import Cache from "./Cache";
 
 const URL_BASE =
   "https://raw.githubusercontent.com/nuuuwan/gig-data/master/geo";
@@ -55,11 +55,11 @@ export default class Geo {
 
   static async getOverlapGraph(regionIdList) {
     return await Cache.get(
-      'getOverlapGraph-' + JSON.stringify(regionIdList),
-      function() {
-       return Geo.getOverlapGraphNoCache(regionIdList);
+      "getOverlapGraph-" + JSON.stringify(regionIdList),
+      function () {
+        return Geo.getOverlapGraphNoCache(regionIdList);
       }
-    )
+    );
   }
 
   static async getOverlapGraphNoCache(regionIdList) {

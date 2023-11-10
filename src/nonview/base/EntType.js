@@ -16,21 +16,20 @@ export default class EntType {
     if (this.id.length <= 3) {
       return this.id.toUpperCase();
     }
-    return this.id.substring(0,1).toUpperCase() + this.id.substring(1);
+    return this.id.substring(0, 1).toUpperCase() + this.id.substring(1);
   }
 
   get longName() {
     if (this.shortName.length <= 3) {
       return {
-        'ed': 'Electoral District',
-        'pd': 'Polling Division',
-        'dsd': 'Divisional Secretariat Division',
-        'gnd': 'Grama Niladhari Division',
+        ed: "Electoral District",
+        pd: "Polling Division",
+        dsd: "Divisional Secretariat Division",
+        gnd: "Grama Niladhari Division",
       }[this.id];
     }
     return this.shortName;
   }
-
 
   // Loaders
   static isLKRegion(entId) {

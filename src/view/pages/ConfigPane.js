@@ -1,38 +1,45 @@
 import { Component } from "react";
-import { Typography, List, ListItem, ListItemAvatar, ListItemText, Avatar,ListItemButton } from "@mui/material";
-import PublicIcon from '@mui/icons-material/Public';
+import {
+  Typography,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+  ListItemButton,
+} from "@mui/material";
+import PublicIcon from "@mui/icons-material/Public";
 import { ConfigFactory } from "../../nonview/core";
-import {ColorView } from "../atoms"
+import { ColorView } from "../atoms";
 
-function ConfigListItem({config, onChangeConfig}) {
-  const onClick = function() {
+function ConfigListItem({ config, onChangeConfig }) {
+  const onClick = function () {
     onChangeConfig(config);
-  }  
+  };
 
   return (
-  
-        <ListItem >  <ListItemButton onClick={onClick}>
+    <ListItem>
+      {" "}
+      <ListItemButton onClick={onClick}>
         <ListItemAvatar>
           <Avatar>
             <PublicIcon />
           </Avatar>
         </ListItemAvatar>
-        <ListItemText >
-        <Typography variant="h6" color="text.secondary">
+        <ListItemText>
+          <Typography variant="h6" color="text.secondary">
             {config.name}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-            {config.nRegions + ' regions'}
-            </Typography>
-            {config.colors.map(
-                function(color, iColor) {
-                    return <ColorView key={'color-' + iColor} color={color} />;
-                }
-          
-            )}
-</ListItemText></ListItemButton>
-      </ListItem>
-    );
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {config.nRegions + " regions"}
+          </Typography>
+          {config.colors.map(function (color, iColor) {
+            return <ColorView key={"color-" + iColor} color={color} />;
+          })}
+        </ListItemText>
+      </ListItemButton>
+    </ListItem>
+  );
 }
 
 export default class ConfigPane extends Component {
@@ -46,17 +53,21 @@ export default class ConfigPane extends Component {
     this.setState({ configList });
   }
 
-  
-
   render() {
     return (
-        <List >
-            {this.state.configList.map(
-                function(config, iConfig) {
-                    return <ConfigListItem key={"config-list-item" + iConfig} config={config} onChangeConfig={this.props.onChangeConfig} />;
-                }.bind(this)
-            )}
+      <List>
+        {this.state.configList.map(
+          function (config, iConfig) {
+            return (
+              <ConfigListItem
+                key={"config-list-item" + iConfig}
+                config={config}
+                onChangeConfig={this.props.onChangeConfig}
+              />
+            );
+          }.bind(this)
+        )}
       </List>
-    )
+    );
   }
 }

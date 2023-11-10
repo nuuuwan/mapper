@@ -5,11 +5,11 @@ export default class ConfigFactory {
   static async fromEntType(entType) {
     const ents = await Ent.listFromType(entType);
     const entIds = ents.map((ent) => ent.id);
-    const name =  entType.longName + 's (random coloring)'; 
-    const config =  Config.fromRegionIdList(name, entIds);
+    const name = entType.longName + "s (random coloring)";
+    const config = Config.fromRegionIdList(name, entIds);
     await config.autoColor();
     return config;
-}
+  }
 
   static async allFromEntTypes() {
     const entList = [EntType.PROVINCE, EntType.DISTRICT, EntType.ED];
@@ -22,9 +22,14 @@ export default class ConfigFactory {
 
   static async custom() {
     return [
-      Config.fromRegionIdList('CMC Polling Divisions', ['EC-01A','EC-01B','EC-01C','EC-01D','EC-01E']),
-
-    ]
+      Config.fromRegionIdList("CMC Polling Divisions", [
+        "EC-01A",
+        "EC-01B",
+        "EC-01C",
+        "EC-01D",
+        "EC-01E",
+      ]),
+    ];
   }
 
   static async all() {

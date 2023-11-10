@@ -1,7 +1,7 @@
 import { Component } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import { BBox, LngLat, Ent, Geo, Color, EntType } from "../../nonview/base";
-import {  ConfigFactory } from "../../nonview/core";
+import { ConfigFactory } from "../../nonview/core";
 
 import { HeaderView, FooterView } from "../molecules";
 
@@ -16,7 +16,6 @@ export default class HomePage extends Component {
   constructor(props) {
     super(props);
 
-    
     this.state = {
       config: null,
       bbox: null,
@@ -33,9 +32,8 @@ export default class HomePage extends Component {
   }
 
   static async getBBox(config) {
-
     const regionIdList = config.regionIdList;
-   
+
     const regionIdToPolygonList = await Geo.getIdToPolygonList(regionIdList);
     const lngLatList = LngLat.fromPolygonListList(
       Object.values(regionIdToPolygonList)
@@ -71,10 +69,8 @@ export default class HomePage extends Component {
 
   async onChangeConfig(newConfig) {
     const bbox = await HomePage.getBBox(newConfig);
-    this.setState({ config: newConfig, bbox,pageId: "map" });
+    this.setState({ config: newConfig, bbox, pageId: "map" });
   }
-
-
 
   async onClickAutoColor() {
     let { config } = this.state;
@@ -121,7 +117,6 @@ export default class HomePage extends Component {
         return (
           <ConfigPane
             config={config}
-
             onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );
@@ -132,7 +127,7 @@ export default class HomePage extends Component {
 
   render() {
     const { pageId, config, selectedColor } = this.state;
-    const nRegions = config? config.nRegions : 0;
+    const nRegions = config ? config.nRegions : 0;
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>

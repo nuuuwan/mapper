@@ -135,7 +135,6 @@ export default class Color {
     let minNOverlaps = Infinity;
     let bestKeyToColor = null;
 
-
     for (let nColors = MIN_N_COLORS; nColors <= MAX_N_COLORS; nColors++) {
       for (let i = 0; i < MAX_ATTEMPTS; i++) {
         let keyToIColor = {};
@@ -156,7 +155,6 @@ export default class Color {
         if (nOverlaps < minNOverlaps) {
           minNOverlaps = nOverlaps;
           bestKeyToColor = keyToIColor;
-
         }
 
         if (nOverlaps === 0) {

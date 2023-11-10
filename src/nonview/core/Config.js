@@ -1,5 +1,4 @@
-
-import {Geo, Color} from "../base"
+import { Geo, Color } from "../base";
 var md5 = require("md5");
 
 export default class Config {
@@ -18,7 +17,7 @@ export default class Config {
   }
 
   get regionIdList() {
-     return Object.keys(this.regionIdToValue);
+    return Object.keys(this.regionIdToValue);
   }
 
   get regionInfoList() {
@@ -55,7 +54,6 @@ export default class Config {
     return Object.values(this.valueToColor);
   }
 
-  
   // Updating
 
   update(regionId, newInfo) {
@@ -122,10 +120,11 @@ export default class Config {
     const regionIdList = this.regionIdList;
     const overlapPairs = await Geo.getOverlapGraph(regionIdList);
     const regionIdToColor = Color.autoColor(overlapPairs, regionIdList);
-    
-    Object.entries(regionIdToColor).forEach(function ([regionId, color]) {
-      this.update(regionId, { fill: color });
-    }.bind(this));
-  }
 
+    Object.entries(regionIdToColor).forEach(
+      function ([regionId, color]) {
+        this.update(regionId, { fill: color });
+      }.bind(this)
+    );
+  }
 }
