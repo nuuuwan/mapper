@@ -66,7 +66,7 @@ export default function ConfigTableView({
               const color = config.valueToColor[value];
               return (
                 <ConfigTableViewRow
-                  key={'config-table-view-row-'+id}
+                  key={"config-table-view-row-" + id}
                   id={id}
                   value={value}
                   color={color}

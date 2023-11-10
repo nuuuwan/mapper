@@ -5,4 +5,12 @@ import ShowHide from "./ShowHide";
 import SnackbarLight from "./SnackbarLight";
 import StyledTableCell from "./StyledTableCell";
 import ValueView from "./ValueView";
-export { AlignRight, ColorView, ShowHide, SnackbarLight, StyledTableCell ,ValueView};
+
+export {
+  AlignRight,
+  ColorView,
+  ShowHide,
+  SnackbarLight,
+  StyledTableCell,
+  ValueView,
+};

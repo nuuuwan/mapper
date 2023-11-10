@@ -1,10 +1,9 @@
-import { Color } from "../../nonview/base";
 var md5 = require("md5");
 
 export default class Config {
   static DEFAULT_VALUE = "Group-1";
   static HASH_LENGTH = 8;
-  static DEFAULT_COLOR = '#cccccc'
+  static DEFAULT_COLOR = "#cccccc";
 
   constructor(regionIdToValue, valueToColor) {
     this.regionIdToValue = regionIdToValue;
@@ -50,7 +49,8 @@ export default class Config {
   update(regionId, newInfo) {
     const color = newInfo.fill;
     const colorToValue = this.colorToValue;
-    const value = colorToValue[color] || 'Group-' + (Object.keys(colorToValue).length + 1);
+    const value =
+      colorToValue[color] || "Group-" + (Object.keys(colorToValue).length + 1);
     this.regionIdToValue[regionId] = value;
     this.valueToColor[value] = color;
   }
