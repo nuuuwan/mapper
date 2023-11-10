@@ -2,9 +2,8 @@ import { Color } from "../../nonview/base";
 var md5 = require("md5");
 const HASH_LENGTH = 8;
 
-
 export default class Config {
-  static DEFAULT_VALUE = "Config.DEFAULT_VALUE"
+  static DEFAULT_VALUE = "Config.DEFAULT_VALUE";
   constructor(regionIdToValue, valueToColor) {
     this.regionIdToValue = regionIdToValue;
     this.valueToColor = valueToColor;
@@ -15,9 +14,8 @@ export default class Config {
   }
 
   get regionInfoList() {
-
     return Object.entries(this.regionIdToValue).map(
-      function([id, value]) {
+      function ([id, value]) {
         return {
           id,
           value,
@@ -28,7 +26,6 @@ export default class Config {
   }
 
   get sortedRegionInfoList() {
-
     return this.regionInfoList.sort((a, b) => a.id.localeCompare(b.id));
   }
 
@@ -43,7 +40,6 @@ export default class Config {
   // Updating
 
   update(regionId, newInfo) {
-
     const color = newInfo.fill;
     this.regionIdToValue[regionId] = color;
     this.valueToColor[color] = color;
@@ -64,12 +60,12 @@ export default class Config {
     }
   }
 
-  // Serializing 
+  // Serializing
   toData() {
     return {
       regionIdToValue: this.regionIdToValue,
       valueToColor: this.valueToColor,
-    }; 
+    };
   }
 
   static fromData(data) {
@@ -84,9 +80,11 @@ export default class Config {
     return Config.fromData(JSON.parse(str));
   }
 
-  // Loaders 
+  // Loaders
   static fromRegionIdList(regionIdList) {
-    const regionIdToValue = Object.fromEntries(regionIdList.map((id) => [id, Config.DEFAULT_VALUE]));
+    const regionIdToValue = Object.fromEntries(
+      regionIdList.map((id) => [id, Config.DEFAULT_VALUE])
+    );
     const valueToColor = { [Config.DEFAULT_VALUE]: Color.DEFAULT };
     return new Config(regionIdToValue, valueToColor);
   }
