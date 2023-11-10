@@ -20,6 +20,10 @@ export default class ConfigFactory {
     );
   }
 
+  static async gig2() {
+    return [];
+  }
+
   static async custom() {
     return [
       Config.fromRegionIdList("CMC Polling Divisions", [
@@ -47,8 +51,9 @@ export default class ConfigFactory {
 
   static async all() {
     const all = await ConfigFactory.allFromEntTypes();
+    const gig2 = await ConfigFactory.gig2();
     const custom = await ConfigFactory.custom();
-    return [].concat(all, custom);
+    return [].concat(all, gig2, custom);
   }
 
   static async default() {

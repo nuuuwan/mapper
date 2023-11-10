@@ -4,11 +4,18 @@ import Cache from "./Cache";
 import Color from "./Color";
 import Ent from "./Ent";
 import EntType from "./EntType";
+import GIG2 from "./GIG2";
+import GIG2Table from "./GIG2Table";
+import GIG2TableMetadata from "./GIG2TableMetadata";
+import GIG2TableRow from "./GIG2TableRow";
+import GIG2TableStyle from "./GIG2TableStyle";
 import Geo from "./Geo";
 import GeoBlock from "./GeoBlock";
 import LngLat from "./LngLat";
+import MathX from "./MathX";
 import Number from "./Number";
 import Random from "./Random";
+import StringX from "./StringX";
 import TimeX from "./TimeX";
 import URLContext from "./URLContext";
 import WWW from "./WWW";
@@ -19,11 +26,18 @@ export {
   Color,
   Ent,
   EntType,
+  GIG2,
+  GIG2Table,
+  GIG2TableMetadata,
+  GIG2TableRow,
+  GIG2TableStyle,
   Geo,
   GeoBlock,
   LngLat,
+  MathX,
   Number,
   Random,
+  StringX,
   TimeX,
   URLContext,
   WWW,

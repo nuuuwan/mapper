@@ -1,3 +1,4 @@
+import StringX from "./StringX";
 const URL_BASE = "https://raw.githubusercontent.com/nuuuwan/gig2/data";
 
 export default class EntType {
@@ -16,7 +17,7 @@ export default class EntType {
     if (this.id.length <= 3) {
       return this.id.toUpperCase();
     }
-    return this.id.substring(0, 1).toUpperCase() + this.id.substring(1);
+    return StringX.toTitleCase(this.id);
   }
 
   get longName() {
