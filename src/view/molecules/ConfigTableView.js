@@ -3,55 +3,48 @@ import {
   IconButton,
   Table,
   TableBody,
-  TableCell,
   TableContainer,
   TableHead,
   TableRow,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Number } from "../../nonview/base";
+import { StyledTableCell, ColorView } from "../atoms";
 
-function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
+function RegionActionsView({ id, onRemoveRegions }) {
   return (
-    <TableRow key={id}>
-      <TableCell>{ent.name}</TableCell>
-      <TableCell>{ent.entType.shortName}</TableCell>
-      <TableCell align="right">{Number.humanize(ent.population)}</TableCell>
-      <TableCell align="right">
-        <span
-          style={{
-            background: info.fill,
-            color: "white",
-            padding: 3,
-            borderRadius: 3,
-            margin: 3,
-            textAlign: "center",
-            fontFamily: "monospace",
-          }}
-        >
-          {" "}
-          {info.fill}
-        </span>
-      </TableCell>
-      <TableCell>
-        <IconButton onClick={() => onRemoveRegions([id])}>
-          <DeleteIcon />
-        </IconButton>
-      </TableCell>
-    </TableRow>
+    <IconButton size="small" onClick={() => onRemoveRegions([id])}>
+      <DeleteIcon />
+    </IconButton>
   );
 }
 
 function ConfigTableViewHeaderRow() {
   return (
     <TableRow>
-      <TableCell>Region</TableCell>
-      <TableCell></TableCell>
-      <TableCell>Population</TableCell>
-      <TableCell>Fill</TableCell>
-      <TableCell></TableCell>
+      <StyledTableCell>Region</StyledTableCell>
+      <StyledTableCell>Type</StyledTableCell>
+      <StyledTableCell>Population</StyledTableCell>
+      <StyledTableCell>Fill</StyledTableCell>
+      <StyledTableCell>Actions</StyledTableCell>
 
-      {/* Add more TableCell components here for additional columns */}
+      {/* Add more StyledTableCell components here for additional columns */}
+    </TableRow>
+  );
+}
+
+function ConfigTableViewRow({ id, info, ent, onRemoveRegions }) {
+  return (
+    <TableRow key={id}>
+      <StyledTableCell>{ent.name}</StyledTableCell>
+      <StyledTableCell>{ent.entType.shortName}</StyledTableCell>
+      <StyledTableCell>{Number.humanize(ent.population)}</StyledTableCell>
+      <StyledTableCell>
+        <ColorView color={info.fill} />
+      </StyledTableCell>
+      <StyledTableCell>
+        <RegionActionsView id={id} onRemoveRegions={onRemoveRegions} />
+      </StyledTableCell>
     </TableRow>
   );
 }
