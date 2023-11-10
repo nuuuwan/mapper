@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import PublicIcon from "@mui/icons-material/Public";
 import { GIG2, StringX } from "../../nonview/base";
-import { ConfigFactory } from "../../nonview/core";
+
 import { MEASUREMENT_TO_ICON } from "../../nonview/constants";
 
 const DEFAULT_ICON = PublicIcon;
@@ -52,7 +52,7 @@ function MeasurementListItem({ measurement, isSelected, onClick }) {
   );
 }
 
-export default function MeasurementPicker({ onChangeConfig }) {
+export default function MeasurementPicker({ onChangeTableName }) {
   const idxGMT = GIG2.getGroupToMeasurementToTableNames();
 
   return (
@@ -65,9 +65,9 @@ export default function MeasurementPicker({ onChangeConfig }) {
               const tableNameList = idxMT[measurement];
               const lastTableName = tableNameList.slice(-1)[0];
               const onClick = async function () {
-                const config = await ConfigFactory.fromTableName(lastTableName);
+     
 
-                await onChangeConfig(config, "map");
+                await onChangeTableName(lastTableName);
               };
               return (
                 <MeasurementListItem

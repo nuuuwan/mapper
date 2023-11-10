@@ -1,18 +1,24 @@
 import React from "react";
-import { Box } from "@mui/material";
-import PaletteIcon from "@mui/icons-material/Palette";
+import { Box, Stack } from "@mui/material";
 
-import { ShowHide } from "../atoms";
-import { MultiRegionViewSVG, ScreenShot, ColorPicker } from "../molecules";
+import {
+  MultiRegionViewSVG,
+  ScreenShot,
+  ColorPicker,
+  TimePicker,
+  RegionEntTypePicker,
+} from "../molecules";
 import { STYLE } from "./HomePageStyle";
 
 export default function MapPane({
+  tableName,
   config,
   bbox,
   selectedColor,
   onChangeSelectedColor,
   onClickRegion,
   onClickAutoColor,
+  onChangeTableName,
 }) {
   const screenshotLabel = "map-" + config.fileLabel;
 
@@ -28,13 +34,16 @@ export default function MapPane({
         </ScreenShot>
       </div>
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
-        <ShowHide Icon={PaletteIcon} isShow={false}>
+        <Stack direction="row" spacing={0}>
+        <RegionEntTypePicker />
+          <TimePicker
+            tableName={tableName} onChangeTableName={onChangeTableName} />
           <ColorPicker
             selectedColor={selectedColor}
             onChangeSelectedColor={onChangeSelectedColor}
             onClickAutoColor={onClickAutoColor}
           />
-        </ShowHide>
+        </Stack>
       </div>
     </Box>
   );

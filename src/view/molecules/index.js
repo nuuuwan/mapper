@@ -9,8 +9,10 @@ import MeasurementPicker from "./MeasurementPicker";
 import MultiRegionViewSVG from "./MultiRegionViewSVG";
 import PolygonListView from "./PolygonListView";
 import PolygonView from "./PolygonView";
+import RegionEntTypePicker from "./RegionEntTypePicker";
 import RegionPicker from "./RegionPicker";
 import ScreenShot from "./ScreenShot";
+import TimePicker from "./TimePicker";
 import __ConfigEditorView from "./__ConfigEditorView";
 import __MultiRegionPicker from "./__MultiRegionPicker";
 
@@ -25,8 +27,10 @@ export {
   MultiRegionViewSVG,
   PolygonListView,
   PolygonView,
+  RegionEntTypePicker,
   RegionPicker,
   ScreenShot,
+  TimePicker,
   __ConfigEditorView,
   __MultiRegionPicker,
 };

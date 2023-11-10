@@ -4,10 +4,10 @@ import MeasurementPicker from "../molecules/MeasurementPicker";
 
 export default class ConfigPane extends Component {
   render() {
-    const { onChangeConfig } = this.props;
+    const { onChangeTableName } = this.props;
     return (
       <div style={STYLE.BODY_CONTENT_SCROLLABLE}>
-        <MeasurementPicker onChangeConfig={onChangeConfig} />
+        <MeasurementPicker onChangeTableName={onChangeTableName} />
       </div>
     );
   }

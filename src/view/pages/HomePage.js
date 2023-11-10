@@ -17,6 +17,7 @@ export default class HomePage extends Component {
     super(props);
 
     this.state = {
+      tableName: null,
       config: null,
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
@@ -69,6 +70,12 @@ export default class HomePage extends Component {
     this.setState({ pageId });
   }
 
+  async onChangeTableName(tableName) {
+    const config = await ConfigFactory.fromTableName(tableName);
+    const bbox = await HomePage.getBBox(config);
+    this.setState({ tableName, config: config, bbox, pageId: "map" });
+  }
+
   async onChangeConfig(newConfig, pageId) {
     pageId = pageId || this.state.pageId;
     const bbox = await HomePage.getBBox(newConfig);
@@ -82,7 +89,7 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { bbox, config, selectedColor, pageId, allEntIdx, configList } =
+    const { bbox, tableName,config, selectedColor, pageId, allEntIdx, configList } =
       this.state;
     if (!(config && configList)) {
       return <LoadingProgress />;
@@ -92,12 +99,14 @@ export default class HomePage extends Component {
       case "map":
         return (
           <MapPane
+          tableName={tableName}
             config={config}
             bbox={bbox}
             selectedColor={selectedColor}
             onChangeSelectedColor={this.onChangeSelectedColor.bind(this)}
             onClickRegion={this.onClickRegion.bind(this)}
             onClickAutoColor={this.onClickAutoColor.bind(this)}
+            onChangeTableName={this.onChangeTableName.bind(this)}
           />
         );
       case "data":
@@ -114,7 +123,7 @@ export default class HomePage extends Component {
         return (
           <ConfigPane
             config={config}
-            onChangeConfig={this.onChangeConfig.bind(this)}
+            onChangeTableName={this.onChangeTableName.bind(this)}
             configList={configList}
           />
         );
