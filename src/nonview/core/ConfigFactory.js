@@ -29,6 +29,19 @@ export default class ConfigFactory {
         "EC-01D",
         "EC-01E",
       ]),
+      new Config('Trincomalee PDs by Ethnicity', {
+
+    "EC-14A": "Sinhala",
+    "EC-14B": "Tamil",
+    "EC-14C": "Muslim"
+  },
+{
+
+    "Sinhala": "#941E32",
+    "Muslim": "#005f56",
+    "Tamil": "#df7500"
+  }
+      )
     ];
   }
 

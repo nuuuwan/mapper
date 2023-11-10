@@ -14,7 +14,7 @@ export default class RegionGroupPicker extends Component {
   async componentDidMount() {
     const { regionIds } = this.props;
     const regionGroups = [].concat(
-      await RegionGroup.fromTypes(),
+
       await RegionGroup.similar(regionIds)
     );
 

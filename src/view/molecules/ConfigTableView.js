@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@mui/material";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Number } from "../../nonview/base";
+
 import { StyledTableCell, ValueView } from "../atoms";
 
 function RegionActionsView({ id, onRemoveRegions }) {
@@ -22,9 +22,10 @@ function RegionActionsView({ id, onRemoveRegions }) {
 function ConfigTableViewHeaderRow() {
   return (
     <TableRow>
+      <StyledTableCell></StyledTableCell>
       <StyledTableCell>Region</StyledTableCell>
-      <StyledTableCell>Type</StyledTableCell>
-      <StyledTableCell>Population</StyledTableCell>
+
+
       <StyledTableCell>Value</StyledTableCell>
       <StyledTableCell>Actions</StyledTableCell>
 
@@ -36,9 +37,10 @@ function ConfigTableViewHeaderRow() {
 function ConfigTableViewRow({ id, value, color, ent, onRemoveRegions }) {
   return (
     <TableRow key={id}>
-      <StyledTableCell>{ent.name}</StyledTableCell>
-      <StyledTableCell>{ent.entType.shortName}</StyledTableCell>
-      <StyledTableCell>{Number.humanize(ent.population)}</StyledTableCell>
+      <StyledTableCell>{ent.id}</StyledTableCell>
+      <StyledTableCell>{ent.label}</StyledTableCell>
+
+
       <StyledTableCell>
         <ValueView value={value} color={color} />
       </StyledTableCell>

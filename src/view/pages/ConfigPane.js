@@ -14,7 +14,7 @@ import { ColorView } from "../atoms";
 
 function ConfigListItem({ config, onChangeConfig }) {
   const onClick = function () {
-    onChangeConfig(config);
+    onChangeConfig(config, "map");
   };
 
   return (

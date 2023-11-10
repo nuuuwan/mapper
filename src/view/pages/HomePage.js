@@ -67,9 +67,10 @@ export default class HomePage extends Component {
     this.setState({ pageId });
   }
 
-  async onChangeConfig(newConfig) {
+  async onChangeConfig(newConfig, pageId) {
+    pageId = pageId || this.state.pageId;
     const bbox = await HomePage.getBBox(newConfig);
-    this.setState({ config: newConfig, bbox, pageId: "map" });
+    this.setState({ config: newConfig, bbox, pageId });
   }
 
   async onClickAutoColor() {

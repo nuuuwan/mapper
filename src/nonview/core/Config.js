@@ -89,13 +89,14 @@ export default class Config {
   // Serializing
   toData() {
     return {
+      name: this.name,
       regionIdToValue: this.regionIdToValue,
       valueToColor: this.valueToColor,
     };
   }
 
   static fromData(data) {
-    return new Config(data.regionIdToValue, data.valueToColor);
+    return new Config(data.name, data.regionIdToValue, data.valueToColor);
   }
 
   toString() {
