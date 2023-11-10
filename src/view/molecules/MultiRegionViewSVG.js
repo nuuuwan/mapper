@@ -1,4 +1,5 @@
 import { RegionViewShapeSVG } from "../organisms";
+import ColorLegendSVG from "./ColorLegendSVG";
 
 const SVG_WIDTH = 1000;
 const SVG_PADDING = 10;
@@ -56,6 +57,7 @@ export default function MultiRegionViewSVG({ bbox, config, onClickRegion }) {
       </defs>
       {innerShapes}
       {innerLabels}
+      <ColorLegendSVG config={config} />
     </svg>
   );
 }
