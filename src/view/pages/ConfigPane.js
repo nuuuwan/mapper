@@ -20,7 +20,7 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const background = isSelected ? "#ccc" : "#fff";
 
   return (
-    <ListItem sx={{background}}>
+    <ListItem sx={{ background }}>
       {" "}
       <ListItemButton onClick={onClick}>
         <ListItemAvatar>
@@ -60,18 +60,16 @@ export default class ConfigPane extends Component {
     const { onChangeConfig, config: selectedConfig } = this.props;
     return (
       <List>
-        {configList.map(
-          function (config, iConfig) {
-           return (
-              <ConfigListItem
-                key={"config-list-item" + iConfig}
-                config={config}
-                onChangeConfig={onChangeConfig}
-                isSelected={selectedConfig.equal(config)}
-              />
-            );
-          }
-        )}
+        {configList.map(function (config, iConfig) {
+          return (
+            <ConfigListItem
+              key={"config-list-item" + iConfig}
+              config={config}
+              onChangeConfig={onChangeConfig}
+              isSelected={selectedConfig.equal(config)}
+            />
+          );
+        })}
       </List>
     );
   }

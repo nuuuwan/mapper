@@ -41,7 +41,7 @@ export default class Config {
   }
 
   get fileLabel() {
-    return this.name.replaceAll(' ', '-').toLowerCase();
+    return this.name.replaceAll(" ", "-").toLowerCase();
   }
 
   get fileName() {

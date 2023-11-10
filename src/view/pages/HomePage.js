@@ -128,11 +128,15 @@ export default class HomePage extends Component {
 
   render() {
     const { pageId, config, selectedColor } = this.state;
-    
+
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>
-          <HeaderView config={config} pageId={pageId} selectedColor={selectedColor} />
+          <HeaderView
+            config={config}
+            pageId={pageId}
+            selectedColor={selectedColor}
+          />
         </Box>
         <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
         <Box sx={STYLE.FOOTER}>
