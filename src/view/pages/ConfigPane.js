@@ -12,13 +12,15 @@ import PublicIcon from "@mui/icons-material/Public";
 import { ConfigFactory } from "../../nonview/core";
 import { ColorView } from "../atoms";
 
-function ConfigListItem({ config, onChangeConfig }) {
+function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const onClick = function () {
     onChangeConfig(config, "map");
   };
 
+  const background = isSelected ? "#ccc" : "#fff";
+
   return (
-    <ListItem>
+    <ListItem sx={{background}}>
       {" "}
       <ListItemButton onClick={onClick}>
         <ListItemAvatar>
@@ -54,18 +56,21 @@ export default class ConfigPane extends Component {
   }
 
   render() {
+    const { configList } = this.state;
+    const { onChangeConfig, config: selectedConfig } = this.props;
     return (
       <List>
-        {this.state.configList.map(
+        {configList.map(
           function (config, iConfig) {
-            return (
+           return (
               <ConfigListItem
                 key={"config-list-item" + iConfig}
                 config={config}
-                onChangeConfig={this.props.onChangeConfig}
+                onChangeConfig={onChangeConfig}
+                isSelected={selectedConfig.equal(config)}
               />
             );
-          }.bind(this)
+          }
         )}
       </List>
     );

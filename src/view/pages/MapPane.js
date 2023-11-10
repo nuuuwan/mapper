@@ -14,7 +14,7 @@ export default function MapPane({
   onClickRegion,
   onClickAutoColor,
 }) {
-  const screenshotLabel = "map-" + config.hash;
+  const screenshotLabel = "map-" + config.fileLabel;
 
   return (
     <Box>

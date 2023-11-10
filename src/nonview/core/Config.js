@@ -40,8 +40,12 @@ export default class Config {
     return Object.keys(this.regionIdToValue).length;
   }
 
+  get fileLabel() {
+    return this.name.replaceAll(' ', '-').toLowerCase();
+  }
+
   get fileName() {
-    return `config-${this.hash}.json`;
+    return `config-${this.fileLabel}.json`;
   }
 
   get colorToValue() {
@@ -52,6 +56,10 @@ export default class Config {
 
   get colors() {
     return Object.values(this.valueToColor);
+  }
+
+  equal(other) {
+    return this.name.localeCompare(other.name) === 0;
   }
 
   // Updating

@@ -128,11 +128,11 @@ export default class HomePage extends Component {
 
   render() {
     const { pageId, config, selectedColor } = this.state;
-    const nRegions = config ? config.nRegions : 0;
+    
     return (
       <Box sx={STYLE.ALL}>
         <Box sx={STYLE.HEADER}>
-          <HeaderView nRegions={nRegions} selectedColor={selectedColor} />
+          <HeaderView config={config} pageId={pageId} selectedColor={selectedColor} />
         </Box>
         <Box sx={STYLE.BODY}>{this.renderBody()}</Box>
         <Box sx={STYLE.FOOTER}>

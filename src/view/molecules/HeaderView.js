@@ -1,25 +1,26 @@
-import { AppBar, Typography, Toolbar, Badge } from "@mui/material";
+import { AppBar, Typography, Toolbar } from "@mui/material";
 import { DATETIME_STR } from "../../nonview/constants/VERSION.js";
+import {Color} from "../../nonview/base"
 
-export default function HeaderView({ nRegions, selectedColor }) {
+export default function HeaderView({ config, pageId,selectedColor }) {
   const onClickTitle = function () {
     window.location.reload();
   };
+
+  const backgroundColor = selectedColor;
+  const foregroundColor = Color.getCompliment(selectedColor);
+
+  const title = (config && pageId!== "config") ?config.name : "#Mapper - v" + DATETIME_STR;
+
   return (
-    <AppBar component="nav" sx={{ background: selectedColor }}>
+    <AppBar component="nav" sx={{ background: backgroundColor, color: foregroundColor }}>
       <Toolbar>
-        <Badge badgeContent={nRegions} color="primary">
+     
           <Typography variant="h6" onClick={onClickTitle}>
-            #Mapper
+            {title}
           </Typography>
-        </Badge>
-        <Typography
-          variant="caption"
-          onClick={onClickTitle}
-          sx={{ marginLeft: 1 }}
-        >
-          v{DATETIME_STR}
-        </Typography>
+
+
       </Toolbar>
     </AppBar>
   );
