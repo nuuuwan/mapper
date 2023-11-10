@@ -30,7 +30,7 @@ export default class HomePage extends Component {
     const bbox = await HomePage.getBBox(config);
     const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
     const configList = await ConfigFactory.all();
-    this.setState({ config, bbox, allEntIdx ,configList});
+    this.setState({ config, bbox, allEntIdx, configList });
   }
 
   static async getBBox(config) {
@@ -82,8 +82,9 @@ export default class HomePage extends Component {
   }
 
   renderBody() {
-    const { bbox, config, selectedColor, pageId, allEntIdx, configList } = this.state;
-    if (! (config && configList)) {
+    const { bbox, config, selectedColor, pageId, allEntIdx, configList } =
+      this.state;
+    if (!(config && configList)) {
       return <LoadingProgress />;
     }
 

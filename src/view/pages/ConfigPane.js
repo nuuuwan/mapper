@@ -20,7 +20,7 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
   const background = isSelected ? "#ccc" : "#fff";
 
   return (
-    <ListItem >
+    <ListItem>
       {" "}
       <ListItemButton onClick={onClick} sx={{ background }}>
         <ListItemAvatar>
@@ -45,10 +45,7 @@ function ConfigListItem({ config, isSelected, onChangeConfig }) {
 }
 
 export default class ConfigPane extends Component {
-
-
   render() {
-
     const { configList, onChangeConfig, config: selectedConfig } = this.props;
     return (
       <List>
