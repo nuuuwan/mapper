@@ -50,13 +50,13 @@ export default class Config {
     const color = newInfo.fill;
     const colorToValue = this.colorToValue;
     const value =
-      colorToValue[color] || "Group-" + (Object.keys(colorToValue).length);
+      colorToValue[color] || "Group-" + Object.keys(colorToValue).length;
     const isAlreadySet = this.regionIdToValue[regionId] === value;
     if (isAlreadySet) {
       this.regionIdToValue[regionId] = Config.DEFAULT_VALUE;
     } else {
-    this.regionIdToValue[regionId] = value ;
-    this.valueToColor[value] = color;
+      this.regionIdToValue[regionId] = value;
+      this.valueToColor[value] = color;
     }
   }
 
