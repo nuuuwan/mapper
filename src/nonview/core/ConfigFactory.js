@@ -21,6 +21,8 @@ export default class ConfigFactory {
   }
 
   static async fromTableName(tableName, regionEntType) {
+    const timerId = `ConfigFactory.fromTableName(${tableName}, ${regionEntType.shortName})`;
+    console.time(timerId);
     const table = await GIG2.getTable(tableName);
     const tableMetaData = new GIG2TableMetadata(tableName);
 
@@ -55,7 +57,7 @@ export default class ConfigFactory {
       " by " +
       regionEntType.longName;
     const config = new Config(configName, regionIdToValue, valueToColor);
-
+    console.timeEnd(timerId);
     return config;
   }
   static async gig2() {

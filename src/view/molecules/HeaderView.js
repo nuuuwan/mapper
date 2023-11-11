@@ -4,6 +4,8 @@ import { Color } from "../../nonview/base";
 
 export default function HeaderView({ config, pageId, selectedColor }) {
   const onClickTitle = function () {
+    localStorage.clear();
+    console.warn("localStorage cleared");
     window.location.reload();
   };
 
