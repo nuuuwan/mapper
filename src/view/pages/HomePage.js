@@ -157,7 +157,7 @@ export default class HomePage extends Component {
   }
 
   render() {
-    const { pageId, config, selectedColor } = this.state;
+    const { pageId, config, selectedColor, tableName } = this.state;
 
     return (
       <Box sx={STYLE.ALL}>
@@ -173,6 +173,7 @@ export default class HomePage extends Component {
           <FooterView
             onClickPage={this.onClickPage.bind(this)}
             pageId={pageId}
+            tableName={tableName}
           />
         </Box>
       </Box>
