@@ -18,20 +18,18 @@ export default class HomePage extends Component {
 
     this.state = {
       tableName: null,
+      regionEntType: null,
       config: null,
       bbox: null,
       selectedColor: Color.DEFAULT_COLORS[0],
       pageId: "config",
-      configList: null,
     };
   }
 
   async componentDidMount() {
-    const config = await ConfigFactory.default();
-    const bbox = await HomePage.getBBox(config);
     const allEntIdx = await Ent.idxFromTypeList(ENT_TYPE_LIST);
-    const configList = await ConfigFactory.all();
-    this.setState({ config, bbox, allEntIdx, configList });
+
+    this.setState({ allEntIdx });
   }
 
   static async getBBox(config) {
@@ -71,9 +69,29 @@ export default class HomePage extends Component {
   }
 
   async onChangeTableName(tableName) {
-    const config = await ConfigFactory.fromTableName(tableName);
+    const regionEntType = EntType.PROVINCE;
+    const config = await ConfigFactory.fromTableName(tableName, regionEntType);
     const bbox = await HomePage.getBBox(config);
-    this.setState({ tableName, config: config, bbox, pageId: "map" });
+    this.setState({
+      tableName,
+      regionEntType,
+      config: config,
+      bbox,
+      pageId: "map",
+    });
+  }
+
+  async onChangeRegionEntType(regionEntType) {
+    const { tableName } = this.state;
+    const config = await ConfigFactory.fromTableName(tableName, regionEntType);
+    const bbox = await HomePage.getBBox(config);
+    this.setState({
+      tableName,
+      regionEntType,
+      config: config,
+      bbox,
+      pageId: "map",
+    });
   }
 
   async onChangeConfig(newConfig, pageId) {
@@ -92,21 +110,26 @@ export default class HomePage extends Component {
     const {
       bbox,
       tableName,
+      regionEntType,
       config,
       selectedColor,
       pageId,
       allEntIdx,
-      configList,
     } = this.state;
-    if (!(config && configList)) {
+    if (!allEntIdx) {
       return <LoadingProgress />;
     }
 
     switch (pageId) {
+      case "config":
+        return (
+          <ConfigPane onChangeTableName={this.onChangeTableName.bind(this)} />
+        );
       case "map":
         return (
           <MapPane
             tableName={tableName}
+            regionEntType={regionEntType}
             config={config}
             bbox={bbox}
             selectedColor={selectedColor}
@@ -114,6 +137,7 @@ export default class HomePage extends Component {
             onClickRegion={this.onClickRegion.bind(this)}
             onClickAutoColor={this.onClickAutoColor.bind(this)}
             onChangeTableName={this.onChangeTableName.bind(this)}
+            onChangeRegionEntType={this.onChangeRegionEntType.bind(this)}
           />
         );
       case "data":
@@ -126,14 +150,7 @@ export default class HomePage extends Component {
             onChangeConfig={this.onChangeConfig.bind(this)}
           />
         );
-      case "config":
-        return (
-          <ConfigPane
-            config={config}
-            onChangeTableName={this.onChangeTableName.bind(this)}
-            configList={configList}
-          />
-        );
+
       default:
         return "Unknown Page: " + pageId;
     }

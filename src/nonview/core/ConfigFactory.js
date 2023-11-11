@@ -20,25 +20,25 @@ export default class ConfigFactory {
     );
   }
 
-  static async fromTableName(tableName) {
+  static async fromTableName(tableName, regionEntType) {
     const table = await GIG2.getTable(tableName);
     const tableMetaData = new GIG2TableMetadata(tableName);
-    const entityKind = tableMetaData.entity;
 
-    let entType = EntType.PROVINCE;
-    if (entityKind === "regions-ec") {
-      entType = EntType.ED;
-    } else {
-      entType = EntType.DISTRICT;
-    }
-    const ents = await Ent.listFromType(entType);
+    const ents = await Ent.listFromType(regionEntType);
     const regionIds = ents.map((ent) => ent.id);
 
     const regionIdToValue = Object.fromEntries(
-      regionIds.map(function (regionId) {
-        const value = table.getRowByID(regionId).getMaxValueKeyAndValue()[0];
-        return [regionId, value];
-      })
+      regionIds
+        .map(function (regionId) {
+          const row = table.getRowByID(regionId);
+          if (!row) {
+            console.error(`No ${tableName} row for regionId: ${regionId}`);
+            return null;
+          }
+          const value = row.getMaxValueKeyAndValue()[0];
+          return [regionId, value];
+        })
+        .filter((x) => x !== null)
     );
     const values = Object.values(regionIdToValue);
     const valueToColor = Object.fromEntries(
@@ -53,7 +53,7 @@ export default class ConfigFactory {
       " " +
       tableMetaData.measurementLowest +
       " by " +
-      entType.longName;
+      regionEntType.longName;
     const config = new Config(configName, regionIdToValue, valueToColor);
 
     return config;

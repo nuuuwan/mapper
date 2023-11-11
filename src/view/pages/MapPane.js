@@ -12,6 +12,7 @@ import { STYLE } from "./HomePageStyle";
 
 export default function MapPane({
   tableName,
+  regionEntType,
   config,
   bbox,
   selectedColor,
@@ -19,7 +20,12 @@ export default function MapPane({
   onClickRegion,
   onClickAutoColor,
   onChangeTableName,
+  onChangeRegionEntType,
 }) {
+  if (!tableName) {
+    throw new Error(`tableName is undefined`);
+  }
+
   const screenshotLabel = "map-" + config.fileLabel;
 
   return (
@@ -35,7 +41,11 @@ export default function MapPane({
       </div>
       <div style={Object.assign({}, STYLE.BODY_CONTROLS, { right: 32 })}>
         <Stack direction="row" spacing={0}>
-          <RegionEntTypePicker />
+          <RegionEntTypePicker
+            tableName={tableName}
+            regionEntType={regionEntType}
+            onChangeRegionEntType={onChangeRegionEntType}
+          />
           <TimePicker
             tableName={tableName}
             onChangeTableName={onChangeTableName}

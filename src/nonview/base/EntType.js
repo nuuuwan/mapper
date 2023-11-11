@@ -9,6 +9,9 @@ export default class EntType {
   }
 
   // Getters
+  toString() {
+    return this.longName;
+  }
   get dataURL() {
     return `${URL_BASE}/${this.id}.latest.basic.tsv`;
   }
