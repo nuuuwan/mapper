@@ -1,4 +1,3 @@
-
 import { EntType, GIG2TableMetadata } from "../../nonview/base";
 
 import { ButtonPicker } from "../molecules";
@@ -26,6 +25,11 @@ export default function RegionEntTypePicker({
   }
 
   return (
-   <ButtonPicker optionList={regionEntTypeList} selectedOption={selectedRegionEntType} onClick={onChangeRegionEntType} Icon={MapIcon} />
+    <ButtonPicker
+      optionList={regionEntTypeList}
+      selectedOption={selectedRegionEntType}
+      onClick={onChangeRegionEntType}
+      Icon={MapIcon}
+    />
   );
 }
