@@ -13,7 +13,7 @@ export default class GIG2TableStyle {
       return FIELD_NAME_TO_COLOR[valueKey];
     }
     if (!adhocValueKeyToColor[valueKey]) {
-      adhocValueKeyToColor[valueKey] = Color.getRandomHSLA();
+      adhocValueKeyToColor[valueKey] = Color.getRandomHex();
     }
     return adhocValueKeyToColor[valueKey];
   }
